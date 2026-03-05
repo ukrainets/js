@@ -18,24 +18,29 @@ A CLI tool that automates scanning company career pages for matching QA/SQA job 
 3. **Launch browser** — starts a headless Chromium instance via Playwright (handles JS-rendered ATS platforms like Greenhouse, Ashby, Rippling)
 4. **For each company:**
    - Navigate to `open_positions_url` and wait for the page to fully load
-   - Extract all visible text content from the page
-   - Run fuzzy matching of every title against the page text using `rapidfuzz`
-   - If a match exceeds the similarity threshold (default: 80%), log it to the console immediately
+   - Extract all anchor elements (`<a>` tags) — capturing both link text and URL
+   - Match each title against the link text (exact, case-insensitive, line by line)
+   - If a match is found, log the title and its direct job posting URL to the console
 5. **Print summary** — total companies searched and total matches found
 
 ### Matching
-Uses case-insensitive exact substring search — checks whether the job title appears anywhere in the page text.
-- `"QA Automation Engineer"` matches `"QA Automation Engineer"` regardless of casing
-- No fuzzy scoring — a title either appears on the page or it doesn't
+Matches titles against anchor (`<a>`) link text — not the full page text blob. Each link's text is split line by line and compared exactly (case-insensitive) against titles.
+- `"QA Automation Engineer"` matches a link labelled `"QA Automation Engineer"` regardless of casing
+- `"Automation Engineer"` does **not** match a link labelled `"Cloud Test Automation Engineer"` — must be an exact line match
+- The matched job URL is pulled directly from the link's `href`
 - Title variations are covered by the breadth of `sqa_titles.csv` (e.g. both `"Sr. QA Engineer"` and `"Senior QA Engineer"` are listed)
 
 ### Console Output
 ```
-[MATCH] Litify | https://job-boards.greenhouse.io/litify/ | QA Automation Engineer
-[MATCH] 1Password | https://jobs.ashbyhq.com/1password | Senior QA Engineer
-...
----
-Searched: 13 companies | Matches found: 2
+🔎  Scanning : Litify - https://job-boards.greenhouse.io/litify/
+✅  Match for: [QA Automation Engineer] https://job-boards.greenhouse.io/litify/jobs/7601828
+✅  Match for: [Senior QA Engineer] https://job-boards.greenhouse.io/litify/jobs/7601901
+
+🔎  Scanning : Acme Corp - https://jobs.ashbyhq.com/acme/
+❌  No matches found
+
+────────────────────────────────────────────────────────────
+🏁  Done — searched 13 companies, found 2 matching position(s)
 ```
 
 ---

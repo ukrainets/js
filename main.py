@@ -1,7 +1,7 @@
 """
 Job Search Automation
 Scans company career pages for matching QA/SQA job titles.
-Matching is case-insensitive exact substring search — no fuzzy scoring.
+Matching is case-insensitive exact match against page link text.
 
 Usage:
     python main.py
@@ -13,6 +13,7 @@ import argparse
 import csv
 import random
 import time
+from urllib.parse import urljoin
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 
 # ── Constants ────────────────────────────────────────────────────────────────
@@ -59,22 +60,49 @@ def load_titles(path: str) -> list[str]:
 
 # ── Matching ─────────────────────────────────────────────────────────────────
 
-def find_matches(page_text: str, titles: list[str]) -> list[str]:
+def get_job_links(page, base_url: str) -> list[tuple[str, str]]:
     """
-    Case-insensitive exact substring search.
-    Checks whether each title appears anywhere in the page text.
+    Extract all anchor elements from the page.
+    Returns a list of (link_text_line, absolute_url) pairs.
 
-    Returns a list of matched titles.
+    Link text is split line by line — some ATS platforms put the job title
+    on the first line followed by location/type on subsequent lines.
+    Relative hrefs are resolved to absolute URLs using base_url.
     """
-    page_lower = page_text.lower()
-    return [title for title in titles if title.lower() in page_lower]
+    result = []
+    for anchor in page.query_selector_all("a[href]"):
+        href      = anchor.get_attribute("href") or ""
+        link_text = anchor.inner_text() or ""
+        if not href or not link_text.strip():
+            continue
+        absolute_url = urljoin(base_url, href)
+        for line in link_text.splitlines():
+            line = line.strip()
+            if line:
+                result.append((line, absolute_url))
+    return result
+
+
+def find_matches(links: list[tuple[str, str]], titles: list[str]) -> list[tuple[str, str]]:
+    """
+    Case-insensitive exact match of each title against anchor link text lines.
+
+    Matching against individual link text (not full page text blob) ensures
+    "Automation Engineer" won't match a link titled "Cloud Test Automation Engineer".
+
+    Returns a deduplicated list of (matched_title, job_url).
+    """
+    titles_map = {t.lower(): t for t in titles}
+    seen, matches = set(), []
+    for line, href in links:
+        key = line.lower()
+        if key in titles_map and key not in seen:
+            seen.add(key)
+            matches.append((titles_map[key], href))
+    return matches
 
 
 # ── Browser / scraping ───────────────────────────────────────────────────────
-
-def get_page_text(page) -> str:
-    """Extract all visible text from the page body."""
-    return page.inner_text("body")
 
 
 # ── Main run loop ─────────────────────────────────────────────────────────────
@@ -103,26 +131,25 @@ def run(companies_path: str, titles_path: str, headless: bool) -> None:
         page = context.new_page()
 
         for name, url in companies:
-            print(f"\nScanning : {name}")
-            print(f"URL      : {url}")
+            print(f"\n🔎  Scanning : {name} - {url}")
             try:
                 # networkidle waits until no network requests for 500ms —
                 # important for JS-heavy ATS platforms (Greenhouse, Ashby, etc.)
                 page.goto(url, wait_until="networkidle", timeout=PAGE_TIMEOUT)
-                text    = get_page_text(page)
-                matches = find_matches(text, titles)
+                links   = get_job_links(page, url)
+                matches = find_matches(links, titles)
 
                 if matches:
-                    for title in matches:
-                        print(f"  [MATCH] {name} | {url} | {title}")
+                    for title, job_url in matches:
+                        print(f"✅  Match for: [{title}] {job_url}")
                         total_matches += 1
                 else:
-                    print(f"  [NO MATCH]")
+                    print(f"❌  No matches found")
 
             except PlaywrightTimeoutError:
-                print(f"  [TIMEOUT] Page took too long to load — skipping")
+                print(f"⚠️   Timeout — page took too long to load, skipping")
             except Exception as e:
-                print(f"  [ERROR] {e}")
+                print(f"⚠️   Error — {e}")
 
             # Polite delay — reduces chance of rate-limiting
             time.sleep(random.uniform(MIN_DELAY, MAX_DELAY))
@@ -130,8 +157,7 @@ def run(companies_path: str, titles_path: str, headless: bool) -> None:
         browser.close()
 
     print("\n" + "─" * 60)
-    print(f"Searched : {len(companies)} companies")
-    print(f"Matches  : {total_matches}")
+    print(f"🏁  Done — searched {len(companies)} companies, found {total_matches} matching position(s)")
 
 
 # ── CLI entry point ───────────────────────────────────────────────────────────
