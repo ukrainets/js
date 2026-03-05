@@ -23,18 +23,16 @@ A CLI tool that automates scanning company career pages for matching QA/SQA job 
    - If a match exceeds the similarity threshold (default: 80%), log it to the console immediately
 5. **Print summary** — total companies searched and total matches found
 
-### Fuzzy Matching
-Uses `rapidfuzz` partial ratio scoring to catch title variations:
-- Abbreviations: `Sr.` vs `Sr` vs `Senior`
-- Casing differences: `QA engineer` vs `QA Engineer`
-- Minor word order or punctuation differences
-
-Match threshold is a configurable constant (`MATCH_THRESHOLD`) in `main.py`.
+### Matching
+Uses case-insensitive exact substring search — checks whether the job title appears anywhere in the page text.
+- `"QA Automation Engineer"` matches `"QA Automation Engineer"` regardless of casing
+- No fuzzy scoring — a title either appears on the page or it doesn't
+- Title variations are covered by the breadth of `sqa_titles.csv` (e.g. both `"Sr. QA Engineer"` and `"Senior QA Engineer"` are listed)
 
 ### Console Output
 ```
-[MATCH] Litify | https://job-boards.greenhouse.io/litify/ | QA Automation Engineer (score: 92%)
-[MATCH] 1Password | https://jobs.ashbyhq.com/1password | Senior QA Engineer (score: 88%)
+[MATCH] Litify | https://job-boards.greenhouse.io/litify/ | QA Automation Engineer
+[MATCH] 1Password | https://jobs.ashbyhq.com/1password | Senior QA Engineer
 ...
 ---
 Searched: 13 companies | Matches found: 2
@@ -50,7 +48,15 @@ Searched: 13 companies | Matches found: 2
 
 ### Install dependencies
 ```bash
+# 1. Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate        # macOS/Linux
+# .venv\Scripts\activate         # Windows
+
+# 2. Install dependencies
 pip install -r requirements.txt
+
+# 3. Install Playwright's Chromium browser
 playwright install chromium
 ```
 
@@ -64,10 +70,9 @@ python main.py
 
 ### Optional flags
 ```bash
-python main.py --threshold 85        # set custom fuzzy match threshold (default: 80)
 python main.py --companies input_data/companies.csv   # custom companies file path
 python main.py --titles input_data/sqa_titles.csv     # custom titles file path
-python main.py --no-headless         # run with visible browser window (useful for debugging)
+python main.py --no-headless                          # run with visible browser window (useful for debugging)
 ```
 
 ---
@@ -89,4 +94,3 @@ job_search/
 | Package | Purpose |
 |---------|---------|
 | `playwright` | Headless browser — handles JS-rendered career pages |
-| `rapidfuzz` | Fuzzy string matching for job title detection |

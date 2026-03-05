@@ -1,10 +1,10 @@
 """
 Job Search Automation
-Scans company career pages for matching QA/SQA job titles using fuzzy matching.
+Scans company career pages for matching QA/SQA job titles.
+Matching is case-insensitive exact substring search — no fuzzy scoring.
 
 Usage:
     python main.py
-    python main.py --threshold 85
     python main.py --companies input_data/companies.csv --titles input_data/sqa_titles.csv
     python main.py --no-headless
 """
@@ -14,10 +14,8 @@ import csv
 import random
 import time
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
-from rapidfuzz import fuzz
 
 # ── Constants ────────────────────────────────────────────────────────────────
-MATCH_THRESHOLD = 80          # default fuzzy match score (0–100)
 PAGE_TIMEOUT    = 30_000      # ms — max wait for page load
 MIN_DELAY       = 1.0         # seconds — min pause between requests
 MAX_DELAY       = 3.0         # seconds — max pause between requests
@@ -61,28 +59,15 @@ def load_titles(path: str) -> list[str]:
 
 # ── Matching ─────────────────────────────────────────────────────────────────
 
-def find_matches(page_text: str, titles: list[str], threshold: int) -> list[tuple[str, int]]:
+def find_matches(page_text: str, titles: list[str]) -> list[str]:
     """
-    Fuzzy-match each title against individual lines of the page text.
-    Uses partial_ratio so short titles match within longer strings
-    (e.g. "QA Engineer" matches "Senior QA Engineer II").
+    Case-insensitive exact substring search.
+    Checks whether each title appears anywhere in the page text.
 
-    Returns a list of (title, score) for every title that matched,
-    one entry per title regardless of how many lines matched.
+    Returns a list of matched titles.
     """
-    matches = []
-    lines = [line.strip() for line in page_text.splitlines() if line.strip()]
-    for title in titles:
-        best_score = 0
-        for line in lines:
-            score = fuzz.partial_ratio(title.lower(), line.lower())
-            if score > best_score:
-                best_score = score
-            if best_score == 100:   # perfect match, no need to keep scanning
-                break
-        if best_score >= threshold:
-            matches.append((title, best_score))
-    return matches
+    page_lower = page_text.lower()
+    return [title for title in titles if title.lower() in page_lower]
 
 
 # ── Browser / scraping ───────────────────────────────────────────────────────
@@ -94,13 +79,12 @@ def get_page_text(page) -> str:
 
 # ── Main run loop ─────────────────────────────────────────────────────────────
 
-def run(companies_path: str, titles_path: str, threshold: int, headless: bool) -> None:
+def run(companies_path: str, titles_path: str, headless: bool) -> None:
     companies = load_companies(companies_path)
     titles    = load_titles(titles_path)
 
     print(f"Companies loaded : {len(companies)}")
     print(f"Titles loaded    : {len(titles)}")
-    print(f"Match threshold  : {threshold}%")
     print(f"Headless         : {headless}")
     print("─" * 60)
 
@@ -126,11 +110,11 @@ def run(companies_path: str, titles_path: str, threshold: int, headless: bool) -
                 # important for JS-heavy ATS platforms (Greenhouse, Ashby, etc.)
                 page.goto(url, wait_until="networkidle", timeout=PAGE_TIMEOUT)
                 text    = get_page_text(page)
-                matches = find_matches(text, titles, threshold)
+                matches = find_matches(text, titles)
 
                 if matches:
-                    for title, score in matches:
-                        print(f"  [MATCH] {name} | {url} | {title} (score: {score}%)")
+                    for title in matches:
+                        print(f"  [MATCH] {name} | {url} | {title}")
                         total_matches += 1
                 else:
                     print(f"  [NO MATCH]")
@@ -158,10 +142,6 @@ def main():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
-        "--threshold", type=int, default=MATCH_THRESHOLD,
-        help="Fuzzy match score threshold (0–100)"
-    )
-    parser.add_argument(
         "--companies", default=DEFAULT_COMPANIES,
         help="Path to companies CSV file"
     )
@@ -178,7 +158,6 @@ def main():
     run(
         companies_path=args.companies,
         titles_path=args.titles,
-        threshold=args.threshold,
         headless=not args.no_headless,
     )
 
