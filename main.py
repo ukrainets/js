@@ -13,6 +13,7 @@ import argparse
 import csv
 import random
 import time
+from datetime import datetime
 from urllib.parse import urljoin
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 
@@ -105,15 +106,31 @@ def find_matches(links: list[tuple[str, str]], titles: list[str]) -> list[tuple[
 # ── Browser / scraping ───────────────────────────────────────────────────────
 
 
+# ── Time helpers ──────────────────────────────────────────────────────────────
+
+def format_duration(seconds: float) -> str:
+    """Format elapsed seconds as 'Xh. Ymin. Zsec.' omitting leading zero units."""
+    total = int(seconds)
+    h, remainder = divmod(total, 3600)
+    m, s = divmod(remainder, 60)
+    if h:
+        return f"{h}h. {m}min. {s}sec."
+    if m:
+        return f"{m}min. {s}sec."
+    return f"{s}sec."
+
+
 # ── Main run loop ─────────────────────────────────────────────────────────────
 
 def run(companies_path: str, titles_path: str, headless: bool) -> None:
-    companies = load_companies(companies_path)
-    titles    = load_titles(titles_path)
+    companies  = load_companies(companies_path)
+    titles     = load_titles(titles_path)
+    start_time = datetime.now()
 
-    print(f"Companies loaded : {len(companies)}")
-    print(f"Titles loaded    : {len(titles)}")
-    print(f"Headless         : {headless}")
+    print(f"Start time        : {start_time.strftime('%H:%M')}")
+    print(f"Companies loaded  : {len(companies)}")
+    print(f"Titles loaded     : {len(titles)}")
+    print(f"Headless          : {headless}")
     print("─" * 60)
 
     total_matches = 0
@@ -156,8 +173,14 @@ def run(companies_path: str, titles_path: str, headless: bool) -> None:
 
         browser.close()
 
+    end_time = datetime.now()
+    elapsed  = (end_time - start_time).total_seconds()
+
     print("\n" + "─" * 60)
-    print(f"🏁  Done — searched {len(companies)} companies, found {total_matches} matching position(s)")
+    print(f"🏁  Done in {format_duration(elapsed)}")
+    print(f"   - end time  : {end_time.strftime('%H:%M')}")
+    print(f"   - searched  : {len(companies)} companies")
+    print(f"   - found     : {total_matches} match(es)\n")
 
 
 # ── CLI entry point ───────────────────────────────────────────────────────────
