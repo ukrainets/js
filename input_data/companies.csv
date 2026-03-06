@@ -1,14 +1,231 @@
 company_name,website,open_positions_url,hr_platform
-Litify,https://www.litify.com/,https://job-boards.greenhouse.io/litify/,greenhouse
-Canopy,https://www.getcanopy.com/,https://job-boards.greenhouse.io/canopytax/,greenhouse
-Resilience,https://cyberresilience.com/,https://job-boards.greenhouse.io/resilience,greenhouse
-Halcyon,https://www.halcyon.ai/,https://job-boards.greenhouse.io/halcyon/,greenhouse
-Amount,https://www.amount.com/,https://job-boards.greenhouse.io/amount/,greenhouse
-Natera,https://www.natera.com/,https://job-boards.greenhouse.io/natera,greenhouse
-Bitly,https://bitly.com/,https://job-boards.eu.greenhouse.io/bitly/,greenhouse
-BlueSky,https://bsky.social/,https://bsky.social/about/join,Gem
-Teal,https://www.tealhq.com/,https://www.tealhq.com/careers,Ashby
-CarsAndBids,,https://ats.rippling.com/cars-and-bids-job-board/jobs,Rippling
-Stripe,https://stripe.com/,https://stripe.com/jobs/search?teams=Banking+as+a+Service&teams=Climate&teams=Connect&teams=Crypto&teams=Infrastructure+%26+Corporate+Tech&teams=Mobile&teams=New+Financial+Products&teams=Payments&teams=Platform&teams=Professional+Services&teams=Revenue+%26+Financial+Automation&teams=Tax&teams=Terminal&remote_locations=North+America--US+Remote,
-ConsumerReports,https://www.consumerreports.org/,https://job-boards.greenhouse.io/consumerreports,greenhouse
-1Password,https://1password.com/,https://jobs.ashbyhq.com/1password,Ashby
+1Password,https://1password.com,https://jobs.1password.com,Greenhouse
+Abbott,https://abbott.com,https://abbott.com/careers.html,Custom
+AbbVie,https://abbvie.com,https://careers.abbvie.com/en/jobs,Workday
+Accenture,https://accenture.com,https://www.accenture.com/us-en/careers/jobsearch,Custom
+Accenture Song,https://accenture.com/us-en/about/song-index,https://www.accenture.com/us-en/careers/jobsearch,Custom
+Accenture Strategy & Consulting,https://accenture.com,https://www.accenture.com/us-en/careers/jobsearch,Custom
+Acronis,https://acronis.com,https://www.acronis.com/en-us/company/careers/,Greenhouse
+AgentSync,https://agentsync.io,https://agentsync.io/careers,Greenhouse
+Allstate,https://allstate.com,https://careers.allstate.com/jobs/search,Workday
+Amazon,https://amazon.com,https://amazon.jobs/en/search,Custom
+Ameriprise Financial Services LLC,https://ameriprise.com,https://ameriprise.wd5.myworkdayjobs.com/External,Workday
+Apex Fintech Solutions,https://apexfintechsolutions.com,https://apexfintechsolutions.com/about/careers/,Greenhouse
+Apple,https://apple.com,https://jobs.apple.com/en-us/search,Custom
+ATTOM Data Solutions,https://attomdata.com,https://attomdata.com/company/careers/,BambooHR
+Avant,https://avant.com,https://avant.com/careers/,Greenhouse
+Backbase,https://backbase.com,https://www.backbase.com/careers/,Greenhouse
+Bank of America,https://bankofamerica.com,https://careers.bankofamerica.com/en-us/search-jobs,Custom
+Barclays Investment Bank,https://home.barclays,https://search.jobs.barclays/search,Custom
+Baxter International Inc.,https://baxter.com,https://jobs.baxter.com/search-jobs,Workday
+Bazaarvoice,https://bazaarvoice.com,https://www.bazaarvoice.com/careers/,Greenhouse
+BCG X,https://bcg.com/x,https://careers.bcg.com/search-jobs,Custom
+Billtrust,https://billtrust.com,https://www.billtrust.com/careers/,Greenhouse
+Bishop Fox,https://bishopfox.com,https://bishopfox.com/careers,Greenhouse
+Bitdefender,https://bitdefender.com,https://www.bitdefender.com/en-us/careers/,Custom
+BitMart,https://bitmart.com,https://www.bitmart.com/recruit/en,Custom
+Bloomerang,https://bloomerang.co,https://bloomerang.co/careers/,Greenhouse
+BMO,https://bmo.com,https://bmo.wd3.myworkdayjobs.com/External,Workday
+Camunda,https://camunda.com,https://camunda.com/careers/,Greenhouse
+Candidly,https://getcandidly.com,https://getcandidly.com/careers/,Greenhouse
+Capgemini Engineering,https://capgemini.com,https://www.capgemini.com/careers/job-search/,Custom
+Caterpillar Inc.,https://cat.com,https://careers.caterpillar.com/en/jobs/,Custom
+Caylent,https://caylent.com,https://caylent.com/careers,Greenhouse
+Cboe Global Markets,https://cboe.com,https://careers.cboe.com/us/en/search-results,Workday
+CDK Global,https://cdkglobal.com,https://careers.cdkglobal.com/search-jobs,Workday
+CEX.IO,https://cex.io,https://cex.io/careers,Custom
+Charles Schwab,https://schwab.com,https://www.schwab.com/careers/job-search,Workday
+Cintas,https://cintas.com,https://careers.cintas.com/search-jobs,Workday
+Cision,https://cision.com,https://www.cision.com/about/careers/,Greenhouse
+Coca-Cola HBC,https://coca-colahbc.com,https://careers.cchellenic.com/search/,Custom
+Codal,https://codal.com,https://codal.com/careers/,Greenhouse
+Coder,https://coder.com,https://coder.com/careers,Greenhouse
+Commonwealth Bank,https://commbank.com.au,https://www.commbank.com.au/about-us/careers/search-apply.html,Workday
+CoreLogic,https://corelogic.com,https://www.corelogic.com/careers/,Workday
+Credera,https://credera.com,https://www.credera.com/careers/open-positions,Greenhouse
+Cyngn,https://cyngn.com,https://www.cyngn.com/careers,Greenhouse
+DataArt,https://dataart.com,https://www.dataart.com/open-positions,Custom
+Databricks,https://databricks.com,https://www.databricks.com/company/careers/open-positions,Greenhouse
+Datadog,https://datadoghq.com,https://careers.datadoghq.com/jobs/,Greenhouse
+DataRobot,https://datarobot.com,https://www.datarobot.com/careers/,Greenhouse
+DataSnipper,https://datasnipper.com,https://datasnipper.com/careers/,Ashby
+Deel,https://deel.com,https://www.deel.com/careers,Greenhouse
+Deloitte,https://deloitte.com,https://jobsearch.deloitte.com/us/en/search,Custom
+DePaul University,https://depaul.edu,https://jobs.depaul.edu/postings/search,Custom
+Designory,https://designory.com,https://www.designory.com/careers/,Custom
+designory,https://designory.com,https://www.designory.com/careers/,Custom
+DeVry University,https://devry.edu,https://careers.devry.edu/search/,Custom
+DigitalOcean,https://digitalocean.com,https://www.digitalocean.com/careers/all-roles,Greenhouse
+Digitas North America,https://digitas.com,https://www.digitas.com/en-us/careers,Greenhouse
+Direct Supply,https://directsupply.com,https://www.directsupply.com/careers/search,iCIMS
+DMI,https://dminc.com,https://www.dminc.com/careers/open-positions/,Greenhouse
+DocuSign,https://docusign.com,https://careers.docusign.com/jobs/search,Workday
+eBay,https://ebay.com,https://jobs.ebayinc.com/us/en/search-results,Custom
+ELEKS,https://eleks.com,https://eleks.com/careers/,Custom
+Encora Inc.,https://encora.com,https://www.encora.com/careers,Greenhouse
+Enfusion (Now CWAN),https://enfusion.com,https://www.enfusion.com/careers/,Greenhouse
+EPAM Systems,https://epam.com,https://www.epam.com/careers/job-listings,Custom
+Equitable Bank,https://eqbank.ca,https://eqbank.ca/about-equitable/careers,Workday
+eToro,https://etoro.com,https://www.etoro.com/careers/,Greenhouse
+Etsy,https://etsy.com,https://careers.etsy.com/global/en,Greenhouse
+Experian,https://experian.com,https://www.experian.com/careers/search-jobs.html,Workday
+Farmers Insurance,https://farmers.com,https://www.farmers.com/careers/search/,Workday
+Figment,https://figment.io,https://figment.io/careers/,Ashby
+Fivetran,https://fivetran.com,https://www.fivetran.com/careers,Greenhouse
+Floor & Decor,https://flooranddecor.com,https://www.flooranddecor.com/careers.html,Workday
+Follett School Solutions,https://follettlearning.com,https://follettlearning.com/about/careers/,iCIMS
+Follett Software,https://follettlearning.com,https://follettlearning.com/about/careers/,iCIMS
+Front,https://front.com,https://front.com/company/careers,Greenhouse
+General Motors,https://gm.com,https://search-careers.gm.com/en/jobs/,Workday
+GlobalLogic,https://globallogic.com,https://careers.globallogic.com/en/search-jobs,Custom
+Google,https://google.com,https://careers.google.com/jobs/results/,Custom
+GR8 Tech,https://gr8.tech,https://gr8.tech/vacancies/,Custom
+Grafana Labs,https://grafana.com,https://grafana.com/about/careers/,Greenhouse
+GridX Inc,https://gridx.com,https://gridx.com/careers/,Greenhouse
+Guaranteed Rate,https://rate.com,https://www.rate.com/careers/job-openings,Workday
+GuideStone Financial Resources,https://guidestone.org,https://www.guidestone.org/About-Us/Careers,Custom
+Hagerty,https://hagerty.com,https://www.hagerty.com/corporate/careers/job-listings,Greenhouse
+Handshake,https://joinhandshake.com,https://joinhandshake.com/careers/,Greenhouse
+Hireology,https://hireology.com,https://www.hireology.com/careers/,Custom
+Home Chef,https://homechef.com,https://www.homechef.com/careers,Greenhouse
+Honeywell,https://honeywell.com,https://careers.honeywell.com/us/en/search-results,Phenom
+Horace Mann,https://horacemann.com,https://careers.horacemann.com/search-jobs,Workday
+Hudl,https://hudl.com,https://www.hudl.com/jobs,Greenhouse
+IBM,https://ibm.com,https://www.ibm.com/careers/search,Custom
+ICANN,https://icann.org,https://www.icann.org/en/icann-careers,Custom
+Ideals,https://idealscorp.com,https://idealscorp.com/careers/,Greenhouse
+IdeaSoft.io,https://ideasoft.io,https://ideasoft.io/careers/,Custom
+IKEA,https://ikea.com,https://www.ikea.com/us/en/jobs/,Custom
+Imprivata,https://imprivata.com,https://www.imprivata.com/company/careers/,Greenhouse
+Indeed,https://indeed.com,https://indeed.com/cmp/Indeed/jobs,Custom
+Infosys,https://infosys.com,https://career.infosys.com/joblist,Custom
+Innovecs,https://innovecs.com,https://innovecs.com/careers/,Custom
+Inovalon,https://inovalon.com,https://www.inovalon.com/careers/,Workday
+IQVIA,https://iqvia.com,https://jobs.iqvia.com/search-jobs,Custom
+Itransition Group,https://itransition.com,https://www.itransition.com/careers/jobs,Custom
+JPMorgan Chase & Co.,https://jpmorganchase.com,https://careers.jpmorgan.com/us/en/jobs,Custom
+JPMORGAN CHASE & Co.,https://jpmorganchase.com,https://careers.jpmorgan.com/us/en/jobs,Custom
+Kapowai,https://kapowai.com,https://www.kapowai.com/careers,Custom
+kCura,https://relativity.com,https://www.relativity.com/careers/open-positions/,Greenhouse
+Kemper,https://kemper.com,https://careers.kemper.com/search-jobs,Workday
+Kirkland & Ellis,https://kirkland.com,https://www.kirkland.com/careers/career-opportunities,Custom
+Kohler Co.,https://kohler.com,https://careers.kohler.com/search-jobs,Workday
+Korn Ferry,https://kornferry.com,https://www.kornferry.com/careers/job-search,Workday
+Kubeshark,https://kubeshark.co,https://www.linkedin.com/company/kubeshark/jobs/,LinkedIn
+KUBRA,https://kubra.com,https://jobs.lever.co/kubra,Lever
+Lam Research,https://lamresearch.com,https://careers.lamresearch.com/search/,Workday
+LaSalle Network,https://thelasallenetwork.com,https://www.thelasallenetwork.com/jobs/,Custom
+LaunchDarkly,https://launchdarkly.com,https://launchdarkly.com/careers/,Greenhouse
+Lenovo,https://lenovo.com,https://jobs.lenovo.com/en_US/careers/SearchJobs,Workday
+LinkedIn,https://linkedin.com,https://careers.linkedin.com/,Custom
+Little Caesars Pizza,https://littlecaesars.com,https://jobs.littlecaesars.com/search-jobs,iCIMS
+Loadmill,https://loadmill.com,https://saucelabs.com/careers,Greenhouse
+LogicMonitor,https://logicmonitor.com,https://www.logicmonitor.com/careers,Greenhouse
+Maltego Technologies,https://maltego.com,https://maltego.com/jobs/,Ashby
+Mastercard,https://mastercard.com,https://careers.mastercard.com/us/en/search-results,Workday
+Mastery Logistics Systems,https://mastery-logistics.com,https://www.mastery-logistics.com/careers,Custom
+Maveris,https://maveris.com,https://maveris.com/careers/,Greenhouse
+McDonald's,https://mcdonalds.com,https://careers.mcdonalds.com/corporate/jobs/,Workday
+McKinsey & Company,https://mckinsey.com,https://www.mckinsey.com/careers/search-jobs,Custom
+Mercado Libre,https://mercadolibre.com,https://careers.mercadolibre.com/search,Custom
+Meta,https://meta.com,https://www.metacareers.com/jobs/,Custom
+Mezmo,https://mezmo.com,https://www.mezmo.com/career,Greenhouse
+Microsoft,https://microsoft.com,https://jobs.careers.microsoft.com/global/en/search,Custom
+MongoDB,https://mongodb.com,https://www.mongodb.com/careers/opportunities,Greenhouse
+Morgan Stanley,https://morganstanley.com,https://www.morganstanley.com/careers/search-jobs-and-programs,Custom
+Morningstar,https://morningstar.com,https://www.morningstar.com/company/careers/job-openings,Workday
+N-iX,https://n-ix.com,https://www.n-ix.com/career/,Custom
+Netflix,https://netflix.com,https://jobs.netflix.com/search,Custom
+NMI,https://nmi.com,https://nmi.com/company/careers/,Greenhouse
+NVIDIA,https://nvidia.com,https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite,Workday
+Okta,https://okta.com,https://www.okta.com/company/careers/,Greenhouse
+OLX Group,https://olxgroup.com,https://www.olxgroup.com/open-positions,Greenhouse
+Omnicom Production,https://omnicomgroup.com,https://www.omnicomgroup.com/careers/,Custom
+OpenBet,https://openbet.com,https://www.openbet.com/careers/,Workday
+Oracle,https://oracle.com,https://careers.oracle.com/jobs/,Taleo
+Paylocity,https://paylocity.com,https://www.paylocity.com/careers/career-openings/,Greenhouse
+Perchwell,https://perchwell.com,https://www.perchwell.com/careers,Lever
+Perforce Software,https://perforce.com,https://www.perforce.com/careers/open-positions,Greenhouse
+Performio,https://performio.co,https://www.performio.co/careers/,Greenhouse
+Planning Center,https://planning.center,https://www.planning.center/careers,Greenhouse
+Princess Cruises,https://princess.com,https://www.princess.com/plan/careers/,Workday
+Procentia,https://procentia.com,https://www.procentia.com/careers/,Custom
+Proposify,https://proposify.com,https://www.proposify.com/careers,Lever
+PwC,https://pwc.com,https://www.pwc.com/us/en/careers/job-search.html,Workday
+Qualcomm,https://qualcomm.com,https://careers.qualcomm.com/careers/search,Workday
+Rachio,https://rachio.com,https://rachio.com/pages/careers,Greenhouse
+Randstad Digital,https://randstad.com,https://www.randstaddigital.com/en-us/careers/,Custom
+Redfin,https://redfin.com,https://www.redfin.com/about/jobs,Greenhouse
+Relativity,https://relativity.com,https://www.relativity.com/careers/open-positions/,Greenhouse
+Remote,https://remote.com,https://remote.com/careers,Greenhouse
+RevenueWell,https://revenuewell.com,https://www.revenuewell.com/careers/,Greenhouse
+Rio Tinto,https://riotinto.com,https://www.riotinto.com/en/careers/job-search,Custom
+Riot Games,https://riotgames.com,https://www.riotgames.com/en/work-with-us/jobs,Lever
+Rise Interactive,https://riseinteractive.com,https://www.riseinteractive.com/careers/,Greenhouse
+Robert Half,https://roberthalf.com,https://www.roberthalf.com/us/en/jobs,Custom
+Rocket Lawyer,https://rocketlawyer.com,https://www.rocketlawyer.com/about/careers,Greenhouse
+Rocket Money (formerly Truebill),https://rocketmoney.com,https://www.rocketmoney.com/careers,Greenhouse
+RSM,https://rsmus.com,https://rsmus.com/careers/search.html,Workday
+Ryerson,https://ryerson.com,https://ryerson.wd5.myworkdayjobs.com/Ryerson,Workday
+Salesforce,https://salesforce.com,https://careers.salesforce.com/en/jobs/,Custom
+Santa Monica Studio,https://sms.playstation.com,https://sms.playstation.com/careers,Workday
+Scopic,https://scopicsoftware.com,https://scopicsoftware.com/careers/,Custom
+Scotiabank,https://scotiabank.com,https://jobs.scotiabank.com/search/,Custom
+SES Satellites,https://ses.com,https://www.ses.com/careers/find-a-job,Workday
+Shopify,https://shopify.com,https://www.shopify.com/careers/search,Greenhouse
+Sidley Austin LLP,https://sidley.com,https://www.sidley.com/en/us/careers/staff/open-positions,Custom
+Slalom,https://slalom.com,https://www.slalom.com/us/en/careers/search-jobs,Workday
+SmartBear,https://smartbear.com,https://smartbear.com/about/careers/open-positions/,Greenhouse
+"Softjourn, Inc",https://softjourn.com,https://softjourn.com/careers/,Custom
+SoftServe,https://softserveinc.com,https://career.softserveinc.com/vacancies,Custom
+"Sprout Social, Inc.",https://sproutsocial.com,https://sproutsocial.com/careers/,Greenhouse
+Starburst,https://starburst.io,https://www.starburst.io/careers/,Greenhouse
+Strata Decision Technology,https://stratadecision.com,https://stratadecision.com/about/careers/,Greenhouse
+Stripe,https://stripe.com,https://stripe.com/jobs/search,Custom
+Superhuman,https://superhuman.com,https://superhuman.com/careers,Greenhouse
+Sutherland,https://sutherlandglobal.com,https://www.sutherlandglobal.com/careers/search-jobs,iCIMS
+Sweetwater,https://sweetwater.com,https://www.sweetwater.com/about/employment.php,Custom
+Tamnoon,https://tamnoon.io,https://apply.workable.com/tamnoon-dot-i-o/,Workable
+TaskRabbit,https://taskrabbit.com,https://www.taskrabbit.com/careers,Greenhouse
+tastytrade,https://tastytrade.com,https://tastytrade.com/careers/,Greenhouse
+TDK Corporation of America,https://us.tdk.com,https://us.tdk.com/en/career/,Custom
+Teachers Pay Teachers,https://teacherspayteachers.com,https://www.teacherspayteachers.com/Careers,Greenhouse
+Tekmetric,https://tekmetric.com,https://www.tekmetric.com/careers/open-roles,Greenhouse
+TenantCloud,https://tenantcloud.com,https://tenantcloud.com/careers/,Custom
+testomat.io,https://testomat.io,https://jobs.dou.ua/companies/testomat-io/vacancies/,Custom
+The Depository Trust & Clearing Corporation (DTCC),https://dtcc.com,https://dtcc.com/careers/job-listings,Custom
+The Designory,https://designory.com,https://www.designory.com/careers/,Custom
+Thoughtworks,https://thoughtworks.com,https://www.thoughtworks.com/en-us/careers/jobs,Custom
+Tock,https://exploretock.com,https://boards.greenhouse.io/tock,Greenhouse
+Trading Technologies,https://tradingtechnologies.com,https://www.tradingtechnologies.com/about/careers/,Greenhouse
+Transwestern,https://transwestern.com,https://www.transwestern.com/careers/,Custom
+Trend Micro,https://trendmicro.com,https://www.trendmicro.com/en_us/about/careers.html,Workday
+TUI,https://tui.com,https://tuigroup.taleo.net/careersection/tui/jobsearch.ftl,Taleo
+U.S. Bank,https://usbank.com,https://careers.usbank.com/global/en/search-results,Workday
+Uber,https://uber.com,https://www.uber.com/us/en/careers/list/,Custom
+Unite Us,https://uniteus.com,https://uniteus.com/about/careers/,Greenhouse
+United Airlines,https://united.com,https://careers.united.com/us/en/search-results,Custom
+University of Illinois Urbana-Champaign,https://illinois.edu,https://jobs.illinois.edu/academic-job-board/job-board,Custom
+Upwork,https://upwork.com,https://www.upwork.com/careers,Greenhouse
+Valtech,https://valtech.com,https://www.valtech.com/en/careers/jobs/,Custom
+VCA Animal Hospitals,https://vcahospitals.com,https://careers.vcahospitals.com/search-jobs,Workday
+VelocityEHS,https://velocityehs.com,https://www.velocityehs.com/company/careers/,Greenhouse
+Vend,https://vendhq.com,https://www.vendhq.com/company/careers/,Greenhouse
+Vibes,https://vibes.com,https://www.vibes.com/careers/,Greenhouse
+VillageMD,https://villagemd.com,https://www.villagemd.com/careers/,Greenhouse
+Vistex,https://vistex.com,https://www.vistex.com/company/careers/,Greenhouse
+Vivid Seats LLC,https://vividseats.com,https://www.vividseats.com/careers,Greenhouse
+VML Enterprise Solutions,https://vml.com,https://www.vml.com/en-us/work/careers,Custom
+Warner Bros. Discovery,https://wbd.com,https://careers.wbd.com/global/en/search-results,Workday
+Webflow,https://webflow.com,https://webflow.com/careers,Greenhouse
+Wells Fargo,https://wellsfargo.com,https://www.wellsfargo.com/about/careers/search/,Workday
+WEZOM,https://wezom.com,https://wezom.com/en/careers/,Custom
+Wipfli,https://wipfli.com,https://www.wipfli.com/careers/open-positions,Custom
+Wirex,https://wirexapp.com,https://wirexapp.com/about/careers,Greenhouse
+WordPress,https://wordpress.com,https://automattic.com/work-with-us/,Custom
+Worldline,https://worldline.com,https://careers.worldline.com/jobs,Custom
+XPO,https://xpo.com,https://jobs.xpo.com/search-jobs,Custom
+Yello.co,https://yello.co,https://yello.co/careers/,Greenhouse
+Yum! Brands,https://yum.com,https://careers.yum.com/jobs/,Workday
+Zensar Technologies,https://zensar.com,https://www.zensar.com/careers/,Custom
+Zip Co,https://zip.co,https://zip.co/careers,Greenhouse
