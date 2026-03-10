@@ -13,15 +13,16 @@ A CLI tool that automates scanning company career pages for matching QA/SQA job 
 | `input_data/sqa_titles.csv` | `title` | Job titles to search for |
 
 ### Core Logic
-1. **Load companies** — reads `companies.csv`, extracts `company_name` + `open_positions_url`, deduplicates
-2. **Load titles** — reads `sqa_titles.csv`, extracts `title` column, deduplicates
-3. **Launch browser** — starts a headless Chromium instance via Playwright (handles JS-rendered ATS platforms like Greenhouse, Ashby, Rippling)
-4. **For each company:**
+1. **Load config** — reads `config.json` for concurrency limit and CSV file paths
+2. **Load companies** — reads companies CSV, extracts `company_name` + `open_positions_url`, deduplicates
+3. **Load titles** — reads titles CSV, extracts `title` column, deduplicates
+4. **Launch browser** — starts a single headless Chromium instance via async Playwright
+5. **Scan companies concurrently** — up to `concurrency` tabs open at the same time (controlled by semaphore):
    - Navigate to `open_positions_url` and wait for the page to fully load
    - Extract all anchor elements (`<a>` tags) — capturing both link text and URL
    - Match each title against the link text (exact, case-insensitive, line by line)
    - If a match is found, log the title and its direct job posting URL to the console
-5. **Print summary** — total companies searched and total matches found
+6. **Print summary** — elapsed time, companies searched, and matches found
 
 ### Matching
 Matches titles against anchor (`<a>`) link text — not the full page text blob. Each link's text is split line by line and compared exactly (case-insensitive) against titles.
@@ -32,6 +33,13 @@ Matches titles against anchor (`<a>`) link text — not the full page text blob.
 
 ### Console Output
 ```
+Start time        : 09:03
+Companies loaded  : 13
+Titles loaded     : 144
+Concurrency       : 5 tab(s)
+Headless          : True
+────────────────────────────────────────────────────────────
+
 🔎  Scanning : Litify - https://job-boards.greenhouse.io/litify/
 ✅  Match for: [QA Automation Engineer] https://job-boards.greenhouse.io/litify/jobs/7601828
 ✅  Match for: [Senior QA Engineer] https://job-boards.greenhouse.io/litify/jobs/7601901
@@ -40,7 +48,10 @@ Matches titles against anchor (`<a>`) link text — not the full page text blob.
 ❌  No matches found
 
 ────────────────────────────────────────────────────────────
-🏁  Done — searched 13 companies, found 2 matching position(s)
+🏁  Done in 2min. 30sec.
+   - end time  : 09:05
+   - searched  : 13 companies
+   - found     : 2 match(es)
 ```
 
 ---
@@ -75,10 +86,33 @@ python main.py
 
 ### Optional flags
 ```bash
-python main.py --companies input_data/companies.csv   # custom companies file path
-python main.py --titles input_data/sqa_titles.csv     # custom titles file path
+python main.py --concurrency 10                       # override tab count from config
+python main.py --companies input_data/companies.csv   # override companies file from config
+python main.py --titles input_data/sqa_titles.csv     # override titles file from config
 python main.py --no-headless                          # run with visible browser window (useful for debugging)
 ```
+
+---
+
+## Configuration
+
+Edit `config.json` to set your defaults:
+
+```json
+{
+  "concurrency":    5,
+  "companies_file": "input_data/companies.csv",
+  "titles_file":    "input_data/sqa_titles.csv"
+}
+```
+
+| Key | Description |
+|-----|-------------|
+| `concurrency` | Number of browser tabs open simultaneously. Start at `5`, raise to `10–15` for larger lists |
+| `companies_file` | Path to your companies CSV |
+| `titles_file` | Path to your job titles CSV |
+
+All values can be overridden at runtime via CLI flags.
 
 ---
 
@@ -89,6 +123,7 @@ job_search/
 │   ├── companies.csv       # Company names and career page URLs
 │   └── sqa_titles.csv      # Job titles to match against
 ├── main.py                 # Entry point and core logic
+├── config.json             # Runtime configuration (concurrency, file paths)
 ├── requirements.txt        # Python dependencies
 └── README.md
 ```
