@@ -47,18 +47,35 @@ def load_config() -> dict:
 
 def load_companies(path: str) -> list[tuple[str, str]]:
     """
-    Read companies CSV and return a deduplicated list of (company_name, open_positions_url).
-    Skips rows with missing name or URL.
+    Read companies CSV and return a sorted, deduplicated list of (company_name, open_positions_url).
+
+    Filtering:
+    - Only rows where no_click == "TRUE" are included.
+    - Rows with missing name or URL are skipped.
+    - Duplicate URLs are skipped.
+
+    Ordering:
+    - Sorted by rating descending (1–5). Companies with no rating go last.
     """
     companies, seen = [], set()
     with open(path, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
+            no_click = row.get("no_click", "").strip().upper()
+            if no_click != "TRUE":
+                continue
+
             name = row["company_name"].strip()
             url  = row["open_positions_url"].strip()
-            if name and url and url not in seen:
-                seen.add(url)
-                companies.append((name, url))
-    return companies
+            if not name or not url or url in seen:
+                continue
+
+            seen.add(url)
+            raw_rating = row.get("rating", "").strip()
+            rating = float(raw_rating) if raw_rating else 0.0
+            companies.append((name, url, rating))
+
+    companies.sort(key=lambda c: c[2], reverse=True)
+    return [(name, url) for name, url, _ in companies]
 
 
 def load_titles(path: str) -> list[str]:
@@ -187,7 +204,7 @@ async def run(companies_path: str, titles_path: str, headless: bool, concurrency
     start_time = datetime.now()
 
     print(f"Start time        : {start_time.strftime('%H:%M')}")
-    print(f"Companies loaded  : {len(companies)}")
+    print(f"Companies to scan : {len(companies)}  (no_click=TRUE, sorted by rating ↓)")
     print(f"Titles loaded     : {len(titles)}")
     print(f"Concurrency       : {concurrency} tab(s)")
     print(f"Headless          : {headless}")
