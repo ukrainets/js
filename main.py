@@ -19,8 +19,10 @@ from urllib.parse import urljoin
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
 # ── Constants ─────────────────────────────────────────────────────────────────
-CONFIG_FILE  = "config.json"
-PAGE_TIMEOUT = 30_000       # ms — max wait for a page to load
+CONFIG_FILE        = "config.json"
+PAGE_TIMEOUT       = 30_000   # ms — first navigation attempt
+PAGE_TIMEOUT_RETRY = 60_000   # ms — single retry after timeout
+PAGE_SETTLE_MS     = 2_000    # ms — wait after domcontentloaded for JS to render
 
 CONFIG_DEFAULTS = {
     "concurrency":    5,
@@ -153,6 +155,19 @@ def format_duration(seconds: float) -> str:
 
 # ── Async company scanner ─────────────────────────────────────────────────────
 
+async def navigate(page, url: str, timeout: int) -> None:
+    """
+    Navigate to URL and wait for DOM to be ready.
+
+    Uses domcontentloaded instead of networkidle — career pages often have
+    persistent analytics/chat requests that never fully settle, causing
+    networkidle to always hit the timeout limit.
+    A fixed settle wait after load gives JS time to render job listings.
+    """
+    await page.goto(url, wait_until="domcontentloaded", timeout=timeout)
+    await page.wait_for_timeout(PAGE_SETTLE_MS)
+
+
 async def scan_company(
     semaphore: asyncio.Semaphore,
     context,
@@ -166,6 +181,11 @@ async def scan_company(
     Collects all output lines then prints them atomically so results
     from parallel tabs don't interleave in the console.
 
+    Resilience:
+    - Fix 1: domcontentloaded + settle wait instead of networkidle
+    - Fix 4: one retry with extended timeout on first-attempt timeout
+    - Fix 5: execution context guard on DOM query (handles mid-scan redirects)
+
     Returns the number of matches found.
     """
     async with semaphore:
@@ -173,8 +193,26 @@ async def scan_company(
         lines = [f"\n🔎  Scanning : {name} - {url}"]
         match_count = 0
         try:
-            await page.goto(url, wait_until="networkidle", timeout=PAGE_TIMEOUT)
-            links   = await get_job_links(page, url)
+            # Fix 1 + Fix 4 — load with domcontentloaded, retry once on timeout
+            try:
+                await navigate(page, url, PAGE_TIMEOUT)
+            except PlaywrightTimeoutError:
+                lines.append("⏳  Timed out, retrying with extended timeout...")
+                await navigate(page, url, PAGE_TIMEOUT_RETRY)
+
+            # Fix 5 — execution context guard: if the page navigates mid-query
+            # (SPA redirect, meta-refresh, etc.) the context is destroyed.
+            # Wait for the new load state and retry the DOM query once.
+            try:
+                links = await get_job_links(page, url)
+            except Exception as e:
+                if "context was destroyed" in str(e).lower():
+                    await page.wait_for_load_state("domcontentloaded")
+                    await page.wait_for_timeout(PAGE_SETTLE_MS)
+                    links = await get_job_links(page, url)
+                else:
+                    raise
+
             matches = find_matches(links, titles)
 
             if matches:
@@ -185,7 +223,7 @@ async def scan_company(
                 lines.append("❌  No matches found")
 
         except PlaywrightTimeoutError:
-            lines.append("⚠️   Timeout — page took too long to load, skipping")
+            lines.append("⚠️   Timeout after retry — skipping")
         except Exception as e:
             lines.append(f"⚠️   Error — {e}")
         finally:
