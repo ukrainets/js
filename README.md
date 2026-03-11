@@ -4,6 +4,43 @@ A CLI tool that automates scanning company career pages for matching QA/SQA job 
 
 ---
 
+## Setup
+
+### Prerequisites
+- Python 3.9+
+- pip
+
+### Install dependencies
+```bash
+# 1. Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate        # macOS/Linux
+# .venv\Scripts\activate         # Windows
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Install Playwright's Chromium browser
+playwright install chromium
+```
+
+---
+
+## Run
+
+```bash
+python main.py
+```
+
+### Optional flags
+```bash
+python main.py --concurrency 10                       # override tab count from config
+python main.py --companies input_data/companies.csv   # override companies file from config
+python main.py --titles input_data/sqa_titles.csv     # override titles file from config
+python main.py --no-headless                          # run with visible browser window (useful for debugging)
+```
+---
+
 ## How It Works
 
 ### Input Files
@@ -53,45 +90,6 @@ Headless          : True
    - searched  : 13 companies
    - found     : 2 match(es)
 ```
-
----
-
-## Setup
-
-### Prerequisites
-- Python 3.9+
-- pip
-
-### Install dependencies
-```bash
-# 1. Create and activate a virtual environment
-python -m venv .venv
-source .venv/bin/activate        # macOS/Linux
-# .venv\Scripts\activate         # Windows
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Install Playwright's Chromium browser
-playwright install chromium
-```
-
----
-
-## Run
-
-```bash
-python main.py
-```
-
-### Optional flags
-```bash
-python main.py --concurrency 10                       # override tab count from config
-python main.py --companies input_data/companies.csv   # override companies file from config
-python main.py --titles input_data/sqa_titles.csv     # override titles file from config
-python main.py --no-headless                          # run with visible browser window (useful for debugging)
-```
-
 ---
 
 ## Configuration
