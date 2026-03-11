@@ -1,5 +1,6 @@
 {
   "concurrency": 5,
   "companies_file": "input_data/companies.csv",
-  "titles_file": "input_data/sqa_titles.csv"
+  "titles_file": "input_data/sqa_titles.csv",
+  "output_file": "output_data/match.csv"
 }
