@@ -160,40 +160,44 @@ def format_duration(seconds: float) -> str:
 CSV_COLUMNS = ["id", "company_name", "match_position_url", "time_found", "reviewed", "comment"]
 
 
-def write_matches_to_csv(matches: list[dict], path: str) -> list[dict]:
+def load_known_urls(path: str) -> set[str]:
     """
-    Append matched positions to the output CSV.
-
-    - Creates the file (and any parent directories) with a header row if it doesn't exist.
-    - Appends rows without re-writing the header if the file already exists.
-    - Assigns a fresh UUID to each row at write time.
-    - Returns the list of rows actually written (used by future Slack notification feature).
+    Read all match_position_url values from the existing output CSV.
+    Returns an empty set if the file does not exist.
+    Called once at startup to pre-populate the in-memory duplicate guard.
     """
-    if not matches:
-        return []
+    p = Path(path)
+    if not p.exists():
+        return set()
+    with open(p, newline="", encoding="utf-8") as f:
+        return {
+            row["match_position_url"]
+            for row in csv.DictReader(f)
+            if row.get("match_position_url")
+        }
 
+
+def append_match_row(match: dict, path: str) -> None:
+    """
+    Append a single match row to the output CSV.
+    Creates the file and header row if it does not exist.
+    Must be called under asyncio.Lock — never invoked concurrently.
+    """
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
     file_exists = output.exists()
-
-    written = []
     with open(output, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=CSV_COLUMNS)
         if not file_exists:
             writer.writeheader()
-        for match in matches:
-            row = {
-                "id":                 str(uuid.uuid4()),
-                "company_name":       match["company_name"],
-                "match_position_url": match["match_position_url"],
-                "time_found":         match["time_found"],
-                "reviewed":           "",
-                "comment":            "",
-            }
-            writer.writerow(row)
-            written.append(row)
-
-    return written
+        writer.writerow({
+            "id":                 str(uuid.uuid4()),
+            "company_name":       match["company_name"],
+            "match_position_url": match["match_position_url"],
+            "time_found":         match["time_found"],
+            "reviewed":           "",
+            "comment":            "",
+        })
 
 
 # ── Async company scanner ─────────────────────────────────────────────────────
@@ -217,6 +221,9 @@ async def scan_company(
     name: str,
     url: str,
     titles: list[str],
+    output_path: str,
+    write_lock: asyncio.Lock,
+    known_urls: set[str],
 ) -> list[dict]:
     """
     Scan a single company's career page.
@@ -229,13 +236,17 @@ async def scan_company(
     - Fix 4: one retry with extended timeout on first-attempt timeout
     - Fix 5: execution context guard on DOM query (handles mid-scan redirects)
 
-    Returns a list of match dicts {company_name, match_position_url, time_found}.
-    Returns [] on timeout or error.
+    Duplicate check:
+    - For each matched URL, acquires write_lock and checks known_urls.
+    - New URLs are written immediately and added to known_urls.
+    - Duplicate URLs are skipped silently.
+
+    Returns a list of newly written match dicts. Returns [] on timeout/error.
     """
     async with semaphore:
         page = await context.new_page()
-        lines   = [f"\n🔎  Scanning : {name} - {url}"]
-        found   = []
+        lines     = [f"\n🔎  Scanning : {name} - {url}"]
+        new_found = []
         try:
             # Fix 1 + Fix 4 — load with domcontentloaded, retry once on timeout
             try:
@@ -262,12 +273,23 @@ async def scan_company(
             if matches:
                 time_found = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 for title, job_url in matches:
-                    lines.append(f"✅  Match for: [{title}] {job_url}")
-                    found.append({
-                        "company_name":       name,
-                        "match_position_url": job_url,
-                        "time_found":         time_found,
-                    })
+                    async with write_lock:
+                        if job_url not in known_urls:
+                            match_dict = {
+                                "company_name":       name,
+                                "match_position_url": job_url,
+                                "time_found":         time_found,
+                            }
+                            append_match_row(match_dict, output_path)
+                            known_urls.add(job_url)
+                            new_found.append(match_dict)
+                            lines.append(f"✅  Match for: [{title}] {job_url}")
+                            lines.append(f"🟢  added to output file")
+                        # duplicate — skip silently, no output line
+
+                if not new_found:
+                    # Title matches were found on the page but all URLs already in CSV
+                    lines.append("🟡  No new matches found")
             else:
                 lines.append("❌  No matches found")
 
@@ -280,7 +302,7 @@ async def scan_company(
 
         # Print all lines for this company in one shot — keeps output grouped
         print("\n".join(lines))
-        return found
+        return new_found
 
 
 # ── Main run loop ─────────────────────────────────────────────────────────────
@@ -303,7 +325,9 @@ async def run(
     print(f"Headless          : {headless}")
     print("─" * 60)
 
-    semaphore = asyncio.Semaphore(concurrency)
+    semaphore  = asyncio.Semaphore(concurrency)
+    write_lock = asyncio.Lock()
+    known_urls = load_known_urls(output_path)
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=headless)
@@ -316,16 +340,15 @@ async def run(
         )
 
         tasks = [
-            scan_company(semaphore, context, name, url, titles)
+            scan_company(semaphore, context, name, url, titles, output_path, write_lock, known_urls)
             for name, url in companies
         ]
         results = await asyncio.gather(*tasks)
 
         await browser.close()
 
-    all_matches   = [m for result in results for m in result]
-    total_matches = len(all_matches)
-    written       = write_matches_to_csv(all_matches, output_path)
+    new_matches   = [m for result in results for m in result]
+    total_matches = len(new_matches)
 
     end_time = datetime.now()
     elapsed  = (end_time - start_time).total_seconds()
@@ -334,9 +357,9 @@ async def run(
     print(f"🏁  Done in {format_duration(elapsed)}")
     print(f"   - end time  : {end_time.strftime('%H:%M')}")
     print(f"   - searched  : {len(companies)} companies")
-    print(f"   - found     : {total_matches} match(es)")
-    if written:
-        print(f"📄  Results saved to: {output_path}")
+    print(f"   - found     : {total_matches} new match(es)")
+    if new_matches:
+        print(f"📄  New results saved to: {output_path}")
 
 
 # ── CLI entry point ───────────────────────────────────────────────────────────

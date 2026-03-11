@@ -13,20 +13,15 @@ multiple browser tabs
 
 MacBook Air
 4 tabs - 5 min
-5 tabs - 4 min
+5 tabs - 4 min ✅
 6 tabs - 5 min
 10 tabs - 6 min
-
-Optimal tab # - 5.
 
 iMac
 5 tabs - 3min
 10 tabs - 2min
 12 tabs - 1min. 50sec
-14 tabs - 1min. 41sec
+14 tabs - 1min. 41sec ✅
 15 tabs - 1min. 42sec
 20 tabs - 1min. 46sec
-
-Optimal tab # - 14.
-
 ---
