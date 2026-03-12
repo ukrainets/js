@@ -1,5 +1,5 @@
-id,company_name,match_position_url,time_found,revieved,comment
-5ec55968-b476-4d03-aaac-830a16dfe981,Halcyon,https://job-boards.greenhouse.io/halcyon/jobs/5808645004,2026-03-11 14:19:22,TRUE,
+4id,company_name,match_position_url,time_found,revieved,comment
+5ec55968-b476-4d03-aaac-830a16dfe981,Halcyon,https://job-boards.greenhouse.io/halcyon/jobs/5808645004,2026-03-11 14:19:22,TRUE
 5654d631-65de-426a-a071-805e5f21007f,Amount,https://job-boards.greenhouse.io/amount/jobs/5058090007,2026-03-11 14:19:25,TRUE,Low pay
 cf87ebbb-41ea-4acf-8c7d-c5e17303f106,Abridge,https://jobs.ashbyhq.com/abridge/fb77df82-ce6b-4459-b574-dab149aab5dd,2026-03-11 14:20:07,TRUE,San Francisco - Onsite
 fe72d335-f90a-4f64-a13d-367b03ba477b,tvscientific,https://job-boards.greenhouse.io/tvscientificpoweredbypinterest/jobs/7655616,2026-03-11 14:20:12,TRUE,applied
@@ -7,12 +7,13 @@ fe72d335-f90a-4f64-a13d-367b03ba477b,tvscientific,https://job-boards.greenhouse.
 0a440861-5acd-4b13-933f-23b57868b48f,Impiricus,https://job-boards.greenhouse.io/impiricus/jobs/4993696008,2026-03-11 14:20:52,TRUE,applied
 bf8d0507-07ff-4e8d-8c96-985315c0efe3,NETGEAR,https://jobs.ashbyhq.com/netgear/f1f470c8-0edd-44f8-8f4c-34e13c0482c3,2026-03-11 17:15:10,TRUE,not in US
 6af5c3d3-4e7a-426e-9479-6dcc08b1b883,8:00 AM,https://www.8am.com/openings?gh_jid=4661531006,2026-03-11 17:15:14,TRUE,applied
-985cec7a-bb7d-453e-80e2-846387fe0ce2,Capgemini Engineering,https://www.capgemini.com/jobs/421807-en_US+sap_btp/,2026-03-11 17:15:19,TRUE,
-ec23150f-d635-487e-867a-ed83b1e2bb84,Codal,https://codal.com/capabilities/product-engineering/quality-assurance/,2026-03-11 17:38:07,TRUE,
+985cec7a-bb7d-453e-80e2-846387fe0ce2,Capgemini Engineering,https://www.capgemini.com/jobs/421807-en_US+sap_btp/,2026-03-11 17:15:19,TRUE
+ec23150f-d635-487e-867a-ed83b1e2bb84,Codal,https://codal.com/capabilities/product-engineering/quality-assurance/,2026-03-11 17:38:07,TRUE
 d7b03053-3521-4866-9fc1-ec77cfb427f5,Santa Monica Studio,https://sms.playstation.com/careers/qa,2026-03-11 17:39:08,TRUE,Game studio
 2fba0b3d-054f-44d8-8a70-17f8ec736c57,Cognition (Devin AI),https://jobs.ashbyhq.com/cognition/e6f55fdf-151d-4282-a600-b92e4124732f,2026-03-11 17:39:41,TRUE,not in US
 1cce0582-aa98-4b79-baff-97d4915165fb,G2i,https://jobs.ashbyhq.com/g2i/7beb972c-f447-4fb7-b5f7-17f6cba6327a,2026-03-11 17:39:50,TRUE,Job Search platform
 e287bb21-8495-4f90-ac1c-48e2b0200a61,Solace,https://jobs.ashbyhq.com/solace/143e4877-547e-40b7-b96b-a70c0cf99f87,2026-03-11 17:40:19,TRUE,low pay
 5c75e09b-666b-4e5a-8061-e467d6c641c5,UiPath,https://jobs.ashbyhq.com/uipath/dea5a292-40d1-420b-9ca6-49e12f994abe,2026-03-11 17:40:26,TRUE,not in US
-,Thoughtworks,https://www.thoughtworks.com/en-us/careers/jobs/7423730,2026-04-10 17:25:00,TRUE,not in US
-,Thoughtworks,https://www.thoughtworks.com/en-us/careers/jobs/7247673,2026-04-10 17:25:00,TRUE,not in US
+uuid,Thoughtworks,https://www.thoughtworks.com/en-us/careers/jobs/7423730,2026-04-10 17:25:00,TRUE,not in US
+uuid,Thoughtworks,https://www.thoughtworks.com/en-us/careers/jobs/7247673,2026-04-10 17:25:00,TRUE,not in US
+73b4b817-6f1f-464e-9268-aa919bd23fa0,Sweetwater,https://careers.sweetwater.com/us/en/job/P-101436/QA-Engineer,2026-03-12 09:09:35

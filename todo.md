@@ -42,3 +42,7 @@ List of planned work
     - Add shcaduler functionality to run the app on the schadule. 
     - `config.json` should keep the time when schadule will run. There should be option to set multipel times.
     - Set schaduler to run at `8:08`, `13:13`, and `18:18`.
+
+[] Add batter handling to the missing input files. 
+    - Add infrastructiure checks before runing main.
+    - Add add notificaiton for the missing input files.

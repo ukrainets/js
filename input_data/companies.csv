@@ -46,7 +46,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,Charles Schwab,https://schwab.com,https://www.schwab.com/careers/job-search,Workday,TRUE,,
 ,,Cintas,https://cintas.com,https://careers.cintas.com/search-jobs,Workday,FALSE,,
 ,,Cision,https://cision.com,https://www.cision.com/careers/career-listing/,,TRUE,,
-,,Codal,https://codal.com,https://codal.com/careers/,Greenhouse,TRUE,,
+,,Codal,https://codal.com,https://codal.jobs/,Greenhouse,TRUE,,
 ,,Coder,https://coder.com,https://coder.com/careers,Greenhouse,TRUE,,
 ,,Commonwealth Bank,https://commbank.com.au,https://cba.wd3.myworkdayjobs.com/CommBank_Careers?locationCountry=d903bb3fedad45039383f6de334ad4db,Workday,FALSE,,
 ,,CoreLogic,https://corelogic.com,https://www.corelogic.com/careers/,Workday,TRUE,,
@@ -64,8 +64,8 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,DigitalOcean,https://digitalocean.com,https://www.digitalocean.com/careers/open-roles?query=,Greenhouse,FALSE,,
 ,,Digitas North America,https://digitas.com,https://www.digitas.com/en-us/careers,Greenhouse,TRUE,,
 ,,Direct Supply,https://directsupply.com,https://directsupply.wd501.myworkdayjobs.com/direct-supply-careers,Workday,FALSE,,
-,1,DMI,https://dminc.com,https://www.dminc.com/careers/open-positions/,Greenhouse,TRUE,,
-,4,DocuSign,https://docusign.com,https://careers.docusign.com/jobs,Workday,TRUE,,
+,1,DMI,https://dminc.com,https://careers-dminc.icims.com/jobs/search?ss=1&hashed=-435685793&mobile=false&width=1664&height=1000&bga=true&needsRedirect=false&jan1offset=-360&jun1offset=-300,Greenhouse,FALSE,,
+,4,DocuSign,https://docusign.com,https://careers.docusign.com/jobs,Workday,FALSE,,
 ,5,eBay,https://ebay.com,https://jobs.ebayinc.com/us/en/search-results,Custom,FALSE,,
 ,,Encora Inc.,https://encora.com,https://careers.encora.com/search,Greenhouse,TRUE,,
 ,,Equitable Bank,https://eqbank.ca,https://jobs.lever.co/eqbank,lever,TRUE,,
@@ -92,7 +92,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,Home Chef,https://homechef.com,https://www.homechef.com/careers,Greenhouse,TRUE,,
 ,,Honeywell,https://honeywell.com,https://careers.honeywell.com/en/sites/Honeywell/jobs?mode=location,Phenom,FALSE,broken - Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://careers.honeywell.com/en/sit,
 ,,Hudl,https://hudl.com,https://www.hudl.com/jobs,Greenhouse,TRUE,,
-,5,IBM,https://ibm.com,https://www.ibm.com/careers/search,Custom,TRUE,,
+,5,IBM,https://ibm.com,https://www.ibm.com/careers/search,Custom,FALSE,,
 ,5,ICANN,https://icann.org,https://www.icann.org/en/icann-careers,Custom,,broken - HTTP 404,
 ,3,IdeaSoft,https://ideasoft.io,https://ideasoft.io/careers/,Custom,TRUE,,
 ,5,IKEA,https://ikea.com,https://www.seeacareerwithus.com/search-jobs#search-results,Custom,FALSE,,
@@ -114,7 +114,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,Lam Research,https://lamresearch.com,https://careers.lamresearch.com/search/,Workday,TRUE,,
 ,2,LaSalle Network,https://thelasallenetwork.com,https://www.thelasallenetwork.com/jobs/,Custom,TRUE,,
 ,,LaunchDarkly,https://launchdarkly.com,https://launchdarkly.com/careers/,Greenhouse,TRUE,,
-,5,Lenovo,https://lenovo.com,https://jobs.lenovo.com/en_US/careers/SearchJobs,Workday,TRUE,,
+,5,Lenovo,https://lenovo.com,https://jobs.lenovo.com/en_US/careers/SearchJobs,Workday,FALSE,,
 ,5,LinkedIn,https://linkedin.com,https://careers.linkedin.com/,Custom,TRUE,,
 ,3,Little Caesars Pizza,https://littlecaesars.com,https://careersatilitchcompanies.com/en-us/job-search,iCIMS,FALSE,,
 ,,Loadmill,https://loadmill.com,https://saucelabs.com/careers,Greenhouse,TRUE,,
@@ -136,7 +136,6 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,NVIDIA,https://nvidia.com,https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite,Workday,FALSE,,
 ,5,Okta,https://okta.com,https://www.okta.com/company/careers/,Greenhouse,TRUE,,
 ,,OLX Group,https://olxgroup.com,https://www.olxgroup.com/open-positions,Greenhouse,,broken - HTTP 404,
-,2,Omnicom Production,https://omnicomgroup.com,https://www.omnicomgroup.com/careers/,Custom,TRUE,,
 ,,OpenBet,https://openbet.com,https://www.openbet.com/careers/,Workday,FALSE,,
 ,5,Oracle,https://oracle.com,https://careers.oracle.com/jobs/,Taleo,FALSE,,
 ,3,Paylocity,https://paylocity.com,https://www.paylocity.com/careers/career-openings/,Greenhouse,,broken - HTTP 404,
@@ -379,3 +378,12 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,3,Mechanical Licensing Collective ,https://www.themlc.com/,https://job-boards.greenhouse.io/mechanicallicensingcollective,greenhouse,TRUE,true +,
 ,,CroMetrics,https://crometrics.com/,https://crometrics.com/careers/#positions,greenhouse,TRUE,true +,IT
 ,3,8:00 AM,https://www.8am.com/,https://www.8am.com/careers/#open-positions,greenhouse,TRUE,true +,IT
+,,Netskope,https://www.netskope.com,https://www.netskope.com/company/careers/open-positions,greenhouse,FALSE,,IT
+,,Impiricus,https://www.impiricus.com/,https://job-boards.greenhouse.io/impiricus,greenhouse,TRUE,true +,healthcare
+,4,Mcafee,https://mcafee.com,https://careers.mcafee.com/global/en/search-results,Workday,FALSE,,IT
+,3,Marriott,https://www.marriott.com/,https://careers.marriott.com/jobs?filter%5Bcountry%5D%5B0%5D=United%20States&filter%5Bemployment_type%5D%5B0%5D=Full%20Time&filter%5Bis_remote%5D%5B0%5D=Yes&filter%5Bcategory%5D%5B0%5D=Information%20Technology&sort_by=external_posting_date,,FALSE,Query filter,
+,,Subsplash,https://www.subsplash.com,https://job-boards.greenhouse.io/subsplash,greenhouse,TRUE,true +,IT
+,4,Skylight,https://myskylight.com/,https://apply.workable.com/skylight-frame/,Workable,FALSE,,IT hardware
+,,Ckeck,https://www.checkhq.com/,https://job-boards.greenhouse.io/check/,greenhouse,TRUE,true +,IT
+,,Medecard,https://www.madecard.com/,https://www.madecard.com/careers,Ashby,TRUE,true +,fintech
+,3,Preferred Travel Group,https://preferredtravelgroup.com/,https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=3e5659aa-96ec-4248-b32b-238111027b07&ccId=19000101_000001&type=JS&lang=en_US&selectedMenuKey=CareerCenter,ADP,FALSE,,Travel
