@@ -29,6 +29,32 @@ List of planned work
         🟡  No new matches found
         ```
 
+✅Update the project structure for batter maintainability
+    use this structure: 
+/Users/vs/Dev/js/
+├── main.py                    # Entry point only: run(), main(), CLI argparse (~75 lines)  
+├── config.py                  # load_config(), all constants  
+├── csv_io.py                  # load_companies(), load_titles(), load_known_urls(), append_match_row(), CSV_COLUMNS  
+├── utils.py                   # format_duration() — shared helpers, grows as needed  
+├── crawlers/                  # All Playwright browser automation  
+│   ├── __init__.py            # empty — makes it a package  
+│   ├── scanner.py             # navigate(), get_job_links(), find_matches(), scan_company()  
+│   ├── scraper.py             # [future] discover and add new companies to companies.csv  
+│   └── crawler.py             # [future] verify company career page URLs are still valid  
+├── integrations/              # External service integrations  
+│   ├── __init__.py            # empty — makes it a package  
+│   ├── notifier.py            # [future — Slack] send_slack_notification()  
+│   ├── scheduler.py           # [future — Scheduler] run_on_schedule(), schedule config  
+│   └── sheets.py              # [future — Google Sheets] read companies/titles, write results
+├── tests/                     # Test suite
+│   └── __init__.py            # empty — makes it a package
+├── verify_no_click.py         # Existing utility — unchanged, stays at root
+├── config.json
+├── requirements.txt
+└── README.md
+
+
+
 [] Slack notification for the new 
 - Add functionality to send a Slack message if the new matches were found
 - Store webhook in the `.env` file under `SLACK_WEBHOOK`

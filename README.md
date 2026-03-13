@@ -35,8 +35,8 @@ python main.py
 ### Optional flags
 ```bash
 python main.py --concurrency 10                       # override tab count from config
-python main.py --companies input_data/companies.csv   # override companies file from config
-python main.py --titles input_data/sqa_titles.csv     # override titles file from config
+python main.py --companies data/companies.csv   # override companies file from config
+python main.py --titles data/sqa_titles.csv     # override titles file from config
 python main.py --no-headless                          # run with visible browser window (useful for debugging)
 ```
 ---
@@ -46,8 +46,8 @@ python main.py --no-headless                          # run with visible browser
 ### Input Files
 | File | Columns Used | Purpose |
 |------|-------------|---------|
-| `input_data/companies.csv` | `company_name`, `open_positions_url` | List of companies and their careers page URLs |
-| `input_data/sqa_titles.csv` | `title` | Job titles to search for |
+| `data/companies.csv` | `company_name`, `open_positions_url` | List of companies and their careers page URLs |
+| `data/sqa_titles.csv` | `title` | Job titles to search for |
 
 ### Core Logic
 1. **Load config** — reads `config.json` for concurrency limit and CSV file paths
@@ -99,8 +99,8 @@ Edit `config.json` to set your defaults:
 ```json
 {
   "concurrency":    5,
-  "companies_file": "input_data/companies.csv",
-  "titles_file":    "input_data/sqa_titles.csv"
+  "companies_file": "data/companies.csv",
+  "titles_file":    "data/sqa_titles.csv"
 }
 ```
 
@@ -117,10 +117,18 @@ All values can be overridden at runtime via CLI flags.
 ## Project Structure
 ```
 job_search/
-├── input_data/
+├── data/
 │   ├── companies.csv       # Company names and career page URLs
-│   └── sqa_titles.csv      # Job titles to match against
-├── main.py                 # Entry point and core logic
+│   ├── sqa_titles.csv      # Job titles to match against
+│   └── match.csv           # Output — matched positions (auto-created)
+├── crawlers/
+│   └── scanner.py          # Async Playwright career page scanner
+├── integrations/           # External service integrations (Slack, Sheets, …)
+├── tests/                  # Test suite
+├── main.py                 # Entry point and orchestration
+├── config.py               # Constants and config loader
+├── csv_io.py               # CSV read/write functions
+├── utils.py                # Shared helpers
 ├── config.json             # Runtime configuration (concurrency, file paths)
 ├── requirements.txt        # Python dependencies
 └── README.md

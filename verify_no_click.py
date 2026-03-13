@@ -33,8 +33,8 @@ from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 
 
 # ── Paths ──────────────────────────────────────────────────────────────────
-DEFAULT_INPUT      = "input_data/companies.csv"
-DEFAULT_OUTPUT     = "input_data/companies_verified.csv"
+DEFAULT_INPUT      = "data/companies.csv"
+DEFAULT_OUTPUT     = "data/companies_verified.csv"
 CHECKPOINT_FILE    = "verify_no_click_checkpoint.csv"
 CHECKPOINT_IDX     = "verify_no_click_checkpoint_idx.json"
 
