@@ -4,45 +4,60 @@ List of planned work
 
 ## To Do
 
-[x] Mach otput
-- Add functionality to store matching found positions to the csv file.
+✅ Mach output
+- Add functionality to store matching found positions to the CSV file.
 - csv file should be stored in `output_data/match.csv`
-- the name for this output file should be set by config in the `config.json`
-- If file not present it should be created, if file present information should be upended.  
-- csv file should have this columns `id, company_name, match_position_url, time_found, revieved, comment`
+- The name for this output file should be set by config in the `config.json`
+- If the file is not present, it should be created; if the file is present, information should be updated.  
+- CSV file should have these columns: id, company_name, match_position_url, time_found, received, comment.
 - `time_found` should be in ISO 8601 format `2026-04-10 17:25:00`
-- `company_name` should be the same as in input CSV.  
+- `company_name` should be the same as in the input CSV.  
     
-[X] Check match output
-- Add functionality to check if found match was already added to the output csv. 
-- This functionality should check current match URL witht the URLs in the `match_position_url` column. Most URLs are unique and and can be used as a unique identifier.
-- If the found match URL is not present in the CSV, it should upended in a new row, and fields `company_name, match_position_url, time_found,` should be filled out. 
-    - for this scenario console output shuld be changed to:
+✅ Check match output
+- Add functionality to check if the found match was already added to the output CSV. 
+- This functionality should check the current match URL with the URLs in the `match_position_url` column. Most URLs are unique and can be used as a unique identifier.
+- If the found match URL is not present in the CSV, it should be upended in a new row, and the fields `company_name, match_position_url, and time_found should be filled out. 
+    - for this scenario, console output should be changed to:
         ```txt
         🔎  Scanning : Amount - https://job-boards.greenhouse.io/amount/
         ✅  Match for: [Automation Engineer] https://job-boards.greenhouse.io/amount/jobs/5058090007
         🟢 added to output file
         ```
-    - If the found URL already in the output file, than app should skipp adding it and write in the console output:
+    - If the found URL is already in the output file, than app should skip adding it and write in the console output:
         ```txt
         🔎  Scanning : Amount - https://job-boards.greenhouse.io/amount/
         🟡  No new matches found
         ```
 
 [] Slack notification for the new 
-- Add functionality to send a Slack message if the new maches were found
+- Add functionality to send a Slack message if the new matches were found
 - Store webhook in the `.env` file under `SLACK_WEBHOOK`
-- When new match found it should be posted to the salck in this format:
+- When a new match found, it should be posted to the Slack in this format:
 ```txt
 🥳 New match found: [company_name] - [title]
 [match_position_url]
 ```
 
-[] Add schaduler
-    - Add shcaduler functionality to run the app on the schadule. 
-    - `config.json` should keep the time when schadule will run. There should be option to set multipel times.
-    - Set schaduler to run at `8:08`, `13:13`, and `18:18`.
+[] Add scheduler
+    - Add scheduler functionality to run the app on a schedule. 
+    - `config.json` should keep the time when the schedule will run. There should be an option to set multiple times.
+    - Set scheduler to run at `8:08`, `13:13`, and `18:18`.
 
 [] Add batter handling to the missing input files. 
-    - Add infrastructiure checks before runing main.
-    - Add add notificaiton for the missing input files.
+    - Add infrastructure checks before running main.
+    - Add notification for the missing input files.
+
+[] Add Google Spreadsheet API helper
+- Documentation
+    - Document how to set up Spreadsheet files
+    - Document how to get API keys and add them to the app.
+- Develop Google Spreadsheet API helper
+    - Make a config switch to switch between CSV file and Google Spreadsheet API
+    - CSV file will be defoult settings
+    - When the config is set to the Google Spreadsheet API app shouldn't use CSV at all and should use spreadhseet
+    - Add the console output to show what input/output media app is using.
+    - Add Proper error handlers if the API is not set up correctly or is not accessible.
+    - App will get companies and titles from the Spreadsheet and write results to the match spreadsheet. 
+      
+    
+    
