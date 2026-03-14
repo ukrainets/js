@@ -23,7 +23,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Apex Fintech Solutions,https://apexfintechsolutions.com,https://careers.apexfintechsolutions.com/?size=n_200_n,custom,FALSE,,
 ,5,Apple,https://apple.com,https://jobs.apple.com/en-us/search,Custom,FALSE,,
 ,,ATTOM Data Solutions,https://attomdata.com,https://www.attomdata.com/careers/,BambooHR,TRUE,,
-,,Avant,https://avant.com,https://avant.wd503.myworkdayjobs.com/External_Careers,Workday,FALSE,,
+,,Avant,https://avant.com,https://avant.wd503.myworkdayjobs.com/External_Careers?timeType=d5c7f8d14fbd0185347af2ceca1a6100&workerSubType=5b3fe27a919b019c433e74f4c91cba09,Workday,TRUE,true+,
 ,,Backbase,https://backbase.com,https://www.backbase.com/careers/jobs,Greenhouse,TRUE,,
 ,3,Bank of America,https://bankofamerica.com,https://careers.bankofamerica.com/en-us/students/job-search?ref=search&start=0&rows=10&search=getAllJobs,Custom,FALSE,,
 ,3,Barclays Investment Bank,https://home.barclays,https://search.jobs.barclays/search-jobs?k=&l=&orgIds=13015,Custom,FALSE,,
@@ -75,25 +75,24 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,3,Farmers Insurance,https://farmers.com,https://jobs.farmersinsurance.com/search/?searchby=location&createNewAlert=false&q=&locationsearch=&geolocation=&optionsFacetsDD_shifttype=&optionsFacetsDD_department=,Workday,FALSE,,
 ,,Figment,https://figment.io,https://job-boards.greenhouse.io/figment,Greenhouse,TRUE,,
 ,,Fivetran,https://fivetran.com,https://www.fivetran.com/careers,Greenhouse,TRUE,,
-,3,Floor & Decor,https://flooranddecor.com,https://www.flooranddecor.com/careers.html,Workday,,broken - HTTP 404,
-,,Follett School Solutions,https://follettlearning.com,https://follettlearning.com/about/careers/,iCIMS,,broken - HTTP 404,
-,3,Follett Software,https://follettlearning.com,https://follettlearning.com/about/careers/,iCIMS,,broken - HTTP 404,
-,,Front,https://front.com,https://front.com/company/careers,Greenhouse,,broken - HTTP 404,
+,3,Floor & Decor,https://flooranddecor.com,https://careers.flooranddecor.com/us/en/search-results?m=3,Workday,FALSE,false+,
+,3,Follett School Solutions,https://follettlearning.com,https://job-boards.greenhouse.io/follettsoftware,Greenhouse,TRUE,true+,
+,,Front,https://front.com,https://front.com/jobs,Ashby,TRUE,true+,
 ,,General Motors,https://gm.com,https://search-careers.gm.com/en/jobs/,Workday,FALSE,,
 ,5,Google,https://google.com,https://careers.google.com/jobs/results/,Custom,TRUE,,
 ,,GR8 Tech,https://gr8.tech,https://gr8.tech/vacancies/,Custom,TRUE,,
 ,,Grafana Labs,https://grafana.com,https://grafana.com/about/careers/,Greenhouse,TRUE,,
 ,,GridX Inc,https://gridx.com,https://gridx.com/careers/,Greenhouse,TRUE,,
-,,Guaranteed Rate,https://rate.com,https://www.rate.com/careers/job-openings,Workday,,broken - HTTP 404,
+,,Guaranteed Rate,https://rate.com,https://www.rate.com/careers/open-positions,,TRUE,true+,
 ,,GuideStone Financial Resources,https://guidestone.org,https://www.guidestone.org/About-Us/Careers,Custom,TRUE,,
-,,Hagerty,https://hagerty.com,https://www.hagerty.com/corporate/careers/job-listings,Greenhouse,,broken - HTTP 404,
+,,Hagerty,https://hagerty.com,https://hagerty.wd5.myworkdayjobs.com/hagerty,Workday,TRUE,true+,insurance
 ,,Handshake,https://joinhandshake.com,https://joinhandshake.com/careers/,Greenhouse,TRUE,,
 ,,Hireology,https://hireology.com,https://www.hireology.com/careers/,Custom,TRUE,,
 ,5,Home Chef,https://homechef.com,https://www.homechef.com/careers,Greenhouse,TRUE,,
-,,Honeywell,https://honeywell.com,https://careers.honeywell.com/en/sites/Honeywell/jobs?mode=location,Phenom,FALSE,broken - Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://careers.honeywell.com/en/sit,
+,,Honeywell,https://honeywell.com,https://careers.honeywell.com/en/sites/Honeywell/jobs?lastSelectedFacet=POSTING_DATES&mode=location&selectedLocationsFacet=300000000469866&selectedPostingDatesFacet=30%3B7&selectedWorkplaceTypesFacet=ORA_REMOTE&sortBy=POSTING_DATES_DESC,Phenom,TRUE,true+ filter applied,
 ,,Hudl,https://hudl.com,https://www.hudl.com/jobs,Greenhouse,TRUE,,
 ,5,IBM,https://ibm.com,https://www.ibm.com/careers/search,Custom,FALSE,,
-,5,ICANN,https://icann.org,https://www.icann.org/en/icann-careers,Custom,,broken - HTTP 404,
+,5,ICANN,https://icann.org,https://www.icann.org/en/icann-careers,Custom,TRUE,true+ infinit scroll,
 ,3,IdeaSoft,https://ideasoft.io,https://ideasoft.io/careers/,Custom,TRUE,,
 ,5,IKEA,https://ikea.com,https://www.seeacareerwithus.com/search-jobs#search-results,Custom,FALSE,,
 ,,Imprivata,https://imprivata.com,https://www.imprivata.com/company/careers/,Greenhouse,TRUE,,
@@ -102,7 +101,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Innovecs,https://innovecs.com,https://jobs.innovecs.com/vacancies/,Custom,TRUE,,
 ,,Inovalon,https://inovalon.com,https://www.inovalon.com/careers/,Workday,TRUE,,
 ,,IQVIA,https://iqvia.com,https://jobs.iqvia.com/search-jobs,Custom,TRUE,,
-,,Itransition Group,https://itransition.com,https://www.itransition.com/careers/jobs,Custom,,broken - HTTP 404,
+,,Itransition Group,https://itransition.com,https://www.itransition.com/careers/vacancies,Custom,FALSE,false+ Agency,
 ,5,JPMorgan Chase & Co.,https://jpmorganchase.com,https://careers.jpmorgan.com/us/en/jobs,Custom,FALSE,,
 ,,Kapowai,https://kapowai.com,https://www.kapowai.com/careers,Custom,,broken - HTTP 404,
 ,2,kCura,https://relativity.com,https://www.relativity.com/careers/open-positions/,Greenhouse,TRUE,,
@@ -344,9 +343,9 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Zencastr,zencastr.com,https://jobs.ashbyhq.com/zencastr,Ashby,TRUE,,
 ,,Andela,andela.com,https://jobs.ashbyhq.com/andela,Ashby,TRUE,,
 ,,Boomi,boomi.com,https://boomi.com/company/careers/#greenhouseapp,Ashby,TRUE,,
-,,Calm,calm.com,https://www.calm.com/careers#open-roles,Ashby,TRUE,broken - HTTP 403,
+,,Calm,calm.com,https://www.calm.com/careers#open-roles,Ashby,TRUE,,
 ,,Cedar,cedar.com,https://www.cedar.com/careers/open-roles,Ashby,TRUE,,
-,5,Duolingo,duolingo.com,https://careers.duolingo.com/#careers,Ashby,TRUE,,
+,5,Duolingo,duolingo.com,https://careers.duolingo.com/#careers,Ashby,FALSE,one click,Education
 ,,Eventual Computing,eventual.ai,https://www.eventual.ai/careers#open-positions,Ashby,TRUE,,
 ,,Mercury,mercury.com,https://mercury.com/jobs#job-listings,Ashby,TRUE,,
 ,5,Opendoor,opendoor.com,https://www.opendoor.com/careers/open-positions,Ashby,TRUE,,
@@ -358,7 +357,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Vivante Health,vivantehealth.com,https://cylinderhealth.com/about-us/careers/#open-positions,Ashby,FALSE,,
 ,,Workiva,workiva.com,https://workiva.wd503.myworkdayjobs.com/careers,Workday,FALSE,,
 ,,Lyric,https://www.lyric.ai/,https://tbc.wd12.myworkdayjobs.com/LyricCareers,Workday,FALSE,,
-,,Network Optix,https://www.networkoptix.com/,https://job-boards.greenhouse.io/networkoptix,,TRUE,,
+,,Network Optix,https://www.networkoptix.com/,https://job-boards.greenhouse.io/networkoptix,greenhouse,TRUE,,
 ,,Xealth,https://www.xealth.com,https://www.xealth.com/company/careers/#job-openings,,TRUE,,
 ,,tvscientific,https://www.tvscientific.com,https://job-boards.greenhouse.io/tvscientificpoweredbypinterest,greenhouse,TRUE,true +,
 ,,psiquantum,https://www.psiquantum.com/,https://www.psiquantum.com/open-roles,,TRUE,,
@@ -371,19 +370,22 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,renewedvision,https://www.renewedvision.com,https://www.renewedvision.com/about-renewed-vision#jobs,,TRUE,,
 ,,thriveglobal,https://thriveglobal.com/,https://ats.rippling.com/thriveglobal/jobs,Rippling,TRUE,,
 ,,caredx,https://www.caredx.com/,https://www.caredx.com/careers/open-roles,greenhouse,TRUE,,healthcare
-,,finvi,https://finvi.com,https://finvi.com/careers/#jobs,adp,TRUE,true +,healthcare
-,,genlogs,https://www.genlogs.io/,https://ats.rippling.com/genlogs-corporation/jobs,,TRUE,true +,Transportation
-,,novacredit,https://www.novacredit.com/,https://job-boards.greenhouse.io/novacredit,greenhouse,TRUE,true +,fintech
-,5,Mozilla,https://www.mozilla.org/,https://www.mozilla.org/en-US/careers/listings/?location=Remote%20US,custom,TRUE,true +,IT
-,3,Mechanical Licensing Collective ,https://www.themlc.com/,https://job-boards.greenhouse.io/mechanicallicensingcollective,greenhouse,TRUE,true +,
-,,CroMetrics,https://crometrics.com/,https://crometrics.com/careers/#positions,greenhouse,TRUE,true +,IT
-,3,8:00 AM,https://www.8am.com/,https://www.8am.com/careers/#open-positions,greenhouse,TRUE,true +,IT
+,,finvi,https://finvi.com,https://finvi.com/careers/#jobs,adp,TRUE,true+,healthcare
+,,genlogs,https://www.genlogs.io/,https://ats.rippling.com/genlogs-corporation/jobs,,TRUE,true+,Transportation
+,,novacredit,https://www.novacredit.com/,https://job-boards.greenhouse.io/novacredit,greenhouse,TRUE,true+,fintech
+,5,Mozilla,https://www.mozilla.org/,https://www.mozilla.org/en-US/careers/listings/?location=Remote%20US,custom,TRUE,true+,IT
+,3,Mechanical Licensing Collective ,https://www.themlc.com/,https://job-boards.greenhouse.io/mechanicallicensingcollective,greenhouse,TRUE,true+,
+,,CroMetrics,https://crometrics.com/,https://crometrics.com/careers/#positions,greenhouse,TRUE,true+,IT
+,3,8:00 AM,https://www.8am.com/,https://www.8am.com/careers/#open-positions,greenhouse,TRUE,true+,IT
 ,,Netskope,https://www.netskope.com,https://www.netskope.com/company/careers/open-positions,greenhouse,FALSE,,IT
-,,Impiricus,https://www.impiricus.com/,https://job-boards.greenhouse.io/impiricus,greenhouse,TRUE,true +,healthcare
+,,Impiricus,https://www.impiricus.com/,https://job-boards.greenhouse.io/impiricus,greenhouse,TRUE,true+,healthcare
 ,4,Mcafee,https://mcafee.com,https://careers.mcafee.com/global/en/search-results,Workday,FALSE,,IT
 ,3,Marriott,https://www.marriott.com/,https://careers.marriott.com/jobs?filter%5Bcountry%5D%5B0%5D=United%20States&filter%5Bemployment_type%5D%5B0%5D=Full%20Time&filter%5Bis_remote%5D%5B0%5D=Yes&filter%5Bcategory%5D%5B0%5D=Information%20Technology&sort_by=external_posting_date,,FALSE,Query filter,
-,,Subsplash,https://www.subsplash.com,https://job-boards.greenhouse.io/subsplash,greenhouse,TRUE,true +,IT
+,,Subsplash,https://www.subsplash.com,https://job-boards.greenhouse.io/subsplash,greenhouse,TRUE,true+,IT
 ,4,Skylight,https://myskylight.com/,https://apply.workable.com/skylight-frame/,Workable,FALSE,,IT hardware
-,,Ckeck,https://www.checkhq.com/,https://job-boards.greenhouse.io/check/,greenhouse,TRUE,true +,IT
-,,Medecard,https://www.madecard.com/,https://www.madecard.com/careers,Ashby,TRUE,true +,fintech
+,,Ckeck,https://www.checkhq.com/,https://job-boards.greenhouse.io/check/,greenhouse,TRUE,true+,IT
+,,Medecard,https://www.madecard.com/,https://www.madecard.com/careers,Ashby,TRUE,true+,fintech
 ,3,Preferred Travel Group,https://preferredtravelgroup.com/,https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=3e5659aa-96ec-4248-b32b-238111027b07&ccId=19000101_000001&type=JS&lang=en_US&selectedMenuKey=CareerCenter,ADP,FALSE,,Travel
+,,Engineered Intelligence,https://www.engineeredintelligence.com/,https://engineeredintel.bamboohr.com/careers/,BambooHR,TRUE,true+,
+,,Fueled,https://fueled.com/,https://job-boards.greenhouse.io/fueledcareers/,greenhouse,TRUE,true+,agency
+,,One Study Team,https://www.onestudyteam.com/,https://job-boards.greenhouse.io/onestudyteam,greenhouse,TRUE,true+,healthcare

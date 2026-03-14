@@ -29,7 +29,7 @@ List of planned work
         🟡  No new matches found
         ```
 
-✅Update the project structure for batter maintainability
+✅ Update the project structure for batter maintainability
     use this structure: 
 /Users/vs/Dev/js/
 ├── main.py                    # Entry point only: run(), main(), CLI argparse (~75 lines)  
@@ -54,6 +54,30 @@ List of planned work
 └── README.md
 
 
+[] Error collection during page scanning
+    So that system issues can be tracked and analyzed  
+    As a data quality engineer  
+    I want the application to record page errors in a structured log  
+
+- Scenario: Error occurs while scanning a company page
+    - Given that the scanner is running.
+    - When the scanner encounters an error on a loaded page  
+    - Then the system should record the error in the error log storage
+        And the error record should contain a unique identifier  
+        And the company reference should be stored  
+        And the URL where the error occurred should be saved  
+        And the timestamp of when the error was found should be recorded  
+        And the error status should default to "not revived"
+    
+    Functionality:
+    - The system should record errors to the `error` CSV/Spreadsheet/DB
+    - Fields structure: 
+        `id` - (UUID, primary key)  
+        `company_id` - company ID/UUID taken from the `companies` table to link this record to the company  
+        `error_url` - (string) URL on which the error happened. Might be different from the `position_url` as the page might reload to a different URL.
+        `time_found` - (timestamp, system format)  
+        `revived` - (boolean, default false)
+        `comment` - (string, nullable)
 
 [] Slack notification for the new 
 - Add functionality to send a Slack message if the new matches were found
