@@ -16,6 +16,7 @@ CONFIG_DEFAULTS = {
     "companies_file": "data/companies.csv",
     "titles_file":    "data/sqa_titles.csv",
     "output_file":    "data/match.csv",
+    "schedule_times": ["08:08", "13:13", "18:18"],
 }
 
 

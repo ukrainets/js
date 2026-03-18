@@ -1,0 +1,50 @@
+"""
+Scheduler — runs the job search scan at configured times.
+"""
+
+import asyncio
+import schedule
+import time
+from datetime import datetime
+
+from config import load_config
+from main import run
+
+
+def run_scan() -> None:
+    """Execute one full scan. Config is re-read each time so changes take effect."""
+    config = load_config()
+    print(f"\n🕐  Scheduled scan triggered at {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    try:
+        asyncio.run(run(
+            companies_path=config["companies_file"],
+            titles_path=config["titles_file"],
+            headless=True,
+            concurrency=config["concurrency"],
+            output_path=config["output_file"],
+        ))
+    except Exception as e:
+        print(f"⚠️  Scan failed: {e}")
+
+
+def run_scheduler(run_now: bool = False) -> None:
+    config = load_config()
+    times = config.get("schedule_times", ["08:08", "13:13", "18:18"])
+
+    for t in times:
+        schedule.every().day.at(t).do(run_scan)
+
+    next_run = schedule.next_run()
+    print(f"🚀  Scheduler started — running every day at: {', '.join(times)}")
+    print(f"    Next run : {next_run.strftime('%Y-%m-%d %H:%M') if next_run else 'none'}")
+    print("    Press Ctrl+C to stop.\n")
+
+    if run_now:
+        run_scan()
+
+    try:
+        while True:
+            schedule.run_pending()
+            time.sleep(30)
+    except KeyboardInterrupt:
+        print("\n⛔  Scheduler stopped.")
