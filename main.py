@@ -17,6 +17,7 @@ from playwright.async_api import async_playwright
 
 from config import load_config
 from csv_io import load_companies, load_titles, load_known_urls
+from integrations.notifier import SLACK_WEBHOOK, notify_match_found
 from utils import format_duration
 from crawlers.scanner import scan_company
 
@@ -29,7 +30,7 @@ async def run(
     headless: bool,
     concurrency: int,
     output_path: str,
-) -> None:
+) -> int:
     companies  = load_companies(companies_path)
     titles     = load_titles(titles_path)
     start_time = datetime.now()
@@ -55,8 +56,9 @@ async def run(
             )
         )
 
+        on_match = notify_match_found if SLACK_WEBHOOK else None
         tasks = [
-            scan_company(semaphore, context, name, url, titles, output_path, write_lock, known_urls)
+            scan_company(semaphore, context, name, url, titles, output_path, write_lock, known_urls, on_match)
             for name, url in companies
         ]
         results = await asyncio.gather(*tasks)
@@ -76,6 +78,8 @@ async def run(
     print(f"   - found     : {total_matches} new match(es)")
     if new_matches:
         print(f"📄  New results saved to: {output_path}")
+
+    return total_matches
 
 
 # ── CLI entry point ───────────────────────────────────────────────────────────

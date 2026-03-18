@@ -82,6 +82,7 @@ async def scan_company(
     output_path: str,
     write_lock: asyncio.Lock,
     known_urls: set[str],
+    on_match=None,
 ) -> list[dict]:
     """
     Scan a single company's career page.
@@ -141,6 +142,8 @@ async def scan_company(
                             append_match_row(match_dict, output_path)
                             known_urls.add(job_url)
                             new_found.append(match_dict)
+                            if on_match:
+                                on_match(name, title, job_url)
                             lines.append(f"✅  Match for: [{title}] {job_url}")
                             lines.append(f"🟢  added to output file")
                         # duplicate — skip silently, no output line
