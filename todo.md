@@ -80,9 +80,9 @@ List of planned work
         `comment` - (string, nullable)
 
 [] Slack notification for the new 
-- Add functionality to send a Slack message if the new matches were found
+- Add functionality to send a Slack message if new matches were found
 - Store webhook in the `.env` file under `SLACK_WEBHOOK`
-- When a new match found, it should be posted to the Slack in this format:
+- When a new match is found, it should be posted to Slack in this format:
 ```txt
 🥳 New match found: [company_name] - [title]
 [match_position_url]
@@ -93,7 +93,7 @@ List of planned work
     - `config.json` should keep the time when the schedule will run. There should be an option to set multiple times.
     - Set scheduler to run at `8:08`, `13:13`, and `18:18`.
 
-[] Add batter handling to the missing input files. 
+[] Add better handling to the missing input files. 
     - Add infrastructure checks before running main.
     - Add notification for the missing input files.
 
