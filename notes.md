@@ -14,6 +14,10 @@ Mar 10
 multiple browser tabs
 277 companies
 
+Mar 17 
+297 companies
+
+
 MacBook Air
 4 tabs - 5 min
 5 tabs - 4 min ✅

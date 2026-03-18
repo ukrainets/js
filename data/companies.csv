@@ -107,7 +107,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,2,kCura,https://relativity.com,https://www.relativity.com/careers/open-positions/,Greenhouse,TRUE,,
 ,,Kemper,https://kemper.com,https://careers.kemper.com/search-jobs,Workday,,broken - HTTP 404,
 ,,Kirkland & Ellis,https://kirkland.com,https://www.kirkland.com/careers/career-opportunities,Custom,,broken - HTTP 404,
-,3,Kohler Co.,https://kohler.com,https://careers.kohler.com/search-jobs,Workday,,broken - HTTP 404,
+,3,Kohler Co.,https://kohler.com,https://www.kohlercompany.com/careers/search-careers/?jobfunction=Information%20Technology&positiontype=Professional&positionlocation=United%20States,Workday,TRUE,true+ filter applied,manufactiring
 ,,Kubeshark,https://kubeshark.co,https://www.linkedin.com/company/kubeshark/jobs/,LinkedIn,TRUE,,
 ,,KUBRA,https://kubra.com,https://jobs.lever.co/kubra,Lever,TRUE,,
 ,5,Lam Research,https://lamresearch.com,https://careers.lamresearch.com/search/,Workday,TRUE,,
@@ -120,7 +120,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,LogicMonitor,https://logicmonitor.com,https://www.logicmonitor.com/careers,Greenhouse,TRUE,,
 ,,Maltego Technologies,https://maltego.com,https://maltego.com/jobs/,Ashby,TRUE,,
 ,5,Mastercard,https://mastercard.com,https://careers.mastercard.com/us/en/search-results,Workday,FALSE,,
-,,Maveris,https://maveris.com,https://maveris.com/careers/,Greenhouse,,broken - HTTP 403,
+,,Maveris,https://maveris.com,https://apply.workable.com/maveriscareers/#jobs,Workable,TRUE,true+,
 ,5,McDonald's,https://mcdonalds.com,https://careers.mcdonalds.com/corporate/jobs/,Workday,,broken - HTTP 404,
 ,,McKinsey & Company,https://mckinsey.com,https://www.mckinsey.com/careers/search-jobs,Custom,,broken - Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.mckinsey.com/careers/sea,
 ,5,Meta,https://meta.com,https://www.metacareers.com/jobs/,Custom,TRUE,,
@@ -128,7 +128,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,Microsoft,https://microsoft.com,https://apply.careers.microsoft.com/careers?,Custom,TRUE,,
 ,5,MongoDB,https://mongodb.com,https://www.mongodb.com/careers/opportunities,Greenhouse,,broken - HTTP 503,
 ,5,Morgan Stanley,https://morganstanley.com,https://www.morganstanley.com/careers/career-opportunities-search?opportunity=sg,Custom,FALSE,broken - Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.morganstanley.com/career,
-,5,Morningstar,https://morningstar.com,https://www.morningstar.com/company/careers/job-openings,Workday,,broken - HTTP 404,
+,5,Morningstar,https://morningstar.com,https://careers.morningstar.com/us/en/search-results,Workday,FALSE,false+,fintech
 ,,N-iX,https://n-ix.com,https://www.n-ix.com/career/,Custom,TRUE,,
 ,,Netflix,https://netflix.com,https://jobs.netflix.com/search,Custom,,broken - HTTP 404,
 ,,NMI,https://nmi.com,https://nmi.com/company/careers/,Greenhouse,TRUE,,
@@ -182,8 +182,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,tastytrade,https://tastytrade.com,https://tastytrade.com/careers/,Greenhouse,TRUE,,
 ,3,TDK Corporation of America,https://tdk.com,https://www.tdk.com/en/careers/job_opportunities/index.html,Custom,FALSE,broken - Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.tdk.com/en/careers/job_o,
 ,,Teachers Pay Teachers,https://teacherspayteachers.com,https://www.teacherspayteachers.com/Careers,Greenhouse,TRUE,,
-,,Tekmetric,https://tekmetric.com,https://www.tekmetric.com/careers/open-roles,Greenhouse,,broken - HTTP 404,
-,2,TenantCloud,https://tenantcloud.com,https://tenantcloud.com/careers/,Custom,,broken - HTTP 404,
+,,Tekmetric,https://tekmetric.com,https://job-boards.greenhouse.io/tekmetric/,Greenhouse,TRUE,true+,
 ,,testomat.io,https://testomat.io,https://jobs.dou.ua/companies/testomat-io/vacancies/,Custom,,broken - HTTP 404,
 ,,Thoughtworks,https://thoughtworks.com,https://www.thoughtworks.com/en-us/careers/jobs,Custom,TRUE,,
 ,,Tock,https://exploretock.com,https://boards.greenhouse.io/tock,Greenhouse,,broken - HTTP 404,
@@ -389,3 +388,12 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Engineered Intelligence,https://www.engineeredintelligence.com/,https://engineeredintel.bamboohr.com/careers/,BambooHR,TRUE,true+,
 ,,Fueled,https://fueled.com/,https://job-boards.greenhouse.io/fueledcareers/,greenhouse,TRUE,true+,agency
 ,,One Study Team,https://www.onestudyteam.com/,https://job-boards.greenhouse.io/onestudyteam,greenhouse,TRUE,true+,healthcare
+,3,Gallagher,https://www.ajg.com/,https://jobs.ajg.com/ajg-home/jobs?sortBy=relevance&page=1&tags3=Fully%20Remote%20Worker&limit=100,,TRUE,true+ Filter applied,insurance
+,3,Geowealth,https://geowealth.com,https://geowealth.com/careers/,,TRUE,true+,SaaS
+,4,Aembit,https://aembit.io/,https://aembit.bamboohr.com/careers/,BambooHR,TRUE,"true+ Startup, Security",SaaS
+,2,Invisible,https://invisibletech.ai/,https://job-boards.eu.greenhouse.io/invisibletech/,greenhouse,TRUE,"true+ Govenment, Clerence required",agency
+,2,Group1001,https://www.group1001.com/,https://group1001wd.wd5.myworkdayjobs.com/Careers?isRemote=dc7503d8446c11de98360015c5e6daf6&workerSubType=597388e5ca171065c8c75b03194e08bb&timeType=338af4518d3d10643e3c353fb9365a7a,Workday,TRUE,true+ filter applied,insurance
+,5,P-1AI,https://p-1.ai/,https://jobs.ashbyhq.com/P-1%20AI/,Ashby,TRUE,true+,AI
+,4,Calendly,https://calendly.com/,https://job-boards.greenhouse.io/calendly/,greenhouse,TRUE,true+,SaaS
+,3,Bluebeam,https://www.bluebeam.com,https://careers.nemetschek.com/Bluebeam/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_customfield1=&optionsFacetsDD_customfield5=&optionsFacetsDD_location=US,SAP,TRUE,true+,construction
+,4,Bitwarden,https://bitwarden.com,https://bitwarden.com/careers/#open-positions,greenhouse,TRUE,true+ PW manager,SaaS
