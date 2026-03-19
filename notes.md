@@ -1,6 +1,7 @@
 # Notes
 
 ## Companies DB
+
 - Mar 13. searched  : 276 companies
 
 ## Performance
@@ -10,25 +11,28 @@ Mar 6 2026
 mixed company list, that got multiple errors.
 223 companies scan took 33min. 35 sec.
 
-Mar 10
-multiple browser tabs
-277 companies
+### Active scan progress
 
-Mar 17 
-297 companies
+- Mar 10, 277 companies
+- Mar 17, 297 companies
+- Mar 19, 335 companies
 
+### Performance test
 
 MacBook Air
-4 tabs - 5 min
-5 tabs - 4 min ✅
-6 tabs - 5 min
-10 tabs - 6 min
+
+- 4 tabs - 5 min
+- 5 tabs - 4 min ✅
+- 6 tabs - 5 min
+- 10 tabs - 6 min
 
 iMac
-5 tabs - 3min
-10 tabs - 2min
-12 tabs - 1min. 50sec
-14 tabs - 1min. 41sec ✅
-15 tabs - 1min. 42sec
-20 tabs - 1min. 46sec
+
+- 5 tabs - 3min
+- 10 tabs - 2min
+- 12 tabs - 1min. 50sec
+- 14 tabs - 1min. 41sec ✅
+- 15 tabs - 1min. 42sec
+- 20 tabs - 1min. 46sec
+
 ---
