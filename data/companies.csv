@@ -5,11 +5,11 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Halcyon,https://www.halcyon.ai/,https://job-boards.greenhouse.io/halcyon/,greenhouse,TRUE,,
 ,,Amount,https://www.amount.com/,https://job-boards.greenhouse.io/amount/,greenhouse,TRUE,,
 ,,Natera,https://www.natera.com/,https://job-boards.greenhouse.io/natera,greenhouse,TRUE,,
-,,Bitly,https://bitly.com/,https://job-boards.eu.greenhouse.io/bitly/,greenhouse,TRUE,,
+,,Bitly,https://bitly.com/,https://job-boards.eu.greenhouse.io/bitly/,greenhouse,TRUE,true+,it
 ,5,BlueSky,https://bsky.social/,https://bsky.social/about/join,Gem,TRUE,,Social
 ,5,CarsAndBids,,https://ats.rippling.com/cars-and-bids-job-board/jobs,Rippling,TRUE,,
 ,5,ConsumerReports,https://www.consumerreports.org/,https://job-boards.greenhouse.io/consumerreports,greenhouse,TRUE,,
-,5,1Password,https://1password.com/,https://jobs.ashbyhq.com/1password,Ashby,TRUE,,
+,5,1Password,https://1password.com/,https://jobs.ashbyhq.com/1password,Ashby,TRUE,true+,saas
 ,,Abbott,https://abbott.com,https://www.jobs.abbott/us/en/search-results,Custom,FALSE,,
 ,,AbbVie,https://abbvie.com,https://careers.abbvie.com/en/jobs,Workday,FALSE,,
 ,,Accenture,https://accenture.com,https://www.accenture.com/us-en/careers/jobsearch,Custom,TRUE,,
@@ -70,7 +70,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Encora Inc.,https://encora.com,https://careers.encora.com/search,Greenhouse,TRUE,,
 ,,Equitable Bank,https://eqbank.ca,https://jobs.lever.co/eqbank,lever,TRUE,,
 ,,eToro,https://etoro.com,https://www.etoro.com/careers/,Greenhouse,TRUE,,
-,5,Etsy,https://etsy.com,https://careers.etsy.com/jobs/search?query=,Greenhouse,FALSE,,
+,5,Etsy,https://etsy.com,https://careers.etsy.com/jobs/search?page=1&workplace_type%5B%5D=remote&employment_type_uids%5B%5D=3c5829aa50ee51a62d0fe527091fe365&country_codes%5B%5D=US&query=Engineer,Greenhouse,TRUE,true+ filter applied,
 ,5,Experian,https://experian.com,https://jobs.experian.com/jobs,Workday,FALSE,,
 ,3,Farmers Insurance,https://farmers.com,https://jobs.farmersinsurance.com/search/?searchby=location&createNewAlert=false&q=&locationsearch=&geolocation=&optionsFacetsDD_shifttype=&optionsFacetsDD_department=,Workday,FALSE,,
 ,,Figment,https://figment.io,https://job-boards.greenhouse.io/figment,Greenhouse,TRUE,,
@@ -103,10 +103,8 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,IQVIA,https://iqvia.com,https://jobs.iqvia.com/search-jobs,Custom,TRUE,,
 ,,Itransition Group,https://itransition.com,https://www.itransition.com/careers/vacancies,Custom,FALSE,false+ Agency,
 ,5,JPMorgan Chase & Co.,https://jpmorganchase.com,https://careers.jpmorgan.com/us/en/jobs,Custom,FALSE,,
-,,Kapowai,https://kapowai.com,https://www.kapowai.com/careers,Custom,,broken - HTTP 404,
 ,2,kCura,https://relativity.com,https://www.relativity.com/careers/open-positions/,Greenhouse,TRUE,,
-,,Kemper,https://kemper.com,https://careers.kemper.com/search-jobs,Workday,,broken - HTTP 404,
-,,Kirkland & Ellis,https://kirkland.com,https://www.kirkland.com/careers/career-opportunities,Custom,,broken - HTTP 404,
+,3,Kemper,https://kemper.com,https://kemper.wd5.myworkdayjobs.com/Kemper_Careers?timeType=fcc1b9aef13b0120a30ed9ae20137200&jobFamilyGroup=69d055723b3a01388e19baf28900ab02&workerSubType=edb2dbde967b019fd621a16a1014b20f,Workday,TRUE,true+ filter applied,
 ,3,Kohler Co.,https://kohler.com,https://www.kohlercompany.com/careers/search-careers/?jobfunction=Information%20Technology&positiontype=Professional&positionlocation=United%20States,Workday,TRUE,true+ filter applied,manufactiring
 ,,Kubeshark,https://kubeshark.co,https://www.linkedin.com/company/kubeshark/jobs/,LinkedIn,TRUE,,
 ,,KUBRA,https://kubra.com,https://jobs.lever.co/kubra,Lever,TRUE,,
@@ -121,95 +119,77 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Maltego Technologies,https://maltego.com,https://maltego.com/jobs/,Ashby,TRUE,,
 ,5,Mastercard,https://mastercard.com,https://careers.mastercard.com/us/en/search-results,Workday,FALSE,,
 ,,Maveris,https://maveris.com,https://apply.workable.com/maveriscareers/#jobs,Workable,TRUE,true+,
-,5,McDonald's,https://mcdonalds.com,https://careers.mcdonalds.com/corporate/jobs/,Workday,,broken - HTTP 404,
-,,McKinsey & Company,https://mckinsey.com,https://www.mckinsey.com/careers/search-jobs,Custom,,broken - Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.mckinsey.com/careers/sea,
+,5,McDonald's,https://mcdonalds.com,https://careers.mcdonalds.com/jobs?filter%5Bcountry%5D%5B0%5D=US&filter%5Bstate%5D%5B0%5D=IL&filter%5Bcity%5D%5B0%5D=Chicago&filter%5Bcategory%5D%5B0%5D=Quality%20Assurance%20Engineering&filter%5Bcategory%5D%5B1%5D=Software%20Engineering&filter%5Bcategory%5D%5B2%5D=Technology%20%26%20Digital%20Audit&filter%5Bcategory%5D%5B3%5D=Technology&sort_by=update_date&page_size=20&page_number=1,Workday,TRUE,true+ filter applied,fastfood
+,,McKinsey & Company,https://mckinsey.com,https://www.mckinsey.com/careers/search-jobs?industries=High%20Tech&functions=Technology&interest=Technology%20%26%20Digital,Custom,TRUE,true+ filter applied,
 ,5,Meta,https://meta.com,https://www.metacareers.com/jobs/,Custom,TRUE,,
 ,,Mezmo,https://mezmo.com,https://www.mezmo.com/career,Greenhouse,TRUE,,
 ,5,Microsoft,https://microsoft.com,https://apply.careers.microsoft.com/careers?,Custom,TRUE,,
-,5,MongoDB,https://mongodb.com,https://www.mongodb.com/careers/opportunities,Greenhouse,,broken - HTTP 503,
-,5,Morgan Stanley,https://morganstanley.com,https://www.morganstanley.com/careers/career-opportunities-search?opportunity=sg,Custom,FALSE,broken - Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.morganstanley.com/career,
+,5,Morgan Stanley,https://morganstanley.com,https://www.morganstanley.com/careers/career-opportunities-search?opportunity=sg,Custom,FALSE,false+,fintech
 ,5,Morningstar,https://morningstar.com,https://careers.morningstar.com/us/en/search-results,Workday,FALSE,false+,fintech
 ,,N-iX,https://n-ix.com,https://www.n-ix.com/career/,Custom,TRUE,,
-,,Netflix,https://netflix.com,https://jobs.netflix.com/search,Custom,,broken - HTTP 404,
+,5,Netflix,https://netflix.com,https://explore.jobs.netflix.net/careers?pid=790314899260&Teams=Engineering&Teams=Engineering%20Operations&Work%20Type=remote&Region=ucan&domain=netflix.com&sort_by=new&triggerGoButton=false,Custom,TRUE,true+ filter applied,media
 ,,NMI,https://nmi.com,https://nmi.com/company/careers/,Greenhouse,TRUE,,
 ,5,NVIDIA,https://nvidia.com,https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite,Workday,FALSE,,
 ,5,Okta,https://okta.com,https://www.okta.com/company/careers/,Greenhouse,TRUE,,
-,,OLX Group,https://olxgroup.com,https://www.olxgroup.com/open-positions,Greenhouse,,broken - HTTP 404,
-,,OpenBet,https://openbet.com,https://www.openbet.com/careers/,Workday,FALSE,,
 ,5,Oracle,https://oracle.com,https://careers.oracle.com/jobs/,Taleo,FALSE,,
-,3,Paylocity,https://paylocity.com,https://www.paylocity.com/careers/career-openings/,Greenhouse,,broken - HTTP 404,
+,3,Paylocity,https://paylocity.com,https://www.paylocity.com/company/careers/all-listings/?d=Product+%26+Technology&r=30&p=1,Greenhouse,TRUE,true+ filter applied,
 ,,Perchwell,https://perchwell.com,https://jobs.ashbyhq.com/Perchwell,Ashby,TRUE,,
-,,Perforce Software,https://perforce.com,https://www.perforce.com/careers/open-positions,Greenhouse,,broken - HTTP 404,
 ,,Performio,https://performio.co,https://www.performio.co/careers/,Greenhouse,TRUE,,
 ,,Planning Center,https://planning.center,https://www.planning.center/careers,Greenhouse,TRUE,,
 ,3,Princess Cruises,https://princess.com,https://eicl.fa.em5.oraclecloud.com/hcmUI/CandidateExperience/en/sites/HAGroup/jobs?mode=location,,FALSE,,
-,,Procentia,https://procentia.com,https://www.procentia.com/careers/,Custom,,broken - HTTP 502,
-,,Proposify,https://proposify.com,https://www.proposify.com/careers,Lever,,broken - HTTP 404,
-,,PwC,https://pwc.com,https://www.pwc.com/us/en/careers/job-search.html,Workday,,broken - HTTP 404,
+,,Proposify,https://proposify.com,https://www.proposify.com/company/careers#open-positions,humy,TRUE,true+,saas
 ,5,Qualcomm,https://qualcomm.com,https://careers.qualcomm.com/careers/search,Workday,TRUE,,
-,,Rachio,https://rachio.com,https://rachio.com/pages/careers,Greenhouse,,broken - HTTP 404,
-,,Randstad Digital,https://randstad.com,https://www.randstaddigital.com/en-us/careers/,Custom,,broken - HTTP 404,
+,,Randstad Digital,https://randstad.com,https://www.randstaddigital.com/en-us/careers/,Custom,FALSE,false+,
 ,5,Redfin,https://redfin.com,https://www.redfin.com/about/jobs,Greenhouse,TRUE,,
 ,2,Relativity,https://relativity.com,https://www.relativity.com/careers/open-positions/,Greenhouse,TRUE,,
 ,,Remote,https://remote.com,https://remote.com/careers,Greenhouse,TRUE,,
 ,,RevenueWell,https://revenuewell.com,https://www.revenuewell.com/careers/,Greenhouse,TRUE,,
 ,,Rio Tinto,https://riotinto.com,https://www.riotinto.com/en/careers/job-search,Custom,TRUE,,
 ,,Riot Games,https://riotgames.com,https://www.riotgames.com/en/work-with-us/jobs,Lever,TRUE,,
-,2,Rise Interactive,https://riseinteractive.com,"https://www.bequad.com/search-jobs?acm=ALL&alrpm=ALL&ascf=[%7B%22key%22:%22company_name%22,%22value%22:%22Rise%22%7D]",,TRUE,,
-,,Robert Half,https://roberthalf.com,https://www.roberthalf.com/us/en/jobs,Custom,FALSE,,
-,,Rocket Lawyer,https://rocketlawyer.com,https://www.rocketlawyer.com/about/careers,Greenhouse,,broken - HTTP 404,
+,,Robert Half,https://roberthalf.com,https://www.roberthalf.com/us/en/jobs?remote=Yes&postedwithin=1&emptype=Perm&lobid=RHT,Custom,TRUE,true+ filter applied,
+,,Rocket Lawyer,https://rocketlawyer.com,https://job-boards.greenhouse.io/rocketlawyer,Greenhouse,TRUE,true+,
 ,5,Rocket Money,https://rocketmoney.com,https://www.rocketmoney.com/careers,Greenhouse,TRUE,,
-,,RSM,https://rsmus.com,https://rsmus.com/careers/search.html,Workday,,broken - HTTP 404,
-,,Ryerson,https://ryerson.com,https://ryerson.wd5.myworkdayjobs.com/Ryerson,Workday,,broken - HTTP 500,
+,,RSM,https://rsmus.com,https://jobs.rsmus.com/?page=1&category=Information+Technology%7C&experienceLevel=Experienced&country=United+States&keyword=&location=&shift=&jobType=Regular&jobLevel=,Workday,TRUE,true+ filter applied,
 ,5,Salesforce,https://salesforce.com,https://careers.salesforce.com/en/jobs/,Custom,TRUE,,
 ,,Santa Monica Studio,https://sms.playstation.com,https://sms.playstation.com/careers,Workday,TRUE,,
 ,,Scopic,https://scopicsoftware.com,https://scopicsoftware.com/careers/,Custom,TRUE,,
 ,,Scotiabank,https://scotiabank.com,https://jobs.scotiabank.com/search/,Custom,FALSE,,
-,,SES Satellites,https://ses.com,https://www.ses.com/careers/find-a-job,Workday,,broken - HTTP 404,
+,,SES Satellites,https://ses.com,https://careers.ses.com/search/?createNewAlert=false&q=&locationsearch=united+states&optionsFacetsDD_customfield3=&optionsFacetsDD_customfield5=,Workday,TRUE,true+ filter applied,
 ,5,Shopify,https://shopify.com,https://www.shopify.com/careers/search,Greenhouse,TRUE,,
-,,Sidley Austin LLP,https://sidley.com,https://www.sidley.com/en/us/careers/staff/open-positions,Custom,,broken - HTTP 404,
-,,Slalom,https://slalom.com,https://www.slalom.com/us/en/careers/search-jobs,Workday,,broken - HTTP 404,
-,,SmartBear,https://smartbear.com,https://smartbear.com/about/careers/open-positions/,Greenhouse,,broken - HTTP 404,
+,,Slalom,https://slalom.com,https://jobs.slalom.com/#/?locations=Chicago&expertises=Technology,Workday,TRUE,true+,
 ,4,"Sprout Social, Inc.",https://sproutsocial.com,https://sproutsocial.com/careers/,Greenhouse,TRUE,,
 ,,Starburst,https://starburst.io,https://www.starburst.io/careers/open-roles/,Greenhouse,TRUE,,
 ,,Strata Decision Technology,https://stratadecision.com,https://job-boards.greenhouse.io/stratacareers,Greenhouse,TRUE,,
-,5,Stripe,https://stripe.com,https://stripe.com/jobs/search,Custom,FALSE,,
+,5,Stripe,https://stripe.com,https://stripe.com/jobs/search?teams=Banking+as+a+Service&teams=Climate&teams=Connect&teams=Crypto&teams=Infrastructure+%26+Corporate+Tech&teams=Mobile&teams=New+Financial+Products&teams=Payments&teams=Platform&teams=Professional+Services&teams=Revenue+%26+Financial+Automation&teams=Tax&teams=Terminal&remote_locations=North+America--US+Remote,Custom,TRUE,true+ filter applied,
 ,3,Superhuman,https://superhuman.com,https://superhuman.com/careers,Greenhouse,FALSE,,
 ,,Sutherland,https://sutherlandglobal.com,https://www.jobs.sutherlandglobal.com/job-results#/,iCIMS,FALSE,,
 ,,Sweetwater,https://sweetwater.com,https://careers.sweetwater.com/us/en/c/technology-jobs,Custom,TRUE,,
 ,,Tamnoon,https://tamnoon.io,https://apply.workable.com/tamnoon-dot-i-o/,Workable,TRUE,,
 ,,TaskRabbit,https://taskrabbit.com,https://www.taskrabbit.com/careers,Greenhouse,TRUE,,
 ,,tastytrade,https://tastytrade.com,https://tastytrade.com/careers/,Greenhouse,TRUE,,
-,3,TDK Corporation of America,https://tdk.com,https://www.tdk.com/en/careers/job_opportunities/index.html,Custom,FALSE,broken - Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.tdk.com/en/careers/job_o,
 ,,Teachers Pay Teachers,https://teacherspayteachers.com,https://www.teacherspayteachers.com/Careers,Greenhouse,TRUE,,
 ,,Tekmetric,https://tekmetric.com,https://job-boards.greenhouse.io/tekmetric/,Greenhouse,TRUE,true+,
-,,testomat.io,https://testomat.io,https://jobs.dou.ua/companies/testomat-io/vacancies/,Custom,,broken - HTTP 404,
 ,,Thoughtworks,https://thoughtworks.com,https://www.thoughtworks.com/en-us/careers/jobs,Custom,TRUE,,
-,,Tock,https://exploretock.com,https://boards.greenhouse.io/tock,Greenhouse,,broken - HTTP 404,
+,,Tock,https://exploretock.com,https://www.exploretock.com/join/careers/,,TRUE,true+,
 ,,Trading Technologies,https://tradingtechnologies.com,https://www.tradingtechnologies.com/about/careers/,Greenhouse,TRUE,,
 ,,Transwestern,https://transwestern.com,https://www.transwestern.com/careers/,Custom,TRUE,,
-,5,Trend Micro,https://trendmicro.com,https://www.trendmicro.com/en_us/about/careers.html,Workday,TRUE,,
+,5,Trend Micro,https://trendmicro.com,https://trendmicro.wd3.myworkdayjobs.com/External?timeType=f6887f8ffb6901a0ae6afd8c1a1d8900&workerSubType=904e04688bb00110d3d92e873c1dfc04&locationCountry=bc33aa3152ec42d4995f4791a106ed09&jobFamilyGroup=904e04688bb0016982d07b383e1dab0c,Workday,TRUE,true+ filter applied,it
 ,5,U.S. Bank,https://usbank.com,https://careers.usbank.com/global/en/search-results,Workday,FALSE,,
 ,4,Uber,https://uber.com,https://www.uber.com/us/en/careers/list/,Custom,TRUE,,
-,,Unite Us,https://uniteus.com,https://uniteus.com/about/careers/,Greenhouse,,broken - HTTP 404,
+,,Unite Us,https://uniteus.com,https://job-boards.greenhouse.io/uniteus/,Greenhouse,TRUE,true+,
 ,5,United Airlines,https://united.com,https://careers.united.com/us/en/search-results,Custom,FALSE,,
-,5,University of Illinois Urbana-Champaign,https://illinois.edu,https://jobs.illinois.edu/academic-job-board/job-board,Custom,,broken - HTTP 500,
 ,5,Upwork,https://upwork.com,https://www.upwork.com/careers,Greenhouse,TRUE,,
-,,Valtech,https://valtech.com,https://www.valtech.com/en/careers/jobs/,Custom,,broken - HTTP 404,
 ,,VCA Animal Hospitals,https://vcahospitals.com,https://www.vcacareers.com/global/en/search-results?,Workday,FALSE,,
 ,,VelocityEHS,https://velocityehs.com,https://www.ehs.com/about-us/careers/open-positions/,Greenhouse,TRUE,,
 ,,Vend,https://vendhq.com,https://www.vendhq.com/company/careers/,Greenhouse,TRUE,,
 ,,Vibes,https://vibes.com,https://www.vibes.com/careers/,Greenhouse,TRUE,,
 ,,VillageMD,https://villagemd.com,https://www.villagemd.com/careers/,Greenhouse,TRUE,,
-,,Vistex,https://vistex.com,https://www.vistex.com/company/careers/,Greenhouse,,broken - HTTP 404,
+,,Vistex,https://vistex.com,https://recruiting2.ultipro.com/VIS1012VISX/JobBoard/23e64b4e-ff01-4579-9e5a-835480ac7a51/?q=&o=postedDateDesc&f4=5mSxC34MJVa9SI7imbN3KA+pXmqkOiv10KvS8MsS5n4BA&f5=BmAcWZ8-8UG4gJrECGX-_w,,TRUE,true+,
 ,1,Vivid Seats LLC,https://vividseats.com,https://www.vividseats.com/careers,Greenhouse,TRUE,,
-,,VML Enterprise Solutions,https://vml.com,https://www.vml.com/en-us/work/careers,Custom,,broken - HTTP 404,
 ,,Warner Bros. Discovery,https://wbd.com,https://careers.wbd.com/global/en/search-results,Workday,FALSE,,
 ,,Webflow,https://webflow.com,https://webflow.com/careers,Greenhouse,TRUE,,
-,3,Wells Fargo,https://wellsfargo.com,https://www.wellsfargo.com/about/careers/search/,Workday,,broken - HTTP 404,
-,,WEZOM,https://wezom.com,https://wezom.com/en/careers/,Custom,,broken - HTTP 404,
-,,Wipfli,https://wipfli.com,https://www.wipfli.com/careers/open-positions,Custom,,broken - error page (404 - Wipfli),
-,,Wirex,https://wirexapp.com,https://wirexapp.com/about/careers,Greenhouse,,broken - HTTP 404,
+,3,Wells Fargo,https://wellsfargo.com,https://www.wellsfargo.com/about/careers/search/,Workday,FALSE,false+,
+,,Wirex,https://wirexapp.com,https://wirex.bamboohr.com/careers,bamboohr,TRUE,true+,
 ,5,WordPress,https://wordpress.com,https://automattic.com/work-with-us/,Custom,TRUE,,
 ,,Worldline,https://worldline.com,https://jobs.worldline.com/search/?q=&locationsearch=&searchResultView=LIST,Custom,FALSE,,
 ,,XPO,https://xpo.com,https://jobs.xpo.com/search-jobs,Custom,FALSE,,
@@ -217,7 +197,6 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,Yum! Brands,https://yum.com,https://jobs.yum.com/?size=n_250_n,Workday,FALSE,,
 ,,Zensar Technologies,https://zensar.com,https://www.zensar.com/careers/,Custom,TRUE,,
 ,,Zip Co,https://zip.co,https://zip.co/careers/roles?loc=united-states,Greenhouse,TRUE,,
-,,A1 Garage Door Service,a1garage.com,https://jobs.ashbyhq.com/A1%20Garage%20Door%20Service,Ashby,TRUE,,
 ,,Abridge,abridge.com,https://jobs.ashbyhq.com/abridge,Ashby,TRUE,,
 ,5,Airtable,airtable.com,https://jobs.ashbyhq.com/airtable,Ashby,TRUE,,
 ,,Alan,alan.com,https://jobs.ashbyhq.com/alan,Ashby,TRUE,,
@@ -397,3 +376,28 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,4,Calendly,https://calendly.com/,https://job-boards.greenhouse.io/calendly/,greenhouse,TRUE,true+,SaaS
 ,3,Bluebeam,https://www.bluebeam.com,https://careers.nemetschek.com/Bluebeam/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_customfield1=&optionsFacetsDD_customfield5=&optionsFacetsDD_location=US,SAP,TRUE,true+,construction
 ,4,Bitwarden,https://bitwarden.com,https://bitwarden.com/careers/#open-positions,greenhouse,TRUE,true+ PW manager,SaaS
+,5,PayPal,https://www.paypal.com/us/home,https://paypal.eightfold.ai/careers?start=0&location=Chicago%2C+IL%2C+United+States&pid=274917530587&sort_by=distance&filter_distance=80&filter_include_remote=1&filter_job_category=Software+Engineering&filter_work_location_option=onsite,eightfold.ai,TRUE,true+ filter applied,fintech
+,3,Bounteous,https://www.bounteous.com/,https://jobs.lever.co/bounteous/?location=United%20States,lever,TRUE,true+,agency
+,2,WithMe,https://withme.com,https://job-boards.greenhouse.io/withmeinc/,greenhouse,TRUE,"true+, chicago based",product
+,3,Ocient,https://ocient.com/,https://ocient.com/job-postings/#openings-list,,TRUE,true+,IT
+,2,TEK Systems,https://www.teksystems.com/en/,https://careers.teksystems.com/us/en/search-results?keywords=,,FALSE,false+,agency
+,2,Envision,https://envisionitagency.com/,https://envisionitagency.com/careers/#open-positions,greenhouse,TRUE,"true+, chicago based",agency
+,3,cars.com,cars.com,https://cars.wd12.myworkdayjobs.com/cars,Workday,FALSE,false+,
+,3,Pinpoint,https://www.pinpointhq.com/,https://workwithus.pinpointhq.com/#js-careers-jobs-block,Pinpoint,TRUE,true+,HR Platform
+,3,Employ,https://www.employinc.com/,https://careers.employinc.com/search/jobs,Employ,TRUE,true+,HR Platform
+,3,Puck,https://www.careerpuck.com/,https://app.careerpuck.com/page/puck-meet-the-team-at-puck?p-s=k4s4nz3e,Puck,TRUE,true+,HR Platform
+,3,Rippling,https://www.rippling.com,https://www.rippling.com/careers/open-roles,Rippling,TRUE,true+,HR Platform
+,3,Dayforce,https://www.dayforce.com/,https://jobs.dayforcehcm.com/mydayforce/alljobs?locationString=United+States&distance=15&payType=2&fromDate=1w&locationId=153&locationType=2,Dayforce,TRUE,true+ filter applied,HR Platform
+,4,Ashby,https://www.ashbyhq.com,https://www.ashbyhq.com/careers,Ashby,TRUE,true+,HR Platform
+,3,Workable,https://workable.com,https://apply.workable.com/careers/#jobs,Workable,TRUE,true+,HR Platform
+,5,Costco IT,https://www.costco.com/,https://phf.tbe.taleo.net/phf02/ats/careers/v2/searchResults?org=COSTCO&cws=41,Taleo,TRUE,"true+, filter applied",retail
+,3,Exelon,https://www.exeloncorp.com/,https://jobs.exeloncorp.com/careers-home/jobs?state=Illinois&page=1&limit=100&categories=Engineering%7CInformation%20Technology,,TRUE,"true+, filter applied",energy
+,4,Instacart,https://www.instacart.com/,https://www.instacart.careers/current-openings,greenhouse,TRUE,true+,retail
+,5,GitLab,https://about.gitlab.com,https://about.gitlab.com/jobs/all-jobs/#engineering,greenhouse,TRUE,true+,IT
+,5,Misumi,https://us.misumi-ec.com/,https://us.misumi-ec.com/careers/,Jazhr,TRUE,true+,retail
+,5,Mcmaster,https://www.mcmaster.com/,https://job-boards.greenhouse.io/mcmastercarr,greenhouse,TRUE,true+,retail
+,4,Fedex,https://fedex.com,https://careers.fedex.com/jobs?filter%5Bis_remote%5D%5B0%5D=Yes,paradox,TRUE,true+,logistic
+,3,Zurich,https://www.zurich.com,https://www.careers.zurich.com/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_shifttype=Experienced&optionsFacetsDD_department=Information+Technology&optionsFacetsDD_customfield3=United+States,SAP,TRUE,true+,finance
+,4,US Foods,https://usfoods.com,https://careers.usfoods.com/us/en/c/digitech-jobs,Workday,TRUE,true+ filter applied,retail
+,4,Dyson,https://dyson.com,https://careers.dyson.com/en-gb/search-results/?q=&page=1&minpage=1&maxpage=1&sort=NewestPosted&countries=1440&teams=1340&teams=1312,Workday,TRUE,true+ filter applied,appliances
+,5,Fidelity,https://fidelity.com,https://jobs.fidelity.com/en/jobs/?search=&team=Technology&region=Illinois&pagesize=20&origin=filtered#results,,TRUE,true+ filter applied,finance
