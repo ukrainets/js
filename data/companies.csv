@@ -196,13 +196,12 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,Yum! Brands,https://yum.com,https://jobs.yum.com/?size=n_250_n&filters%5B0%5D%5Bfield%5D=category&filters%5B0%5D%5Bvalues%5D%5B0%5D=Engineering&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bpersistent%5D=false&filters%5B1%5D%5Bfield%5D=city_filter&filters%5B1%5D%5Bvalues%5D%5B0%5D=remote&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bpersistent%5D=false,Workday,TRUE,true+,food
 ,,Zensar Technologies,https://zensar.com,https://www.zensar.com/careers/,Custom,TRUE,,
 ,,Zip Co,https://zip.co,https://zip.co/careers/roles?loc=united-states,Greenhouse,TRUE,,
-,,Abridge,abridge.com,https://jobs.ashbyhq.com/abridge,Ashby,TRUE,,
-,5,Airtable,airtable.com,https://jobs.ashbyhq.com/airtable,Ashby,TRUE,,
-,,Alan,alan.com,https://jobs.ashbyhq.com/alan,Ashby,TRUE,,
-,,Altura,altura.io,https://jobs.ashbyhq.com/altura,Ashby,TRUE,,
-,,amo,amo.co,https://jobs.ashbyhq.com/amo,Ashby,TRUE,,
-,,Anyscale,anyscale.com,https://jobs.ashbyhq.com/anyscale,Ashby,TRUE,,
-,,Arena Intelligence (LM Arena),lmarena.ai,https://jobs.ashbyhq.com/lmarena,Ashby,TRUE,,
+,,Abridge,abridge.com,https://jobs.ashbyhq.com/abridge,Ashby,TRUE,true+,
+,5,Airtable,airtable.com,https://job-boards.greenhouse.io/airtable/?offices%5B%5D=4005133002,Greenhouse,TRUE,true+ filter applied remote,SaaS
+,,Alan,alan.com,https://jobs.ashbyhq.com/alan,Ashby,TRUE,true+,
+,,Altura,altura.io,https://jobs.ashbyhq.com/altura,Ashby,TRUE,true+,
+,,Anyscale,anyscale.com,https://jobs.ashbyhq.com/anyscale,Ashby,TRUE,true+,
+,,Arena Intelligence (LM Arena),lmarena.ai,https://jobs.ashbyhq.com/arena,Ashby,TRUE,true+,
 ,,Aurora Solar,aurorasolar.com,https://jobs.ashbyhq.com/aurorasolar,Ashby,TRUE,,
 ,,Avid4 Adventure,avid4.com,https://jobs.ashbyhq.com/avid4,Ashby,TRUE,,
 ,,Away,awaytravel.com,https://jobs.ashbyhq.com/away,Ashby,TRUE,,
@@ -258,7 +257,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,LiveKit,livekit.io,https://jobs.ashbyhq.com/livekit,Ashby,TRUE,,
 ,,Local Infusion,—,https://jobs.ashbyhq.com/Local%20Infusion,Ashby,TRUE,,
 ,4,Luma AI,lumalabs.ai,https://jobs.ashbyhq.com/luma-ai,Ashby,TRUE,,
-,,Machinify,machinify.com,https://jobs.ashbyhq.com/machinify,Ashby,TRUE,,
+,,Machinify,machinify.com,https://job-boards.greenhouse.io/machinifyinc,Greenhouse,TRUE,true+,healthcare
 ,,Marqeta,marqeta.com,https://jobs.ashbyhq.com/marqeta,Ashby,TRUE,,
 ,,Marshmallow,marshmallow.com,https://jobs.ashbyhq.com/marshmallow,Ashby,TRUE,,
 ,,Meticulous,meticulous.ai,https://jobs.ashbyhq.com/meticulous,Ashby,TRUE,,
@@ -410,3 +409,14 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,Panasonic,panasonic.com,"https://careers.na.panasonic.com/jobs?page=1&tags1=Full-Time&locations=Bolingbrook,Illinois,United%20States%7CChicago,Illinois,United%20States%7CHoffman%20Estates,Illinois,United%20States%7C,,United%20States&limit=100",icims,TRUE,true+ filter applied,manufacturing
 ,3,International,https://www.international.com/,https://hub-internationalmotors.icims.com/jobs/search?ss=1&searchCategory=2641&searchPositionType=2155&mobile=false&width=1596&height=500&bga=true&needsRedirect=false&jan1offset=-360&jun1offset=-300,icims,TRUE,true+ filter applied,automotive
 ,4,General Dynamics,https://www.gdit.com,https://www.gdit.com/careers/search/?q=qa&page=1&filterClearance=None&filterLocation=Remote,Workday,TRUE,true+ filter applied for QA,IT
+,3,Stand Together,https://standtogether.org/,https://jobs.lever.co/standtogether?,Lever,TRUE,true+ filter applied,nonprofit
+,4,Hometap,https://www.hometap.com,https://www.hometap.com/careers/job-listings,greenhouse,TRUE,true+,finance
+,5,Anduril,https://www.anduril.com,https://www.anduril.com/open-roles?employmentType=full-time&location=remote,greenhouse,TRUE,true+ filter applied,defense
+,3,Fleetio,https://www.fleetio.com/,https://job-boards.greenhouse.io/fleetio/,greenhouse,TRUE,true+,SaaS transportation
+,4,Pinterest,https://www.pinterest.com/,https://www.pinterestcareers.com/jobs/?search=&team=Engineering&team=IT&team=tvScientific&type=Regular&remote=true&pagesize=50#results,greenhouse,TRUE,true+ filter applied,social
+,3,Curalinc,https://curalinc.com/,https://curalinc.com/careers,Paycor,TRUE,true+,healthcare
+,4,Johnson and Johnson,https://www.jnj.com,https://www.careers.jnj.com/en/jobs/?search=&country=United+States+of+America&type=Full+time&pattern=Fully+Remote&pagesize=50#results,Workday,TRUE,true+ filter applied for remote,
+,5,Slack,https://slack.com,https://slack.com/careers,Workday,TRUE,true+,IT
+,5,Framework,https://frame.work/,https://ats.rippling.com/en-GB/framework/jobs,Rippling,TRUE,true+,hardware
+,5,Medium,https://medium.com/,https://job-boards.greenhouse.io/medium/,greenhouse,TRUE,true+,social
+,5,Grammarly-Superhuman,https://superhuman.com/,https://job-boards.greenhouse.io/grammarly?departments%5B%5D=7014,greenhouse,TRUE,true+,IT
