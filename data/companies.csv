@@ -420,3 +420,17 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,Framework,https://frame.work/,https://ats.rippling.com/en-GB/framework/jobs,Rippling,TRUE,true+,hardware
 ,5,Medium,https://medium.com/,https://job-boards.greenhouse.io/medium/,greenhouse,TRUE,true+,social
 ,5,Grammarly-Superhuman,https://superhuman.com/,https://job-boards.greenhouse.io/grammarly?departments%5B%5D=7014,greenhouse,TRUE,true+,IT
+,5,Box,https://box.com,https://careers.box.com/en/jobs/?search=&region=North+America&team=Engineering&pagesize=50#results,,TRUE,true+ filter applied,SaaS
+,3,Cox Automotive,https://www.coxautoinc.com,https://jobs.coxenterprises.com/en/jobs/?search=&location=&lat=&lng=&remote=true&team=Engineering+%2F+Product+Development&team=Information+Technology&team=Data+Intelligence+%26+Science&type=Full+time&req=&pagesize=20&showmap=false#results,,TRUE,true+ filter applied,SaaS
+,5,DropBox,https://www.dropbox.com,https://www.dropbox.jobs/en/jobs/?search=&location=Remote+-+US%3A+All+locations&team=Engineering&pagesize=20#results,,FALSE,false+ 1 click,SaaS
+,5,Cloudflare,https://www.cloudflare.com,https://www.cloudflare.com/careers/jobs/?location=US,greenhouse,TRUE,true+ filter applied,IT
+,5,Lego,https://www.lego.com,https://www.lego.com/en-dk/careers/search?country=bc33aa3152ec42d4995f4791a106ed09&category=248fdf7f03f01009a520af48fa2b0000,Workday,TRUE,true+ filter applied,Toys
+,5,Discord,http://www.discord.com,https://job-boards.greenhouse.io/discord/?offices%5B%5D=4082816002,greenhouse,TRUE,true+ filter applied Remote,social
+,4,Homedepot,https://homedepot.com,https://careers.homedepot.com/job-search-results/?category[]=Technology&location_type[]=Remote,Workday,TRUE,true+ filter applied not showing all results,retail
+,3,Smart Asset,https://smartasset.com/,https://job-boards.greenhouse.io/smartasset,greenhouse,TRUE,true+,IT
+,3,Tebra,https://www.tebra.com/,https://job-boards.greenhouse.io/tebra,greenhouse,TRUE,true+,healthcare
+,3,SmithRX,https://smithrx.com/,https://job-boards.greenhouse.io/smithrx,greenhouse,TRUE,true+,healthcare
+,4,Redshelf,https://redshelf.com,https://jobs.jobvite.com/vitalsource,jobvite,TRUE,true+,education
+,4,Target,https://corporate.target.com/,https://corporate.target.com/careers/job-search?currentPage=1&remote=Remote%20Eligible&jobAreas=Target%20Tech&schedule=Full-time,Workday,TRUE,true+ filter applied,retail
+,4,Here,https://www.here.com/,https://careers-here.icims.com/jobs/search?ss=1&searchPositionType=2049&searchLocation=12781--Chicago&mobile=false&width=1250&height=500&bga=true&needsRedirect=false&jan1offset=-360&jun1offset=-300,Icims,TRUE,true+ filter applied,
+,3,togal ai,https://www.togal.ai,https://www.togal.ai/careers#open-positions,,,,
