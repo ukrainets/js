@@ -202,13 +202,10 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Altura,altura.io,https://jobs.ashbyhq.com/altura,Ashby,TRUE,true+,
 ,,Anyscale,anyscale.com,https://jobs.ashbyhq.com/anyscale,Ashby,TRUE,true+,
 ,,Arena Intelligence (LM Arena),lmarena.ai,https://jobs.ashbyhq.com/arena,Ashby,TRUE,true+,
-,,Aurora Solar,aurorasolar.com,https://jobs.ashbyhq.com/aurorasolar,Ashby,TRUE,,
-,,Avid4 Adventure,avid4.com,https://jobs.ashbyhq.com/avid4,Ashby,TRUE,,
-,,Away,awaytravel.com,https://jobs.ashbyhq.com/away,Ashby,TRUE,,
-,,Axion Ray,axionray.com,https://jobs.ashbyhq.com/axionray,Ashby,TRUE,,
-,,Axle Energy,axle.energy,https://jobs.ashbyhq.com/axle-careers,Ashby,TRUE,,
-,,Brigit,brigit.com,https://jobs.ashbyhq.com/brigit,Ashby,TRUE,,
-,,Brightline,hellobrightline.com,https://jobs.ashbyhq.com/hellobrightline,Ashby,TRUE,,
+,,Aurora Solar,aurorasolar.com,https://jobs.ashbyhq.com/aurorasolar,Ashby,TRUE,true+,
+,,Avid4 Adventure,avid4.com,https://jobs.ashbyhq.com/avid4,Ashby,TRUE,true+,
+,,Brigit,brigit.com,https://jobs.ashbyhq.com/brigit,Ashby,TRUE,true+,
+,,Brightline,hellobrightline.com,https://jobs.ashbyhq.com/hellobrightline,Ashby,TRUE,true+,
 ,,Candid Health,candidhealth.com,https://jobs.ashbyhq.com/candidhealth,Ashby,TRUE,,
 ,,Civic Roundtable,civicroundtable.com,https://jobs.ashbyhq.com/Civic%20Roundtable,Ashby,TRUE,,
 ,,Clay,clay.com,https://jobs.ashbyhq.com/claylabs,Ashby,TRUE,,
@@ -433,4 +430,17 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,4,Redshelf,https://redshelf.com,https://jobs.jobvite.com/vitalsource,jobvite,TRUE,true+,education
 ,4,Target,https://corporate.target.com/,https://corporate.target.com/careers/job-search?currentPage=1&remote=Remote%20Eligible&jobAreas=Target%20Tech&schedule=Full-time,Workday,TRUE,true+ filter applied,retail
 ,4,Here,https://www.here.com/,https://careers-here.icims.com/jobs/search?ss=1&searchPositionType=2049&searchLocation=12781--Chicago&mobile=false&width=1250&height=500&bga=true&needsRedirect=false&jan1offset=-360&jun1offset=-300,Icims,TRUE,true+ filter applied,
-,3,togal ai,https://www.togal.ai,https://www.togal.ai/careers#open-positions,,,,
+,3,togal ai,https://www.togal.ai,https://www.togal.ai/careers#open-positions,Ashby,TRUE,true+,
+,3,Veritone,https://www.veritone.com/,https://veritone.wd1.myworkdayjobs.com/Veritone_Career_Site?locationCountry=bc33aa3152ec42d4995f4791a106ed09,Workday,TRUE,true+ filter applied,
+,5,ASML,https://www.asml.com,https://www.asml.com/en/careers/find-your-job?job_country=US&job_educational_backgrounds=Computer+Science&job_technical_fields=Software%7CSystem+Integration+and+Testing&job_type=Fix&sort_by=relevance,Workday,TRUE,true+ filter applied,hardware
+,5,Astromecha,https://www.astromecha.co,https://www.astromecha.co/careers,Ashby,TRUE,true+,aviation
+,3,Classwallet,https://classwallet.com,https://classwallet.com/careers/,Workable,TRUE,true+,
+,3,Gravie,https://www.gravie.com/,https://jobs.lever.co/gravie?utm_source=BuiltIn&utm_medium=BuiltIn&utm_campaign=BuiltIn,Lever,TRUE,true+,healthcare
+,3,Avive,https://www.avive.life/,https://jobs.lever.co/AviveSolutions,Lever,TRUE,true+,healthcare
+,3,Cleerly,https://cleerlyhealth.com,https://cleerlyhealth.com/careers-board?gh_src=my.greenhouse.search,greenhouse,TRUE,true+,healthcare
+,3,Netbrain,https://www.netbrain.com/,https://job-boards.greenhouse.io/netbrain/,greenhouse,TRUE,true+,IT
+,3,Glydways,https://www.glydways.com/,https://job-boards.greenhouse.io/glydways,greenhouse,TRUE,true+,Transportation
+,4,Tines,https://www.tines.com/,https://job-boards.greenhouse.io/tines,greenhouse,TRUE,true+,SaaS
+,3,DV Trading,https://dvtrading.co/,https://job-boards.greenhouse.io/dvtrading/,greenhouse,TRUE,true+,finance
+,3,Versant Media,https://www.versantmedia.com/,https://careers.smartrecruiters.com/Versant3/?locationType=REMOTE,smartrecruiters,TRUE,true+,Media
+,3,Otter AI,https://otter.ai/,https://otter.ai/careers#open-positions,greenhouse,TRUE,true+,IT
