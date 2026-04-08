@@ -13,10 +13,11 @@ mixed company list, that got multiple errors.
 
 ### Active scan progress
 
-- Mar 10, 277 companies
-- Mar 17, 297 companies
-- Mar 19, 352 companies
-- Mar 27, 361 companies
+- Mar 10, 277 companies  
+- Mar 17, 297 companies  
+- Mar 19, 352 companies  
+- Mar 27, 361 companies  
+- Apr  8, 384 companies  
 
 ### Performance test
 
