@@ -1,0 +1,25 @@
+id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,field
+,,Litify,https://www.litify.com/,https://job-boards.greenhouse.io/litify/,greenhouse,TRUE,,
+x,,Halcyon,https://www.halcyon.ai/,https://job-boards.greenhouse.io/halcyon/,greenhouse,TRUE,,
+x,,Amount,https://www.amount.com/,https://job-boards.greenhouse.io/amount/,greenhouse,TRUE,,
+,5,BlueSky,https://bsky.social/,https://bsky.social/about/join,Gem,TRUE,,Social
+,5,CarsAndBids,,https://ats.rippling.com/cars-and-bids-job-board/jobs,Rippling,TRUE,,
+,5,ConsumerReports,https://www.consumerreports.org/,https://job-boards.greenhouse.io/consumerreports,greenhouse,TRUE,,
+,5,1Password,https://1password.com/,https://jobs.ashbyhq.com/1password,Ashby,TRUE,,
+x,2,Capgemini Engineering,https://capgemini.com,https://www.capgemini.com/careers/join-capgemini/job-search/?country_code=en-us&country_name=United%20States&size=550,Custom,TRUE,,
+,3,Caterpillar Inc.,https://cat.com,https://careers.caterpillar.com/en/jobs/,Custom,FALSE,,
+,5,Charles Schwab,https://schwab.com,https://www.schwab.com/careers/job-search,Workday,TRUE,,
+X,2,kCura,https://relativity.com,https://www.relativity.com/careers/open-positions/,Greenhouse,TRUE,,
+,5,Lam Research,https://lamresearch.com,https://careers.lamresearch.com/search/,Workday,TRUE,,
+,5,Lenovo,https://lenovo.com,https://jobs.lenovo.com/en_US/careers/SearchJobs,Workday,FALSE,,
+,5,Broken Page,https://some-wrong-page.com/,https://some-wrong-page.com/,Custom,TRUE,Broken,
+,5,Mastercard,https://mastercard.com,https://careers.mastercard.com/us/en/search-results,Workday,FALSE,,
+,5,WordPress,https://wordpress.com,https://automattic.com/work-with-us/,Custom,TRUE,,
+,5,Yum! Brands,https://yum.com,https://jobs.yum.com/?size=n_250_n,Workday,FALSE,,
+,5,Airtable,airtable.com,https://jobs.ashbyhq.com/airtable,Ashby,TRUE,,
+x,5,NETGEAR,netgear.com,https://jobs.ashbyhq.com/netgear,Ashby,TRUE,,
+,5,discogs,https://www.discogs.com/,https://www.discogs.com/about/careers,,TRUE,,
+,5,Mozilla,https://www.mozilla.org/,https://www.mozilla.org/en-US/careers/listings/?location=Remote%20US,custom,TRUE,true +,IT
+X,3,8:00 AM,https://www.8am.com/,https://www.8am.com/careers/#open-positions,greenhouse,TRUE,true +,IT
+,4,Mcafee,https://mcafee.com,https://careers.mcafee.com/global/en/search-results,Workday,FALSE,,IT
+,4,Skylight,https://myskylight.com/,https://apply.workable.com/skylight-frame/,Workable,FALSE,,IT hardware
