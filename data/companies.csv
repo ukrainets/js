@@ -340,7 +340,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,5,discogs,https://www.discogs.com/,https://www.discogs.com/about/careers,,TRUE,,
 ,,radformation,https://www.radformation.com/,https://www.radformation.com/careers,,TRUE,,
 ,3,ezeefiber,https://ezeefiber.com/,https://ezeefiber.com/careers/,,TRUE,,
-,,renewedvision,https://www.renewedvision.com,https://www.renewedvision.com/about-renewed-vision#jobs,,TRUE,,
+,,renewedvision,https://www.renewedvision.com,https://job-boards.greenhouse.io/renewedvision,greenhouse,TRUE,true+,SaaS
 ,,thriveglobal,https://thriveglobal.com/,https://ats.rippling.com/thriveglobal/jobs,Rippling,TRUE,,
 ,,caredx,https://www.caredx.com/,https://www.caredx.com/careers/open-roles,greenhouse,TRUE,,healthcare
 ,,finvi,https://finvi.com,https://finvi.com/careers/#jobs,adp,TRUE,true+,healthcare
@@ -444,3 +444,16 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,3,DV Trading,https://dvtrading.co/,https://job-boards.greenhouse.io/dvtrading/,greenhouse,TRUE,true+,finance
 ,3,Versant Media,https://www.versantmedia.com/,https://careers.smartrecruiters.com/Versant3/?locationType=REMOTE,smartrecruiters,TRUE,true+,Media
 ,3,Otter AI,https://otter.ai/,https://otter.ai/careers#open-positions,greenhouse,TRUE,true+,IT
+,3,Knowbe4,https://www.knowbe4.com/,https://job-boards.greenhouse.io/knowbe4?offices%5B%5D=4041279002,greenhouse,TRUE,true+ Filter applied for remote,IT
+,3,Iterable,https://iterable.com/,https://job-boards.greenhouse.io/iterable,greenhouse,TRUE,true+,SaaS
+,3,Expel,https://expel.com/,https://expel.com/about/careers/#findrole,greenhouse,TRUE,true+,IT
+,4,Circleci,https://circleci.com/,https://circleci.com/careers/jobs/,greenhouse,TRUE,true+,IT
+,3,Capital Technology Group,https://www.capitaltg.com/,https://www.capitaltg.com/careers,greenhouse,TRUE,true+,agency
+,3,eyeqmonitoring,https://eyeqmonitoring.com/,https://recruiting.paylocity.com/recruiting/jobs/All/65d6531b-5b4e-4c7d-af94-04c2429b26d6/EyeQ-Monitoring,paylocity,TRUE,true+,SaaS
+,2,Attune,https://www.attuneinsurance.com/,https://job-boards.greenhouse.io/attune,greenhouse,TRUE,true+,insurance
+,3,Torc,https://torc.ai/,https://job-boards.greenhouse.io/torcrobotics?offices%5B%5D=4045225002,greenhouse,TRUE,true+ USremote filter applied,transportation
+,5,Acorn,https://www.acorns.com/,https://jobs.ashbyhq.com/Acorns/,Ashby,TRUE,true+,finance
+,3,Lynx,https://www.lynx.com/,https://ats.rippling.com/lynx-software-technologies/jobs?jobBoardSlug=lynx-software-technologies&page=0&searchQuery=&workplaceType=REMOTE&country=&state=&city=&pageSize=20,Rippling,TRUE,true+ remote filter applied,defense
+,3,Webit,https://www.webitservices.com/,https://apply.workable.com/webitservices/?lng=en#jobs,Workable,TRUE,true+,IT
+,3,Dario,https://www.dariohealth.com,https://www.dariohealth.com/careers/,Spark Hire,TRUE,true+,healthcare
+,4,Angi,https://www.angi.com/,https://job-boards.greenhouse.io/angi?gh_src=my.greenhouse.search&offices%5B%5D=4013419002&departments%5B%5D=4026427002,greenhouse,TRUE,true+ filter applied,marketplace platform
