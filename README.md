@@ -37,6 +37,14 @@ If `SLACK_WEBHOOK` is not set, the app runs normally with no notifications.
 
 ---
 
+## Tests
+
+```bash
+pytest tests/ -v
+```
+
+---
+
 ## Run
 
 ### One-off scan
@@ -84,10 +92,13 @@ python scheduler.py --run-now   # run a scan immediately, then follow the schedu
 6. **Print summary** — elapsed time, companies searched, and matches found
 
 ### Matching
-Matches titles against anchor (`<a>`) link text — not the full page text blob. Each link's text is split line by line and compared exactly (case-insensitive) against titles.
-- `"QA Automation Engineer"` matches a link labelled `"QA Automation Engineer"` regardless of casing
-- `"Automation Engineer"` does **not** match a link labelled `"Cloud Test Automation Engineer"` — must be an exact line match
+Matches titles against anchor (`<a>`) link text — not the full page text blob. Each link's text is split line by line and compared against titles using word-boundary contains matching (case-insensitive).
+- A title matches if it appears as a **complete word sequence** anywhere within the link text
+- Bracket groups — `()`, `[]`, `{}` — are stripped from both sides before comparison, so qualifiers like `(Contract)`, `(Remote)`, or `(Mid level SDET)` are ignored
+- `"Automation Engineer"` matches `"Automation Engineer (Mid level SDET)"` and `"Cloud Test Automation Engineer"`
+- `"QA Lead"` does **not** match `"Squad Leader"` — word boundaries prevent partial-word collisions
 - The matched job URL is pulled directly from the link's `href`
+- First matching title wins per URL; the same URL is never returned twice
 - Title variations are covered by the breadth of `sqa_titles.csv` (e.g. both `"Sr. QA Engineer"` and `"Senior QA Engineer"` are listed)
 
 ### Duplicate detection

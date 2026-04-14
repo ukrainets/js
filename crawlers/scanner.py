@@ -3,6 +3,7 @@ Scanner — async Playwright-based career page scanner.
 """
 
 import asyncio
+import re
 from datetime import datetime
 from urllib.parse import urljoin
 
@@ -10,6 +11,7 @@ from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from config import PAGE_TIMEOUT, PAGE_TIMEOUT_RETRY, PAGE_SETTLE_MS
 from csv_io import append_match_row
+from utils import normalize_text
 
 
 # ── Navigation ────────────────────────────────────────────────────────────────
@@ -54,20 +56,34 @@ async def get_job_links(page, base_url: str) -> list[tuple[str, str]]:
 
 def find_matches(links: list[tuple[str, str]], titles: list[str]) -> list[tuple[str, str]]:
     """
-    Case-insensitive exact match of each title against anchor link text lines.
+    Return (original_title, href) pairs where a title appears as a complete
+    word sequence anywhere in the link text (case-insensitive, brackets stripped).
 
-    Matching against individual link text (not full page text blob) ensures
-    "Automation Engineer" won't match a link titled "Cloud Test Automation Engineer".
+    Both sides are normalized via normalize_text() before comparison:
+    bracket groups — (), [], {} — are stripped so qualifiers like
+    "(Contract)" or "(Mid level SDET)" are ignored.
 
-    Returns a deduplicated list of (matched_title, job_url).
+    Word-boundary regex ensures "QA Lead" won't match "Squad Leader".
+    Deduplicates by href — first matching title per URL wins.
+    Regex patterns are pre-compiled once and reused across all links.
     """
-    titles_map = {t.lower(): t for t in titles}
+    # Pre-compile one pattern per title — done once, reused for every link
+    patterns = [
+        (t, re.compile(r'\b' + re.escape(normalize_text(t)) + r'\b', re.IGNORECASE))
+        for t in titles
+        if normalize_text(t)        # skip titles that normalize to empty string
+    ]
+
     seen, matches = set(), []
     for line, href in links:
-        key = line.lower()
-        if key in titles_map and key not in seen:
-            seen.add(key)
-            matches.append((titles_map[key], href))
+        if href in seen:
+            continue
+        normalized_line = normalize_text(line)
+        for original_title, pattern in patterns:
+            if pattern.search(normalized_line):
+                matches.append((original_title, href))
+                seen.add(href)
+                break               # one match per URL is enough
     return matches
 
 
