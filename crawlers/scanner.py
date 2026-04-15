@@ -54,14 +54,18 @@ async def get_job_links(page, base_url: str) -> list[tuple[str, str]]:
     return result
 
 
-def find_matches(links: list[tuple[str, str]], titles: list[str]) -> list[tuple[str, str]]:
+def find_matches(links: list[tuple[str, str]], titles: list[str]) -> list[tuple[str, str, str]]:
     """
-    Return (original_title, href) pairs where a title appears as a complete
-    word sequence anywhere in the link text (case-insensitive, brackets stripped).
+    Return (original_title, scraped_text, href) triples where a title appears
+    as a complete word sequence anywhere in the link text (case-insensitive,
+    brackets stripped).
 
     Both sides are normalized via normalize_text() before comparison:
     bracket groups — (), [], {} — are stripped so qualifiers like
     "(Contract)" or "(Mid level SDET)" are ignored.
+
+    scraped_text is the original link text as it appears on the page — preserved
+    for display so the user sees what the company actually called the role.
 
     Word-boundary regex ensures "QA Lead" won't match "Squad Leader".
     Deduplicates by href — first matching title per URL wins.
@@ -81,7 +85,7 @@ def find_matches(links: list[tuple[str, str]], titles: list[str]) -> list[tuple[
         normalized_line = normalize_text(line)
         for original_title, pattern in patterns:
             if pattern.search(normalized_line):
-                matches.append((original_title, href))
+                matches.append((original_title, line, href))
                 seen.add(href)
                 break               # one match per URL is enough
     return matches
@@ -147,7 +151,7 @@ async def scan_company(
 
             if matches:
                 time_found = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                for title, job_url in matches:
+                for title, scraped_text, job_url in matches:
                     async with write_lock:
                         if job_url not in known_urls:
                             match_dict = {
@@ -159,8 +163,10 @@ async def scan_company(
                             known_urls.add(job_url)
                             new_found.append(match_dict)
                             if on_match:
-                                on_match(name, title, job_url)
-                            lines.append(f"✅  Match for: [{title}] {job_url}")
+                                on_match(name, title, scraped_text, job_url)
+                            lines.append(f"✅  Match for: [{title}]:")
+                            lines.append(f"    {scraped_text}")
+                            lines.append(f"    {job_url}")
                             lines.append(f"🟢  added to output file")
                         # duplicate — skip silently, no output line
 

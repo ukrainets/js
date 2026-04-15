@@ -62,23 +62,24 @@ def test_medrio_bug_parenthetical_qualifier():
     result = find_matches(links, titles)
     assert len(result) == 1
     assert result[0][0] == "Automation Engineer"
-    assert result[0][1] == "https://example.com/job/1"
+    assert result[0][1] == "Automation Engineer (Mid level SDET)"   # scraped text preserved
+    assert result[0][2] == "https://example.com/job/1"
 
 def test_exact_match_still_works():
     links  = [("QA Engineer", "/job/1")]
     titles = ["QA Engineer"]
-    assert find_matches(links, titles) == [("QA Engineer", "/job/1")]
+    assert find_matches(links, titles) == [("QA Engineer", "QA Engineer", "/job/1")]
 
 def test_title_found_inside_longer_text():
     links  = [("Cloud Test Automation Engineer", "/job/1")]
     titles = ["Automation Engineer"]
     result = find_matches(links, titles)
-    assert result == [("Automation Engineer", "/job/1")]
+    assert result == [("Automation Engineer", "Cloud Test Automation Engineer", "/job/1")]
 
 def test_parenthetical_stripped_before_match():
     links  = [("SDET (Senior Level)", "/job/1")]
     titles = ["SDET"]
-    assert find_matches(links, titles) == [("SDET", "/job/1")]
+    assert find_matches(links, titles) == [("SDET", "SDET (Senior Level)", "/job/1")]
 
 def test_case_insensitive():
     links  = [("qa automation engineer", "/job/1")]
@@ -86,6 +87,8 @@ def test_case_insensitive():
     result = find_matches(links, titles)
     assert len(result) == 1
     assert result[0][0] == "QA Automation Engineer"
+    assert result[0][1] == "qa automation engineer"                  # scraped text as-is
+    assert result[0][2] == "/job/1"
 
 def test_no_partial_word_match():
     """Word-boundary guard: "QA Lead" must not match inside "Squad Leader"."""
@@ -107,14 +110,14 @@ def test_dedup_by_url():
     titles = ["QA Engineer", "Senior QA Engineer"]
     result = find_matches(links, titles)
     assert len(result) == 1
-    assert result[0][1] == "/job/1"
+    assert result[0][2] == "/job/1"
 
 def test_multiple_links_multiple_matches():
     links  = [("QA Engineer", "/job/1"), ("SDET", "/job/2")]
     titles = ["QA Engineer", "SDET"]
     result = find_matches(links, titles)
     assert len(result) == 2
-    urls = {r[1] for r in result}
+    urls = {r[2] for r in result}
     assert urls == {"/job/1", "/job/2"}
 
 def test_empty_links():
@@ -127,4 +130,4 @@ def test_real_world_comma_in_title():
     """Comma is preserved on both sides — exact comma title must match."""
     links  = [("Software Engineer, SDET", "/job/1")]
     titles = ["Software Engineer, SDET"]
-    assert find_matches(links, titles) == [("Software Engineer, SDET", "/job/1")]
+    assert find_matches(links, titles) == [("Software Engineer, SDET", "Software Engineer, SDET", "/job/1")]
