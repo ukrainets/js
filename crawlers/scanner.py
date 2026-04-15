@@ -156,6 +156,8 @@ async def scan_company(
                         if job_url not in known_urls:
                             match_dict = {
                                 "company_name":       name,
+                                "match_title":        title,
+                                "position_title":     scraped_text,
                                 "match_position_url": job_url,
                                 "time_found":         time_found,
                             }

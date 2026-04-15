@@ -7,7 +7,7 @@ import uuid
 from pathlib import Path
 
 # ── Output schema ─────────────────────────────────────────────────────────────
-CSV_COLUMNS = ["id", "company_name", "match_position_url", "time_found", "reviewed", "comment"]
+CSV_COLUMNS = ["id", "company_name", "match_title", "position_title", "match_position_url", "time_found", "reviewed", "comment"]
 
 
 def load_companies(path: str) -> list[tuple[str, str]]:
@@ -76,6 +76,23 @@ def load_known_urls(path: str) -> set[str]:
         }
 
 
+def _migrate_header_if_needed(path: Path) -> None:
+    """
+    If the file's header row doesn't match CSV_COLUMNS, replace just the header line.
+    All existing data rows are left completely unchanged — old rows will simply have
+    empty values for any new columns when read back via DictReader.
+    """
+    content = path.read_text(encoding="utf-8")
+    lines   = content.splitlines(keepends=True)
+    if not lines:
+        return
+    expected_header = ",".join(CSV_COLUMNS)
+    if lines[0].rstrip("\r\n") == expected_header:
+        return                                      # already up to date
+    lines[0] = expected_header + "\n"
+    path.write_text("".join(lines), encoding="utf-8")
+
+
 def append_match_row(match: dict, path: str) -> None:
     """
     Append a single match row to the output CSV.
@@ -85,13 +102,19 @@ def append_match_row(match: dict, path: str) -> None:
     Guard: if the file exists but its last byte is not \\n (e.g. after a
     Google Sheets export), a newline is prepended so the new row starts
     on its own line rather than being fused with the previous last line.
+
+    Schema migration: if the file exists with an old header, the header is
+    updated to CSV_COLUMNS in place — existing data rows are left unchanged.
     """
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
     file_exists = output.exists()
 
-    # Guard: Google Sheets export strips trailing newline — fix before appending
     if file_exists and output.stat().st_size > 0:
+        # Migrate header to new schema if needed (e.g. after adding new columns)
+        _migrate_header_if_needed(output)
+
+        # Guard: Google Sheets export strips trailing newline — fix before appending
         with open(output, "rb") as f_check:
             f_check.seek(-1, 2)
             if f_check.read(1) != b"\n":
@@ -105,6 +128,8 @@ def append_match_row(match: dict, path: str) -> None:
         writer.writerow({
             "id":                 str(uuid.uuid4()),
             "company_name":       match["company_name"],
+            "match_title":        match["match_title"],
+            "position_title":     match["position_title"],
             "match_position_url": match["match_position_url"],
             "time_found":         match["time_found"],
             "reviewed":           "",
