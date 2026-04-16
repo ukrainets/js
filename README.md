@@ -1,6 +1,6 @@
 # JS — Job Search Automation
 
-A CLI tool that automates scanning company career pages for matching QA/SQA job titles.
+A CLI tool that automates scanning company career pages for matching job titles.
 
 ---
 
@@ -23,6 +23,8 @@ pip install -r requirements.txt
 # 3. Install Playwright's Chromium browser
 playwright install chromium
 ```
+4. Copy companies.csv and sqa_titles.csv files from `test/test_data` to `data` folder)
+
 
 ### Slack notifications (optional)
 ```bash
@@ -104,7 +106,7 @@ Matches titles against anchor (`<a>`) link text — not the full page text blob.
 ### Duplicate detection
 Before writing a match, the app checks `data/match.csv` for the URL. Duplicates are skipped silently — re-running the scanner never adds the same position twice.
 
-### Console Output
+### Console Output example
 ```
 Start time        : 09:03
 Companies to scan : 276  (no_click=TRUE, sorted by rating ↓)
@@ -181,7 +183,7 @@ Edit `config.json` to set your defaults:
   "companies_file": "data/companies.csv",
   "titles_file": "data/sqa_titles.csv",
   "output_file": "data/match.csv",
-  "schedule_times": ["08:08", "13:13", "18:18"]
+  "schedule_times": ["08:00", "13:00"]
 }
 ```
 
