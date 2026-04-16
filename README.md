@@ -23,7 +23,7 @@ pip install -r requirements.txt
 # 3. Install Playwright's Chromium browser
 playwright install chromium
 ```
-4. Copy companies.csv and sqa_titles.csv files from `test/test_data` to `data` folder)
+4. Copy companies.csv and sqa_titles.csv files from `test/test_data` to `data` folder
 
 
 ### Slack notifications (optional)
