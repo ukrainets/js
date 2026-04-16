@@ -232,3 +232,7 @@ job_search/
 | `schedule` | Time-based job scheduling for the scheduler |
 | `requests` | HTTP client for Slack webhook calls |
 | `python-dotenv` | Loads `SLACK_WEBHOOK` from `.env` file |
+
+## Contributors
+- Vasyl S. 
+- Claude (Anthropic AI) — assisted codding, research & CTO.
