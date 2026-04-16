@@ -1,5 +1,5 @@
 id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,field
-,,Canopy,https://www.getcanopy.com/,https://job-boards.greenhouse.io/canopytax/,greenhouse,TRUE,,
+,,Canopy,https://www.getcanopy.com/,https://job-boards.greenhouse.io/canopytax/,greenhouse,TRUE,true+,
 ,,Resilience,https://cyberresilience.com/,https://job-boards.greenhouse.io/resilience,greenhouse,TRUE,,
 ,,Halcyon,https://www.halcyon.ai/,https://job-boards.greenhouse.io/halcyon/,greenhouse,TRUE,,
 ,,Amount,https://www.amount.com/,https://job-boards.greenhouse.io/amount/,greenhouse,TRUE,,
@@ -165,7 +165,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,,Tamnoon,https://tamnoon.io,https://apply.workable.com/tamnoon-dot-i-o/,Workable,TRUE,,
 ,,TaskRabbit,https://taskrabbit.com,https://www.taskrabbit.com/careers,Greenhouse,TRUE,,
 ,,tastytrade,https://tastytrade.com,https://tastytrade.com/careers/,Greenhouse,TRUE,,
-,,Teachers Pay Teachers,https://teacherspayteachers.com,https://www.teacherspayteachers.com/Careers,Greenhouse,TRUE,,
+,,Teachers Pay Teachers,https://teacherspayteachers.com,https://www.ixl.com/company/careers,Greenhouse,TRUE,,
 ,,Tekmetric,https://tekmetric.com,https://job-boards.greenhouse.io/tekmetric/,Greenhouse,TRUE,true+,
 ,,Thoughtworks,https://thoughtworks.com,https://www.thoughtworks.com/en-us/careers/jobs,Custom,TRUE,,
 ,,Tock,https://exploretock.com,https://www.exploretock.com/join/careers/,,TRUE,true+,
@@ -460,3 +460,11 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 ,3,Gladly,https://www.gladly.ai/,https://www.gladly.ai/careers/#recruiting,greenhouse,TRUE,true+,SaaS
 ,3,Slate,https://www.slate.auto/,https://recar.wd108.myworkdayjobs.com/SLATEcareers/?locations=ded39f5fd9981000ccebf4111e320000,Workday,TRUE,true+ filter applied,transportation
 ,3,Bridgeway,https://www.bridgewaybentech.com/,https://www.bridgewaybentech.com/job-posting,greenhouse,TRUE,true+,finance
+,5,Swift,https://www.swift.com/,https://swift.wd3.myworkdayjobs.com/Join-Swift/?locations=826e72cc277a010152985bb37a690000&locations=8fd1e40998530132ca47be9a8c012728&locations=8fd1e40998530126d542f63256014422,Workday,TRUE,true+ filter applied,finance
+,3,Nova Credit,https://www.novacredit.com/,https://job-boards.greenhouse.io/novacredit,greenhouse,TRUE,true+,finance
+,3,Busines Solver,https://businessolver.com,https://businessolver.com/careers/openings/,greenhouse,TRUE,true+,finance
+,2,Fanatics Collectibles,https://www.fanaticscollect.com/,https://job-boards.greenhouse.io/fanaticscollectibles?gh_src=my.greenhouse.search&field_4431023009%5B%5D=8491187009&field_4758117009%5B%5D=8520669009,greenhouse,TRUE,true+ remote filter applied,Collectibles
+,2,Fanatics Collectibles,https://www.fanaticscollect.com/,https://job-boards.greenhouse.io/fanaticscollectibles?gh_src=my.greenhouse.search&field_4431023009%5B%5D=8491187009&offices%5B%5D=4018707009,greenhouse,TRUE,true+ Chicago filter applied,Collectibles
+,3,One Project,https://oneproject.org/,https://job-boards.greenhouse.io/oneproject,greenhouse,TRUE,true+,SaaS
+,3,Mountain,https://mountain.com/,https://job-boards.greenhouse.io/mntn,greenhouse,TRUE,true+,advertisment
+,3,Wrapbook,https://www.wrapbook.com,https://www.wrapbook.com/careers,Ashby,TRUE,true+,SaaS

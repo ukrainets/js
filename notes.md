@@ -19,6 +19,7 @@ mixed company list, that got multiple errors.
 - Mar 27, 361 companies  
 - Apr  8, 384 companies  
 - Apr 13, 397 companies
+- Apr 16, 407 companies
 
 ### Performance test
 

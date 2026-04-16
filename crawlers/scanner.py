@@ -3,6 +3,7 @@ Scanner — async Playwright-based career page scanner.
 """
 
 import asyncio
+import re
 from datetime import datetime
 from urllib.parse import urljoin
 
@@ -10,6 +11,7 @@ from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from config import PAGE_TIMEOUT, PAGE_TIMEOUT_RETRY, PAGE_SETTLE_MS
 from csv_io import append_match_row
+from utils import normalize_text
 
 
 # ── Navigation ────────────────────────────────────────────────────────────────
@@ -52,22 +54,40 @@ async def get_job_links(page, base_url: str) -> list[tuple[str, str]]:
     return result
 
 
-def find_matches(links: list[tuple[str, str]], titles: list[str]) -> list[tuple[str, str]]:
+def find_matches(links: list[tuple[str, str]], titles: list[str]) -> list[tuple[str, str, str]]:
     """
-    Case-insensitive exact match of each title against anchor link text lines.
+    Return (original_title, scraped_text, href) triples where a title appears
+    as a complete word sequence anywhere in the link text (case-insensitive,
+    brackets stripped).
 
-    Matching against individual link text (not full page text blob) ensures
-    "Automation Engineer" won't match a link titled "Cloud Test Automation Engineer".
+    Both sides are normalized via normalize_text() before comparison:
+    bracket groups — (), [], {} — are stripped so qualifiers like
+    "(Contract)" or "(Mid level SDET)" are ignored.
 
-    Returns a deduplicated list of (matched_title, job_url).
+    scraped_text is the original link text as it appears on the page — preserved
+    for display so the user sees what the company actually called the role.
+
+    Word-boundary regex ensures "QA Lead" won't match "Squad Leader".
+    Deduplicates by href — first matching title per URL wins.
+    Regex patterns are pre-compiled once and reused across all links.
     """
-    titles_map = {t.lower(): t for t in titles}
+    # Pre-compile one pattern per title — done once, reused for every link
+    patterns = [
+        (t, re.compile(r'\b' + re.escape(normalize_text(t)) + r'\b', re.IGNORECASE))
+        for t in titles
+        if normalize_text(t)        # skip titles that normalize to empty string
+    ]
+
     seen, matches = set(), []
     for line, href in links:
-        key = line.lower()
-        if key in titles_map and key not in seen:
-            seen.add(key)
-            matches.append((titles_map[key], href))
+        if href in seen:
+            continue
+        normalized_line = normalize_text(line)
+        for original_title, pattern in patterns:
+            if pattern.search(normalized_line):
+                matches.append((original_title, line, href))
+                seen.add(href)
+                break               # one match per URL is enough
     return matches
 
 
@@ -131,11 +151,13 @@ async def scan_company(
 
             if matches:
                 time_found = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                for title, job_url in matches:
+                for title, scraped_text, job_url in matches:
                     async with write_lock:
                         if job_url not in known_urls:
                             match_dict = {
                                 "company_name":       name,
+                                "match_title":        title,
+                                "position_title":     scraped_text,
                                 "match_position_url": job_url,
                                 "time_found":         time_found,
                             }
@@ -143,8 +165,10 @@ async def scan_company(
                             known_urls.add(job_url)
                             new_found.append(match_dict)
                             if on_match:
-                                on_match(name, title, job_url)
-                            lines.append(f"✅  Match for: [{title}] {job_url}")
+                                on_match(name, title, scraped_text, job_url)
+                            lines.append(f"✅  Match for: [{title}]:")
+                            lines.append(f"    {scraped_text}")
+                            lines.append(f"    {job_url}")
                             lines.append(f"🟢  added to output file")
                         # duplicate — skip silently, no output line
 

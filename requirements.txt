@@ -1,4 +1,5 @@
 playwright
+pytest
 python-dotenv
 requests
 schedule

@@ -33,8 +33,8 @@ def notify_scan_started(company_count: int) -> None:
     _send(f"🔎 Scheduled scan started for {company_count} companies.")
 
 
-def notify_match_found(company_name: str, title: str, job_url: str) -> None:
-    _send(f"🥳 New match found: {company_name} - {title}\n{job_url}")
+def notify_match_found(company_name: str, title: str, scraped_text: str, job_url: str) -> None:
+    _send(f"🥳 New match found for [{title}]:\n{company_name} - {scraped_text}\n{job_url}")
 
 
 def notify_scan_done(new_matches: int, duration: str) -> None:
