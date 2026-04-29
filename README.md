@@ -1,6 +1,11 @@
-# JS — Job Search Automation
+# JS — Job Search
 
-A CLI tool that automates scanning company career pages for matching job titles.
+A tool that automates scanning companies career pages for matching job titles.
+
+**Purpose**
+This tool is better suited to a passive job search than an active one. 
+You create a list of companies that are interesting for you to work at, and a list of job titles that suit your next position.
+The tool periodically scans the careers pages for matching job titles.
 
 ---
 
