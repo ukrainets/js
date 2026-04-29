@@ -10,6 +10,7 @@ CONFIG_FILE        = "config.json"
 PAGE_TIMEOUT       = 30_000   # ms — first navigation attempt
 PAGE_TIMEOUT_RETRY = 60_000   # ms — single retry after timeout
 PAGE_SETTLE_MS     = 2_000    # ms — wait after domcontentloaded for JS to render
+API_CONCURRENCY    = 10       # max concurrent Greenhouse API requests
 
 CONFIG_DEFAULTS = {
     "concurrency":    5,
