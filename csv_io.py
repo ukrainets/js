@@ -43,7 +43,7 @@ def load_companies(path: str) -> list[dict]:
                 "company_name":       name,
                 "open_positions_url": url,
                 "hr_platform":        row.get("hr_platform", "").strip().lower(),
-                "api":                row.get("api", "").strip(),
+                "api_url":            row.get("api_url", "").strip(),
                 "_rating":            rating,
             })
 

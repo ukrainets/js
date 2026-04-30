@@ -37,8 +37,8 @@ async def run(
     titles     = load_titles(titles_path)
     start_time = datetime.now()
 
-    api_companies       = [c for c in companies if c["api"]]
-    playwright_companies = [c for c in companies if not c["api"]]
+    api_companies       = [c for c in companies if c["api_url"]]
+    playwright_companies = [c for c in companies if not c["api_url"]]
 
     print(f"Start time        : {start_time.strftime('%H:%M')}")
     print(f"Companies to scan : {len(companies)}  (no_click=TRUE, sorted by rating ↓)")
@@ -67,7 +67,7 @@ async def run(
 
         async with httpx.AsyncClient() as http_client:
             api_tasks = [
-                scan_greenhouse(http_client, api_semaphore, c["company_name"], c["api"], titles, output_path, write_lock, known_urls, on_match)
+                scan_greenhouse(http_client, api_semaphore, c["company_name"], c["api_url"], titles, output_path, write_lock, known_urls, on_match)
                 for c in api_companies
             ]
             pw_tasks = [

@@ -113,10 +113,10 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
         fieldnames = list(reader.fieldnames or [])
         rows = [dict(r) for r in reader]
 
-    if "api" not in fieldnames:
-        fieldnames.append("api")
+    if "api_url" not in fieldnames:
+        fieldnames.append("api_url")
         for row in rows:
-            row["api"] = ""
+            row["api_url"] = ""
 
     print("🔧  Populating API URLs for Greenhouse companies...")
 
@@ -124,7 +124,7 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
 
     for row in rows:
         platform = row.get("hr_platform", "").strip().lower()
-        existing_api = row.get("api", "").strip()
+        existing_api = row.get("api_url", "").strip()
 
         if existing_api:
             already_set += 1
@@ -144,14 +144,14 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
                     print(f"   ⚠️  {name} — generated URL returned error, skipping")
                     skipped += 1
                     continue
-            row["api"] = api_url
+            row["api_url"] = api_url
             populated += 1
             print(f"   ✅  {name} → {api_url}")
         else:
             candidate = derive_candidate_token(row.get("website", ""))
             if candidate and probe_greenhouse_api(candidate):
                 api_url = GREENHOUSE_API_BASE.format(token=candidate)
-                row["api"] = api_url
+                row["api_url"] = api_url
                 guessed += 1
                 print(f"   ✅  {name} → {api_url}  (token guessed from website domain)")
             else:

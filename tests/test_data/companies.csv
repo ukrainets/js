@@ -1,4 +1,4 @@
-id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,field,api
+id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,field,api_url
 7ee015f2-5482-42d9-8375-07261b8878ec,3,Halcyon,https://www.halcyon.ai/,https://job-boards.greenhouse.io/halcyon/,greenhouse,TRUE,,,https://boards-api.greenhouse.io/v1/boards/halcyon/jobs
 198994c5-dd5d-4f8c-8a69-7795aed228d2,3,Amount,https://www.amount.com/,https://job-boards.greenhouse.io/amount/,greenhouse,TRUE,,,https://boards-api.greenhouse.io/v1/boards/amount/jobs
 a12efa2b-7cb5-46ab-978e-e8a59432011a,5,BlueSky,https://bsky.social/,https://bsky.social/about/join,Gem,TRUE,,Social,
