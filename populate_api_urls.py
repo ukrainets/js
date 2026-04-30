@@ -6,6 +6,11 @@ One-off helper that reads the companies data, extracts Greenhouse board tokens
 from open_positions_url, builds the full API endpoint URL, and writes it back
 to the `api` column.
 
+For Greenhouse companies with a custom career page URL (token not extractable),
+the script tries to derive a board token from the company name and probes the
+Greenhouse API. Companies where the guessed token returns HTTP 200 get an api
+URL populated; the rest fall back to the Playwright scanner.
+
 Run once after adding new Greenhouse companies to keep the api column current.
 
 Usage
@@ -17,6 +22,7 @@ Usage
 
 import argparse
 import csv
+import re
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -55,6 +61,33 @@ def extract_board_token(url: str) -> str | None:
     return parts[0]
 
 
+def derive_candidate_token(company_name: str) -> str:
+    """
+    Derive a Greenhouse board token candidate from a company name.
+    Lowercases and strips all non-alphanumeric characters.
+    Returns an empty string if nothing usable remains.
+
+    Examples:
+      "Upwork"       → "upwork"
+      "Vivid Seats"  → "vividseats"
+      "Yum! Brands"  → "yumbrands"
+    """
+    return re.sub(r"[^a-z0-9]", "", company_name.lower())
+
+
+def probe_greenhouse_api(token: str) -> bool:
+    """
+    Check whether the Greenhouse board API responds for a given token.
+    Returns True only on HTTP 200 (a 404 JSON body comes back as HTTP 404).
+    """
+    url = GREENHOUSE_API_BASE.format(token=token)
+    try:
+        r = httpx.get(url, timeout=10.0, follow_redirects=True)
+        return r.status_code == 200
+    except Exception:
+        return False
+
+
 def validate_url(url: str) -> bool:
     try:
         r = httpx.head(url, timeout=10.0, follow_redirects=True)
@@ -77,7 +110,7 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
 
     print("🔧  Populating API URLs for Greenhouse companies...")
 
-    populated = skipped = already_set = 0
+    populated = guessed = skipped = already_set = 0
 
     for row in rows:
         platform = row.get("hr_platform", "").strip().lower()
@@ -105,8 +138,15 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
             populated += 1
             print(f"   ✅  {name} → {api_url}")
         else:
-            skipped += 1
-            print(f"   ⚠️  {name} — custom URL, skipping (will use Playwright)")
+            candidate = derive_candidate_token(name)
+            if candidate and probe_greenhouse_api(candidate):
+                api_url = GREENHOUSE_API_BASE.format(token=candidate)
+                row["api"] = api_url
+                guessed += 1
+                print(f"   ✅  {name} → {api_url}  (token guessed from company name)")
+            else:
+                skipped += 1
+                print(f"   ⚠️  {name} — custom URL, name-guess failed (will use Playwright)")
 
     out_path = Path(output_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -115,7 +155,7 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
         writer.writeheader()
         writer.writerows(rows)
 
-    print(f"\n📊  Summary: {populated} populated, {skipped} skipped, {already_set} already had API URLs")
+    print(f"\n📊  Summary: {populated} from URL, {guessed} guessed from name, {skipped} skipped, {already_set} already had API URLs")
     print(f"📄  Written to: {output_path}")
 
 
