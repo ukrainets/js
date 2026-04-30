@@ -13,13 +13,15 @@ import argparse
 import asyncio
 from datetime import datetime
 
+import httpx
 from playwright.async_api import async_playwright
 
-from config import load_config
+from config import load_config, API_CONCURRENCY
 from csv_io import load_companies, load_titles, load_known_urls
 from integrations.notifier import SLACK_WEBHOOK, notify_match_found
 from utils import format_duration
 from crawlers.scanner import scan_company
+from crawlers.api_greenhouse import scan_greenhouse
 
 
 # ── Main run loop ─────────────────────────────────────────────────────────────
@@ -35,16 +37,23 @@ async def run(
     titles     = load_titles(titles_path)
     start_time = datetime.now()
 
+    api_companies       = [c for c in companies if c["api_url"]]
+    playwright_companies = [c for c in companies if not c["api_url"]]
+
     print(f"Start time        : {start_time.strftime('%H:%M')}")
     print(f"Companies to scan : {len(companies)}  (no_click=TRUE, sorted by rating ↓)")
+    print(f"  → API           : {len(api_companies)}")
+    print(f"  → Playwright    : {len(playwright_companies)}")
     print(f"Titles loaded     : {len(titles)}")
-    print(f"Concurrency       : {concurrency} tab(s)")
+    print(f"Concurrency       : {concurrency} tab(s) / {API_CONCURRENCY} API")
     print(f"Headless          : {headless}")
     print("─" * 60)
 
-    semaphore  = asyncio.Semaphore(concurrency)
-    write_lock = asyncio.Lock()
-    known_urls = load_known_urls(output_path)
+    pw_semaphore  = asyncio.Semaphore(concurrency)
+    api_semaphore = asyncio.Semaphore(API_CONCURRENCY)
+    write_lock    = asyncio.Lock()
+    known_urls    = load_known_urls(output_path)
+    on_match      = notify_match_found if SLACK_WEBHOOK else None
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=headless)
@@ -56,12 +65,16 @@ async def run(
             )
         )
 
-        on_match = notify_match_found if SLACK_WEBHOOK else None
-        tasks = [
-            scan_company(semaphore, context, name, url, titles, output_path, write_lock, known_urls, on_match)
-            for name, url in companies
-        ]
-        results = await asyncio.gather(*tasks)
+        async with httpx.AsyncClient() as http_client:
+            api_tasks = [
+                scan_greenhouse(http_client, api_semaphore, c["company_name"], c["api_url"], titles, output_path, write_lock, known_urls, on_match)
+                for c in api_companies
+            ]
+            pw_tasks = [
+                scan_company(pw_semaphore, context, c["company_name"], c["open_positions_url"], titles, output_path, write_lock, known_urls, on_match)
+                for c in playwright_companies
+            ]
+            results = await asyncio.gather(*api_tasks, *pw_tasks)
 
         await browser.close()
 

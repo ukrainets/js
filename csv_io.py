@@ -10,9 +10,11 @@ from pathlib import Path
 CSV_COLUMNS = ["id", "company_name", "match_title", "position_title", "match_position_url", "time_found", "reviewed", "comment"]
 
 
-def load_companies(path: str) -> list[tuple[str, str]]:
+def load_companies(path: str) -> list[dict]:
     """
-    Read companies CSV and return a sorted, deduplicated list of (company_name, open_positions_url).
+    Read companies CSV and return a sorted, deduplicated list of company dicts.
+
+    Each dict contains: company_name, open_positions_url, hr_platform, api.
 
     Filtering:
     - Only rows where no_click == "TRUE" are included.
@@ -37,10 +39,18 @@ def load_companies(path: str) -> list[tuple[str, str]]:
             seen.add(url)
             raw_rating = row.get("rating", "").strip()
             rating = float(raw_rating) if raw_rating else 0.0
-            companies.append((name, url, rating))
+            companies.append({
+                "company_name":       name,
+                "open_positions_url": url,
+                "hr_platform":        row.get("hr_platform", "").strip().lower(),
+                "api_url":            row.get("api_url", "").strip(),
+                "_rating":            rating,
+            })
 
-    companies.sort(key=lambda c: c[2], reverse=True)
-    return [(name, url) for name, url, _ in companies]
+    companies.sort(key=lambda c: c["_rating"], reverse=True)
+    for c in companies:
+        del c["_rating"]
+    return companies
 
 
 def load_titles(path: str) -> list[str]:

@@ -1,5 +1,7 @@
 playwright
 pytest
+pytest-asyncio
 python-dotenv
 requests
 schedule
+httpx>=0.27
