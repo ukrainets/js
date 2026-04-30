@@ -61,18 +61,28 @@ def extract_board_token(url: str) -> str | None:
     return parts[0]
 
 
-def derive_candidate_token(company_name: str) -> str:
+def derive_candidate_token(website_url: str) -> str:
     """
-    Derive a Greenhouse board token candidate from a company name.
-    Lowercases and strips all non-alphanumeric characters.
-    Returns an empty string if nothing usable remains.
+    Derive a Greenhouse board token candidate from a company website URL.
+    Extracts the second-level domain (SLD), which companies typically use
+    as their Greenhouse board token.
+    Returns an empty string on invalid/missing input.
 
     Examples:
-      "Upwork"       → "upwork"
-      "Vivid Seats"  → "vividseats"
-      "Yum! Brands"  → "yumbrands"
+      "https://www.upwork.com"  → "upwork"
+      "https://www.vendhq.com"  → "vendhq"
     """
-    return re.sub(r"[^a-z0-9]", "", company_name.lower())
+    if not website_url:
+        return ""
+    try:
+        url = website_url if "://" in website_url else f"https://{website_url}"
+        hostname = urlparse(url).hostname or ""
+        parts = hostname.split(".")
+        if len(parts) < 2:
+            return ""
+        return re.sub(r"[^a-z0-9]", "", parts[-2].lower())
+    except Exception:
+        return ""
 
 
 def probe_greenhouse_api(token: str) -> bool:
@@ -138,15 +148,15 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
             populated += 1
             print(f"   ✅  {name} → {api_url}")
         else:
-            candidate = derive_candidate_token(name)
+            candidate = derive_candidate_token(row.get("website", ""))
             if candidate and probe_greenhouse_api(candidate):
                 api_url = GREENHOUSE_API_BASE.format(token=candidate)
                 row["api"] = api_url
                 guessed += 1
-                print(f"   ✅  {name} → {api_url}  (token guessed from company name)")
+                print(f"   ✅  {name} → {api_url}  (token guessed from website domain)")
             else:
                 skipped += 1
-                print(f"   ⚠️  {name} — custom URL, name-guess failed (will use Playwright)")
+                print(f"   ⚠️  {name} — custom URL, domain-guess failed (will use Playwright)")
 
     out_path = Path(output_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)

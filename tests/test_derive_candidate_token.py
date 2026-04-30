@@ -15,35 +15,43 @@ from populate_api_urls import derive_candidate_token, probe_greenhouse_api
 
 # ── derive_candidate_token ────────────────────────────────────────────────────
 
-def test_simple_name():
-    assert derive_candidate_token("Upwork") == "upwork"
+def test_standard_com_domain():
+    assert derive_candidate_token("https://www.upwork.com") == "upwork"
 
-def test_name_with_space():
-    assert derive_candidate_token("Vivid Seats") == "vividseats"
+def test_www_stripped():
+    assert derive_candidate_token("https://www.webflow.com") == "webflow"
 
-def test_name_with_punctuation():
-    assert derive_candidate_token("Yum! Brands") == "yumbrands"
+def test_no_www():
+    assert derive_candidate_token("https://webflow.com") == "webflow"
 
-def test_name_already_lowercase():
-    assert derive_candidate_token("webflow") == "webflow"
+def test_co_tld():
+    assert derive_candidate_token("https://yello.co") == "yello"
 
-def test_name_with_dots_and_commas():
-    assert derive_candidate_token("Caterpillar Inc.") == "caterpillarinc"
+def test_short_co_tld():
+    assert derive_candidate_token("https://zip.co") == "zip"
 
-def test_name_with_ampersand():
-    assert derive_candidate_token("Tom & Jerry Co.") == "tomjerryco"
+def test_compound_sld():
+    assert derive_candidate_token("https://www.vendhq.com") == "vendhq"
 
-def test_numbers_preserved():
-    assert derive_candidate_token("1Password") == "1password"
+def test_vibes():
+    assert derive_candidate_token("https://www.vibes.com") == "vibes"
+
+def test_no_scheme():
+    assert derive_candidate_token("upwork.com") == "upwork"
 
 def test_empty_string_returns_empty():
     assert derive_candidate_token("") == ""
 
-def test_only_special_chars_returns_empty():
-    assert derive_candidate_token("!!! ---") == ""
+def test_invalid_url_returns_empty():
+    assert derive_candidate_token("not-a-url") == ""
 
-def test_mixed_case():
-    assert derive_candidate_token("OpenAI") == "openai"
+def test_never_raises_on_garbage():
+    for bad in [None, 123, "://broken"]:
+        try:
+            result = derive_candidate_token(bad)
+            assert result == ""
+        except Exception as e:
+            pytest.fail(f"derive_candidate_token raised on {bad!r}: {e}")
 
 
 # ── probe_greenhouse_api ──────────────────────────────────────────────────────
