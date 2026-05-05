@@ -17,6 +17,7 @@ import httpx
 from playwright.async_api import async_playwright
 
 from config import load_config, API_CONCURRENCY
+from logger import start_log, stop_log
 from csv_io import load_companies, load_titles, load_known_urls
 from integrations.notifier import SLACK_WEBHOOK, notify_match_found
 from utils import format_duration
@@ -124,15 +125,24 @@ def main():
         "--no-headless", action="store_true",
         help="Run with a visible browser window (useful for debugging)"
     )
+    parser.add_argument(
+        "--no-log", action="store_true",
+        help="Disable logging to file for this run"
+    )
     args = parser.parse_args()
 
-    asyncio.run(run(
-        companies_path=args.companies,
-        titles_path=args.titles,
-        headless=not args.no_headless,
-        concurrency=args.concurrency,
-        output_path=args.output,
-    ))
+    if not args.no_log and config.get("logging_enabled", True):
+        start_log(trigger="manual", config=config)
+    try:
+        asyncio.run(run(
+            companies_path=args.companies,
+            titles_path=args.titles,
+            headless=not args.no_headless,
+            concurrency=args.concurrency,
+            output_path=args.output,
+        ))
+    finally:
+        stop_log()
 
 
 if __name__ == "__main__":

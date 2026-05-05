@@ -10,6 +10,7 @@ from datetime import datetime
 from config import load_config
 from csv_io import load_companies
 from integrations.notifier import notify_scan_started, notify_scan_done
+from logger import start_log, stop_log
 from main import run
 from utils import format_duration
 
@@ -22,6 +23,8 @@ def run_scan() -> None:
     notify_scan_started(len(companies))
     print(f"\n🕐  Scheduled scan triggered at {datetime.now().strftime('%Y-%m-%d %H:%M')}")
 
+    if config.get("logging_enabled", True):
+        start_log(trigger="scheduler", config=config)
     try:
         start       = time.time()
         new_matches = asyncio.run(run(
@@ -35,6 +38,8 @@ def run_scan() -> None:
         notify_scan_done(new_matches, duration)
     except Exception as e:
         print(f"⚠️  Scan failed: {e}")
+    finally:
+        stop_log()
 
 
 def run_scheduler(run_now: bool = False) -> None:
