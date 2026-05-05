@@ -6,5 +6,6 @@
   "schedule_times": ["08:08", "11:11", "15:15", "18:18", "23:23"],
   "log_dir": "logs",
   "log_retention_days": 30,
-  "logging_enabled": true
+  "logging_enabled": true,
+  "notifications_enabled": false
 }

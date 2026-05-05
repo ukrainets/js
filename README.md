@@ -190,6 +190,7 @@ Edit `config.json` to set your defaults:
   "titles_file": "data/sqa_titles.csv",
   "output_file": "data/match.csv",
   "schedule_times": ["08:00", "13:00"],
+  "notifications_enabled": true,
   "logging_enabled": true,
   "log_dir": "logs",
   "log_retention_days": 30
@@ -203,6 +204,7 @@ Edit `config.json` to set your defaults:
 | `titles_file` | Path to your job titles CSV |
 | `output_file` | Path to the output CSV for matched positions |
 | `schedule_times` | List of daily run times in `HH:MM` format. Add or remove times as needed |
+| `notifications_enabled` | Set to `false` to disable all Slack notifications (useful for test runs) |
 | `logging_enabled` | Set to `false` to disable log file creation globally |
 | `log_dir` | Directory where log files are saved (created automatically if missing) |
 | `log_retention_days` | Log files older than this many days are deleted on each scan start |
