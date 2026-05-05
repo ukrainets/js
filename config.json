@@ -7,5 +7,5 @@
   "log_dir": "logs",
   "log_retention_days": 30,
   "logging_enabled": true,
-  "notifications_enabled": false
+  "notifications_enabled": true
 }
