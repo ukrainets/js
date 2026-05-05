@@ -13,11 +13,15 @@ PAGE_SETTLE_MS     = 2_000    # ms — wait after domcontentloaded for JS to ren
 API_CONCURRENCY    = 20       # max concurrent Greenhouse API requests
 
 CONFIG_DEFAULTS = {
-    "concurrency":    5,
-    "companies_file": "data/companies.csv",
-    "titles_file":    "data/sqa_titles.csv",
-    "output_file":    "data/match.csv",
-    "schedule_times": ["08:08", "13:13", "18:18"],
+    "concurrency":        5,
+    "companies_file":     "data/companies.csv",
+    "titles_file":        "data/sqa_titles.csv",
+    "output_file":        "data/match.csv",
+    "schedule_times":     ["08:08", "13:13", "18:18"],
+    "log_dir":              "logs",
+    "log_retention_days":   30,
+    "logging_enabled":      True,
+    "notifications_enabled": True,
 }
 
 

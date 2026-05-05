@@ -66,6 +66,7 @@ python main.py --companies data/companies.csv    # override companies file
 python main.py --titles data/sqa_titles.csv      # override titles file
 python main.py --output data/match.csv           # override output file
 python main.py --no-headless                     # show browser window (useful for debugging)
+python main.py --no-log                          # skip log file for this run
 ```
 
 ### Scheduler
@@ -188,7 +189,11 @@ Edit `config.json` to set your defaults:
   "companies_file": "data/companies.csv",
   "titles_file": "data/sqa_titles.csv",
   "output_file": "data/match.csv",
-  "schedule_times": ["08:00", "13:00"]
+  "schedule_times": ["08:00", "13:00"],
+  "notifications_enabled": true,
+  "logging_enabled": true,
+  "log_dir": "logs",
+  "log_retention_days": 30
 }
 ```
 
@@ -199,8 +204,45 @@ Edit `config.json` to set your defaults:
 | `titles_file` | Path to your job titles CSV |
 | `output_file` | Path to the output CSV for matched positions |
 | `schedule_times` | List of daily run times in `HH:MM` format. Add or remove times as needed |
+| `notifications_enabled` | Set to `false` to disable all Slack notifications (useful for test runs) |
+| `logging_enabled` | Set to `false` to disable log file creation globally |
+| `log_dir` | Directory where log files are saved (created automatically if missing) |
+| `log_retention_days` | Log files older than this many days are deleted on each scan start |
 
 All file path values can be overridden at runtime via CLI flags.
+
+---
+
+## Logging
+
+Each scan run automatically saves all console output to a markdown log file in the `logs/` directory.
+
+**Log filename format:** `yyyy.mm.dd_hh-mm-ss_js_run.md`
+
+**Log file structure:**
+```
+# JS Run Log
+**Date:** 2026.05.04
+**Start time:** 09:03
+**Trigger:** manual | scheduler
+
+---
+
+` `` `
+... full scan output ...
+` `` `
+```
+
+**Behaviour:**
+- The `logs/` directory is created automatically on first run
+- Each run produces a separate file — seconds in the filename prevent collisions if two scans start within the same minute
+- Log files older than `log_retention_days` days are deleted silently at the start of each scan
+- Log files are never committed to the repository (`logs/` is in `.gitignore`)
+- If log file creation fails for any reason, the scan continues normally
+
+**Disabling logging:**
+- For a single run: `python main.py --no-log`
+- Permanently: set `"logging_enabled": false` in `config.json`
 
 ---
 
@@ -217,8 +259,10 @@ job_search/
 │   ├── notifier.py             # Slack notifications via webhook
 │   └── scheduler.py            # Scheduler logic (times, run loop)
 ├── tests/                      # Test suite
+├── logs/                           # Per-run log files (git-ignored, auto-created)
 ├── main.py                     # Entry point — one-off scan
 ├── scheduler.py                # Entry point — scheduled scan
+├── logger.py                   # Scan run logging (Tee stdout → markdown file)
 ├── config.py                   # Constants and config loader
 ├── csv_io.py                   # CSV read/write functions
 ├── utils.py                    # Shared helpers
