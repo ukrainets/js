@@ -7,6 +7,7 @@ Run with: pytest tests/test_load_companies.py -v
 
 import pytest
 from csv_io import load_companies
+import csv
 
 
 FIXTURE = "tests/test_data/companies.csv"
@@ -42,11 +43,21 @@ def test_greenhouse_companies_have_api_url():
             f"{c['company_name']} missing api url"
 
 
-def test_non_greenhouse_companies_have_empty_api():
+def test_ashby_companies_have_api_url():
     companies = load_companies(FIXTURE)
-    non_greenhouse = [c for c in companies if c["hr_platform"] != "greenhouse"]
-    for c in non_greenhouse:
-        assert c["api_url"] == "", f"{c['company_name']} should have empty api"
+    ashby = [c for c in companies if c["hr_platform"] == "ashby"]
+    assert len(ashby) > 0
+    for c in ashby:
+        assert c["api_url"].startswith("https://api.ashbyhq.com/posting-api/job-board/"), \
+            f"{c['company_name']} missing ashby api url"
+
+
+def test_other_platforms_have_empty_api():
+    other_platforms = {"workday", "rippling", "workable", "gem", "custom", ""}
+    companies = load_companies(FIXTURE)
+    for c in companies:
+        if c["hr_platform"] in other_platforms:
+            assert c["api_url"] == "", f"{c['company_name']} should have empty api"
 
 
 def test_routing_split_is_correct():
@@ -72,3 +83,18 @@ def test_no_duplicate_urls():
     companies = load_companies(FIXTURE)
     urls = [c["open_positions_url"] for c in companies]
     assert len(urls) == len(set(urls))
+
+
+def test_short_row_with_missing_columns_does_not_crash(tmp_path):
+    # DictReader fills missing columns with None when a row is shorter than the header.
+    # load_companies must not raise AttributeError on None values.
+    csv_file = tmp_path / "companies.csv"
+    with open(csv_file, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["id", "rating", "company_name", "website", "open_positions_url", "hr_platform", "no_click", "comment", "field", "api_url"])
+        # Short row — hr_platform, no_click, and api_url are missing → DictReader fills with None
+        writer.writerow(["abc123", "5", "ShortRow Corp", "", "https://example.com/jobs"])
+
+    companies = load_companies(str(csv_file))
+    # Row is missing no_click so it doesn't pass the TRUE filter — result should be empty, not a crash
+    assert isinstance(companies, list)

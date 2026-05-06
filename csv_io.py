@@ -27,23 +27,23 @@ def load_companies(path: str) -> list[dict]:
     companies, seen = [], set()
     with open(path, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            no_click = row.get("no_click", "").strip().upper()
+            no_click = (row.get("no_click") or "").strip().upper()
             if no_click != "TRUE":
                 continue
 
-            name = row["company_name"].strip()
-            url  = row["open_positions_url"].strip()
+            name = (row.get("company_name") or "").strip()
+            url  = (row.get("open_positions_url") or "").strip()
             if not name or not url or url in seen:
                 continue
 
             seen.add(url)
-            raw_rating = row.get("rating", "").strip()
+            raw_rating = (row.get("rating") or "").strip()
             rating = float(raw_rating) if raw_rating else 0.0
             companies.append({
                 "company_name":       name,
                 "open_positions_url": url,
-                "hr_platform":        row.get("hr_platform", "").strip().lower(),
-                "api_url":            row.get("api_url", "").strip(),
+                "hr_platform":        (row.get("hr_platform") or "").strip().lower(),
+                "api_url":            (row.get("api_url") or "").strip(),
                 "_rating":            rating,
             })
 

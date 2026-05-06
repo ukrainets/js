@@ -92,11 +92,10 @@ python scheduler.py --run-now   # run a scan immediately, then follow the schedu
 2. **Load companies** — reads companies CSV, extracts `company_name` + `open_positions_url`, deduplicates
 3. **Load titles** — reads titles CSV, extracts `title` column, deduplicates
 4. **Launch browser** — starts a single headless Chromium instance via async Playwright
-5. **Scan companies concurrently** — up to `concurrency` tabs open at the same time (controlled by semaphore):
-   - Navigate to `open_positions_url` and wait for the page to fully load
-   - Extract all anchor elements (`<a>` tags) — capturing both link text and URL
-   - Match each title against the link text (exact, case-insensitive, line by line)
-   - If a new match is found, write it to `data/match.csv` and (if configured) send a Slack message
+5. **Scan companies concurrently** — companies with a populated `api_url` are routed to the API scanner; the rest use Playwright:
+   - **API path** (Greenhouse, Ashby): sends an HTTP GET to `api_url`, parses JSON, extracts job titles and URLs via a per-platform extractor. Ashby filters out `isListed=false` jobs. Up to `API_CONCURRENCY` (20) requests run in parallel.
+   - **Playwright path**: opens up to `concurrency` browser tabs; navigates to `open_positions_url`, extracts all `<a>` tags, matches titles against link text
+   - If a new match is found, it is written to `data/match.csv` and (if configured) a Slack notification is sent
 6. **Print summary** — elapsed time, companies searched, and matches found
 
 ### Matching
@@ -254,7 +253,11 @@ job_search/
 │   ├── sqa_titles.csv          # Job titles to match against
 │   └── match.csv               # Output — matched positions (auto-created)
 ├── crawlers/
-│   └── scanner.py              # Async Playwright career page scanner
+│   ├── scanner.py              # Async Playwright career page scanner
+│   ├── api_scanner.py          # Generic async API scanner engine
+│   ├── api_registry.py         # Platform → extractor dispatch table
+│   ├── api_greenhouse.py       # Greenhouse JSON extractor
+│   └── api_ashby.py            # Ashby JSON extractor (filters isListed=false)
 ├── integrations/
 │   ├── notifier.py             # Slack notifications via webhook
 │   └── scheduler.py            # Scheduler logic (times, run loop)

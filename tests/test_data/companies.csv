@@ -4,7 +4,7 @@ id,rating,company_name,website,open_positions_url,hr_platform,no_click,comment,f
 a12efa2b-7cb5-46ab-978e-e8a59432011a,5,BlueSky,https://bsky.social/,https://bsky.social/about/join,Gem,TRUE,,Social,
 15de0ad5-97df-4035-aab0-c6041555696d,5,CarsAndBids,,https://ats.rippling.com/cars-and-bids-job-board/jobs,Rippling,TRUE,,,
 3341f0ff-6e9d-4851-bc4b-1613c8fcf797,5,ConsumerReports,https://www.consumerreports.org/,https://job-boards.greenhouse.io/consumerreports,greenhouse,TRUE,,,https://boards-api.greenhouse.io/v1/boards/consumerreports/jobs
-174a9c4f-988f-428f-82ff-36a08f95d41b,5,1Password,https://1password.com/,https://jobs.ashbyhq.com/1password,Ashby,TRUE,,,
+174a9c4f-988f-428f-82ff-36a08f95d41b,5,1Password,https://1password.com/,https://jobs.ashbyhq.com/1password,Ashby,TRUE,,,https://api.ashbyhq.com/posting-api/job-board/1password
 ad24dd2c-54bf-4d5c-a569-55d6348ee303,3,Caterpillar Inc.,https://cat.com,https://careers.caterpillar.com/en/jobs/,Custom,FALSE,,,
 bf87051f-9bff-420e-8f4a-2184674b9169,5,Charles Schwab,https://schwab.com,https://www.schwab.com/careers/job-search,Workday,TRUE,,,
 d96af460-048f-4db3-a74f-05fdb4e68a14,5,Lam Research,https://lamresearch.com,https://careers.lamresearch.com/search/,Workday,TRUE,,,
@@ -13,8 +13,8 @@ d96af460-048f-4db3-a74f-05fdb4e68a14,5,Lam Research,https://lamresearch.com,http
 b23b1c71-30fe-4a5e-b225-3b64aa92bde9,5,Mastercard,https://mastercard.com,https://careers.mastercard.com/us/en/search-results,Workday,FALSE,,,
 130d84e0-9ee8-451a-bf21-a2c1aa674e1a,5,WordPress,https://wordpress.com,https://automattic.com/work-with-us/,Custom,TRUE,,,
 f60bfb15-0fcc-4185-91bf-9c5913a6a089,5,Yum! Brands,https://yum.com,https://jobs.yum.com/?size=n_250_n,Workday,FALSE,,,
-ee0e1cb4-9c28-4f4a-94cd-6e165cfa98f1,5,Airtable,airtable.com,https://jobs.ashbyhq.com/airtable,Ashby,TRUE,,,
-688594f0-76b4-4f00-a24f-1cf777d8fd2a,5,NETGEAR,netgear.com,https://jobs.ashbyhq.com/netgear,Ashby,TRUE,,,
+ee0e1cb4-9c28-4f4a-94cd-6e165cfa98f1,5,Airtable,airtable.com,https://jobs.ashbyhq.com/airtable,Ashby,TRUE,,,https://api.ashbyhq.com/posting-api/job-board/airtable
+688594f0-76b4-4f00-a24f-1cf777d8fd2a,5,NETGEAR,netgear.com,https://jobs.ashbyhq.com/netgear,Ashby,TRUE,,,https://api.ashbyhq.com/posting-api/job-board/netgear
 7c19568a-4e2b-4e07-a7ba-011e04b7cdcd,5,discogs,https://www.discogs.com/,https://www.discogs.com/about/careers,,TRUE,,,
 38f48f9c-57c0-413c-a7a2-74d41682e1ce,5,Mozilla,https://www.mozilla.org/,https://www.mozilla.org/en-US/careers/listings/?location=Remote%20US,custom,TRUE,true +,IT,
 70f94bec-3c38-4d22-9eda-6f55c46192b6,4,Mcafee,https://mcafee.com,https://careers.mcafee.com/global/en/search-results,Workday,FALSE,,IT,
