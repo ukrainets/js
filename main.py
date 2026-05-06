@@ -22,7 +22,8 @@ from csv_io import load_companies, load_titles, load_known_urls
 from integrations.notifier import SLACK_WEBHOOK, notify_match_found
 from utils import format_duration
 from crawlers.scanner import scan_company
-from crawlers.api_greenhouse import scan_greenhouse
+from crawlers.api_scanner import scan_api
+from crawlers.api_registry import API_EXTRACTORS
 
 
 # ── Main run loop ─────────────────────────────────────────────────────────────
@@ -67,10 +68,18 @@ async def run(
         )
 
         async with httpx.AsyncClient() as http_client:
-            api_tasks = [
-                scan_greenhouse(http_client, api_semaphore, c["company_name"], c["api_url"], titles, output_path, write_lock, known_urls, on_match)
-                for c in api_companies
-            ]
+            api_tasks = []
+            for c in api_companies:
+                entry = API_EXTRACTORS.get(c["hr_platform"])
+                if entry is None:
+                    print(f"⚠️  no API extractor for platform '{c['hr_platform']}' — skipping {c['company_name']}")
+                    continue
+                extractor, label = entry
+                api_tasks.append(scan_api(
+                    http_client, api_semaphore, c["company_name"], c["api_url"],
+                    titles, output_path, write_lock, known_urls,
+                    extractor=extractor, platform_label=label, on_match=on_match,
+                ))
             pw_tasks = [
                 scan_company(pw_semaphore, context, c["company_name"], c["open_positions_url"], titles, output_path, write_lock, known_urls, on_match)
                 for c in playwright_companies

@@ -4,16 +4,14 @@ from __future__ import annotations
 """
 populate_api_urls.py
 ====================
-One-off helper that reads the companies data, extracts Greenhouse board tokens
-from open_positions_url, builds the full API endpoint URL, and writes it back
-to the `api` column.
+Reads the companies CSV, extracts board tokens from open_positions_url (or
+derives them from the website domain), builds the full API endpoint URL for
+each supported platform, and writes it back to the api_url column.
 
-For Greenhouse companies with a custom career page URL (token not extractable),
-the script tries to derive a board token from the company name and probes the
-Greenhouse API. Companies where the guessed token returns HTTP 200 get an api
-URL populated; the rest fall back to the Playwright scanner.
+Supported platforms are defined in PLATFORM_REGISTRY — adding a new ATS is
+a single dict entry.
 
-Run once after adding new Greenhouse companies to keep the api column current.
+Run once after adding new companies to keep the api_url column current.
 
 Usage
 -----
@@ -34,40 +32,68 @@ import httpx
 DEFAULT_INPUT  = "data/companies.csv"
 DEFAULT_OUTPUT = "data/companies.csv"
 
-GREENHOUSE_API_BASE = "https://boards-api.greenhouse.io/v1/boards/{token}/jobs"
-GREENHOUSE_HOSTS    = {"job-boards.greenhouse.io", "job-boards.eu.greenhouse.io"}
+PLATFORM_REGISTRY: dict[str, dict] = {
+    "greenhouse": {
+        "hosts":   {"job-boards.greenhouse.io", "job-boards.eu.greenhouse.io"},
+        "api_url": "https://boards-api.greenhouse.io/v1/boards/{token}/jobs",
+    },
+    "ashby": {
+        "hosts":   {"jobs.ashbyhq.com"},
+        "api_url": "https://api.ashbyhq.com/posting-api/job-board/{token}",
+    },
+}
 
 
-def extract_board_token(url: str) -> str | None:
+def extract_board_token(url: str, platform: str) -> str | None:
     """
-    Parse a Greenhouse job board URL and return the board token, or None.
+    Parse a job board URL for the given platform and return the board token.
 
-    Handles:
-      https://job-boards.greenhouse.io/{token}/
-      https://job-boards.eu.greenhouse.io/{token}/
-    Returns None for custom/non-Greenhouse URLs and malformed/empty input.
+    Looks up the platform's known hosts from PLATFORM_REGISTRY and extracts
+    the first non-empty path segment as the token.
+    Returns None for non-matching hosts, missing platforms, or malformed input.
     """
     if not url:
+        return None
+    config = PLATFORM_REGISTRY.get(platform)
+    if not config:
         return None
     try:
         parsed = urlparse(url)
     except Exception:
         return None
-
-    if parsed.hostname not in GREENHOUSE_HOSTS:
+    if parsed.hostname not in config["hosts"]:
         return None
-
     parts = [p for p in parsed.path.strip("/").split("/") if p]
     if not parts:
         return None
     return parts[0]
 
 
+def build_api_url(token: str, platform: str) -> str:
+    """Build the full API endpoint URL for a given token and platform."""
+    return PLATFORM_REGISTRY[platform]["api_url"].format(token=token)
+
+
+def probe_api(token: str, platform: str) -> bool:
+    """
+    Check whether the platform's board API responds for a given token.
+    Returns True only on HTTP 200. Returns False for unknown platforms.
+    """
+    if platform not in PLATFORM_REGISTRY:
+        return False
+    url = build_api_url(token, platform)
+    try:
+        r = httpx.get(url, timeout=10.0, follow_redirects=True)
+        return r.status_code == 200
+    except Exception:
+        return False
+
+
 def derive_candidate_token(website_url: str) -> str:
     """
-    Derive a Greenhouse board token candidate from a company website URL.
-    Extracts the second-level domain (SLD), which companies typically use
-    as their Greenhouse board token.
+    Derive a board token candidate from a company website URL.
+    Extracts the second-level domain, which companies typically use as their
+    ATS board token.
     Returns an empty string on invalid/missing input.
 
     Examples:
@@ -85,19 +111,6 @@ def derive_candidate_token(website_url: str) -> str:
         return re.sub(r"[^a-z0-9]", "", parts[-2].lower())
     except Exception:
         return ""
-
-
-def probe_greenhouse_api(token: str) -> bool:
-    """
-    Check whether the Greenhouse board API responds for a given token.
-    Returns True only on HTTP 200 (a 404 JSON body comes back as HTTP 404).
-    """
-    url = GREENHOUSE_API_BASE.format(token=token)
-    try:
-        r = httpx.get(url, timeout=10.0, follow_redirects=True)
-        return r.status_code == 200
-    except Exception:
-        return False
 
 
 def validate_url(url: str) -> bool:
@@ -120,44 +133,44 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
         for row in rows:
             row["api_url"] = ""
 
-    print("🔧  Populating API URLs for Greenhouse companies...")
+    print("🔧  Populating API URLs...")
 
-    populated = guessed = skipped = already_set = 0
+    per_platform = {plat: {"populated": 0, "guessed": 0, "skipped": 0} for plat in PLATFORM_REGISTRY}
+    already_set = 0
 
     for row in rows:
-        platform = row.get("hr_platform", "").strip().lower()
-        existing_api = row.get("api_url", "").strip()
+        platform    = (row.get("hr_platform") or "").strip().lower()
+        existing    = (row.get("api_url") or "").strip()
+        name        = (row.get("company_name") or "(unknown)").strip()
 
-        if existing_api:
+        if existing:
             already_set += 1
             continue
 
-        if platform != "greenhouse":
+        if platform not in PLATFORM_REGISTRY:
             continue
 
-        token = extract_board_token(row.get("open_positions_url", ""))
-        name  = row.get("company_name", "(unknown)")
+        token = extract_board_token(row.get("open_positions_url") or "", platform)
 
         if token:
-            api_url = GREENHOUSE_API_BASE.format(token=token)
+            api_url = build_api_url(token, platform)
             if validate:
-                ok = validate_url(api_url)
-                if not ok:
+                if not validate_url(api_url):
                     print(f"   ⚠️  {name} — generated URL returned error, skipping")
-                    skipped += 1
+                    per_platform[platform]["skipped"] += 1
                     continue
             row["api_url"] = api_url
-            populated += 1
+            per_platform[platform]["populated"] += 1
             print(f"   ✅  {name} → {api_url}")
         else:
-            candidate = derive_candidate_token(row.get("website", ""))
-            if candidate and probe_greenhouse_api(candidate):
-                api_url = GREENHOUSE_API_BASE.format(token=candidate)
+            candidate = derive_candidate_token(row.get("website") or "")
+            if candidate and probe_api(candidate, platform):
+                api_url = build_api_url(candidate, platform)
                 row["api_url"] = api_url
-                guessed += 1
+                per_platform[platform]["guessed"] += 1
                 print(f"   ✅  {name} → {api_url}  (token guessed from website domain)")
             else:
-                skipped += 1
+                per_platform[platform]["skipped"] += 1
                 print(f"   ⚠️  {name} — custom URL, domain-guess failed (will use Playwright)")
 
     out_path = Path(output_path)
@@ -167,12 +180,17 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
         writer.writeheader()
         writer.writerows(rows)
 
-    print(f"\n📊  Summary: {populated} from URL, {guessed} guessed from name, {skipped} skipped, {already_set} already had API URLs")
+    print(f"\n📊  Summary:")
+    for plat, counts in per_platform.items():
+        total = counts["populated"] + counts["guessed"] + counts["skipped"]
+        if total > 0:
+            print(f"    {plat.capitalize():<12}: {counts['populated']} from URL, {counts['guessed']} guessed, {counts['skipped']} skipped")
+    print(f"    Already set  : {already_set}")
     print(f"📄  Written to: {output_path}")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Populate api column for Greenhouse companies")
+    parser = argparse.ArgumentParser(description="Populate api_url column for supported ATS platforms")
     parser.add_argument("--input",    default=DEFAULT_INPUT,  help="Path to input CSV")
     parser.add_argument("--output",   default=DEFAULT_OUTPUT, help="Path to output CSV")
     parser.add_argument("--validate", action="store_true",    help="HEAD-check each generated URL")
