@@ -346,7 +346,7 @@ def run(input_path: str, output_path: str, headless: bool, resume: bool) -> None
             user_agent=(
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                 "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/122.0.0.0 Safari/537.36"
+                "Chrome/134.0.0.0 Safari/537.36"
             ),
             viewport={"width": 1280, "height": 900},
             java_script_enabled=True,

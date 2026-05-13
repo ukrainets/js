@@ -37,13 +37,14 @@ def start_log(trigger: str, config: dict) -> bool:
 
         _cleanup_old_logs(log_dir, retention_days)
 
-        Path(log_dir).mkdir(parents=True, exist_ok=True)
+        Path(log_dir).mkdir(parents=True, exist_ok=True, mode=0o700)
 
         now = datetime.now()
         filename = now.strftime("%Y.%m.%d_%H-%M-%S") + "_js_run.md"
         log_path = os.path.join(log_dir, filename)
 
         _log_file = open(log_path, "w", encoding="utf-8", buffering=1)
+        os.chmod(log_path, 0o600)
         _log_file.write("# JS Run Log\n")
         _log_file.write(f"**Date:** {now.strftime('%Y.%m.%d')}\n")
         _log_file.write(f"**Start time:** {now.strftime('%H:%M')}\n")
