@@ -85,6 +85,29 @@ def test_no_duplicate_urls():
     assert len(urls) == len(set(urls))
 
 
+def test_unsafe_url_schemes_are_skipped(tmp_path):
+    csv_file = tmp_path / "companies.csv"
+    header = ["id", "rating", "company_name", "website", "open_positions_url",
+              "hr_platform", "no_click", "comment", "field", "api_url"]
+    rows = [
+        ["1", "5", "Safe Co",  "", "https://safe.com/jobs",          "custom", "TRUE", "", "", ""],
+        ["2", "5", "File Co",  "", "file:///etc/passwd",              "custom", "TRUE", "", "", ""],
+        ["3", "5", "FTP Co",   "", "ftp://ftp.example.com/jobs",     "custom", "TRUE", "", "", ""],
+        ["4", "5", "No Scheme","", "//example.com/jobs",              "custom", "TRUE", "", "", ""],
+    ]
+    with open(csv_file, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+        writer.writerows(rows)
+
+    companies = load_companies(str(csv_file))
+    names = {c["company_name"] for c in companies}
+    assert "Safe Co"   in names
+    assert "File Co"   not in names
+    assert "FTP Co"    not in names
+    assert "No Scheme" not in names
+
+
 def test_short_row_with_missing_columns_does_not_crash(tmp_path):
     # DictReader fills missing columns with None when a row is shorter than the header.
     # load_companies must not raise AttributeError on None values.

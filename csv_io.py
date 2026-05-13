@@ -5,6 +5,15 @@ CSV I/O — reading input data and writing output results.
 import csv
 import uuid
 from pathlib import Path
+from urllib.parse import urlparse
+
+def _is_safe_url(url: str) -> bool:
+    try:
+        p = urlparse(url)
+        return p.scheme in ("http", "https") and bool(p.netloc)
+    except Exception:
+        return False
+
 
 # ── Output schema ─────────────────────────────────────────────────────────────
 CSV_COLUMNS = ["id", "company_name", "match_title", "position_title", "match_position_url", "time_found", "reviewed", "comment"]
@@ -34,6 +43,9 @@ def load_companies(path: str) -> list[dict]:
             name = (row.get("company_name") or "").strip()
             url  = (row.get("open_positions_url") or "").strip()
             if not name or not url or url in seen:
+                continue
+            if not _is_safe_url(url):
+                print(f"⚠️  Skipping {name!r} — unsafe URL scheme: {url!r}")
                 continue
 
             seen.add(url)

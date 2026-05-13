@@ -84,7 +84,7 @@ def probe_api(token: str, platform: str) -> bool:
     url = build_api_url(token, platform)
     try:
         r = httpx.get(url, timeout=10.0, follow_redirects=True)
-        return r.status_code == 200
+        return r.status_code == 200 and str(r.url).startswith("https://")
     except Exception:
         return False
 
@@ -116,7 +116,7 @@ def derive_candidate_token(website_url: str) -> str:
 def validate_url(url: str) -> bool:
     try:
         r = httpx.head(url, timeout=10.0, follow_redirects=True)
-        return r.status_code < 400
+        return r.status_code < 400 and str(r.url).startswith("https://")
     except Exception:
         return False
 
