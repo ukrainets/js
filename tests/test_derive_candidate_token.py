@@ -59,6 +59,7 @@ def test_never_raises_on_garbage():
 def test_probe_returns_true_on_200_greenhouse():
     mock_resp = MagicMock(spec=httpx.Response)
     mock_resp.status_code = 200
+    mock_resp.url = "https://boards-api.greenhouse.io/v1/boards/upwork/jobs"
     with patch("populate_api_urls.httpx.get", return_value=mock_resp):
         assert probe_api("upwork", "greenhouse") is True
 
@@ -71,6 +72,7 @@ def test_probe_returns_false_on_404_greenhouse():
 def test_probe_returns_true_on_200_ashby():
     mock_resp = MagicMock(spec=httpx.Response)
     mock_resp.status_code = 200
+    mock_resp.url = "https://api.ashbyhq.com/posting-api/job-board/airtable"
     with patch("populate_api_urls.httpx.get", return_value=mock_resp):
         assert probe_api("airtable", "ashby") is True
 
@@ -112,3 +114,10 @@ def test_probe_uses_correct_ashby_url():
 
 def test_probe_returns_false_for_unknown_platform():
     assert probe_api("sometoken", "lever") is False
+
+def test_probe_returns_false_when_redirected_to_http():
+    mock_resp = MagicMock(spec=httpx.Response)
+    mock_resp.status_code = 200
+    mock_resp.url = "http://boards-api.greenhouse.io/v1/boards/upwork/jobs"
+    with patch("populate_api_urls.httpx.get", return_value=mock_resp):
+        assert probe_api("upwork", "greenhouse") is False

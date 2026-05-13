@@ -76,6 +76,27 @@ def test_stop_log_closes_fenced_code_block(tmp_path):
     assert content.endswith("```\n")
 
 
+def test_log_file_has_restricted_permissions(tmp_path):
+    config = {"log_dir": str(tmp_path), "log_retention_days": 30}
+    try:
+        start_log(trigger="manual", config=config)
+        log_files = list(tmp_path.glob("*.md"))
+        assert len(log_files) == 1
+        assert oct(os.stat(log_files[0]).st_mode)[-3:] == "600"
+    finally:
+        stop_log()
+
+
+def test_log_dir_has_restricted_permissions(tmp_path):
+    log_dir = tmp_path / "new_logs"
+    config = {"log_dir": str(log_dir), "log_retention_days": 30}
+    try:
+        start_log(trigger="manual", config=config)
+        assert oct(os.stat(log_dir).st_mode)[-3:] == "700"
+    finally:
+        stop_log()
+
+
 def test_start_log_returns_false_on_error(tmp_path):
     existing_file = tmp_path / "not_a_dir.txt"
     existing_file.write_text("I am a file")
