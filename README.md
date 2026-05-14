@@ -47,14 +47,25 @@ If `SLACK_WEBHOOK` is not set, the app runs normally with no notifications.
 ## Tests
 
 ```bash
-pytest tests/ -v
+make test
 ```
 
 ---
 
 ## Run
 
-### One-off scan
+### Main commands
+```bash
+make run        # one-off scan
+make schedule   # start the scheduler
+make debug      # scan with browser visible and no log file (useful for debugging)
+make populate   # populate api_url column in companies.csv after adding new companies
+make install    # install dependencies and Playwright browser
+```
+
+### All commands
+
+#### One-off scan
 ```bash
 python main.py
 ```
@@ -69,7 +80,7 @@ python main.py --no-headless                     # show browser window (useful f
 python main.py --no-log                          # skip log file for this run
 ```
 
-### Scheduler
+#### Scheduler
 Runs a scan automatically at the times configured in `config.json` (`schedule_times`).
 
 ```bash
