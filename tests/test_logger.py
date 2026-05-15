@@ -8,10 +8,7 @@ import os
 import re
 import time
 
-import pytest
-
 from logger import _cleanup_old_logs, start_log, stop_log
-
 
 # ── _cleanup_old_logs() ───────────────────────────────────────────────────────
 

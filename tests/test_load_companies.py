@@ -5,10 +5,9 @@ Verifies dict shape, filtering, deduplication, sorting, and routing split.
 Run with: pytest tests/test_load_companies.py -v
 """
 
-import pytest
-from csv_io import load_companies
 import csv
 
+from csv_io import load_companies
 
 FIXTURE = "tests/test_data/companies.csv"
 

@@ -44,10 +44,12 @@ If `SLACK_WEBHOOK` is not set, the app runs normally with no notifications.
 
 ---
 
-## Tests
+## Tests & Linting
 
 ```bash
-make test
+make test     # run test suite
+make lint     # check for linting issues
+make format   # auto-format code
 ```
 
 ---
@@ -61,6 +63,8 @@ make schedule   # start the scheduler
 make debug      # scan with browser visible and no log file (useful for debugging)
 make populate   # populate api_url column in companies.csv after adding new companies
 make install    # install dependencies and Playwright browser
+make lint       # check for linting issues (Ruff)
+make format     # auto-format code (Ruff)
 ```
 
 ### All commands

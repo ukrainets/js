@@ -9,7 +9,6 @@ import csv
 from unittest.mock import MagicMock, patch
 
 import httpx
-import pytest
 
 from populate_api_urls import run, validate_url
 

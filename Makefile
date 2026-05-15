@@ -1,7 +1,8 @@
 PYTHON := .venv/bin/python
 PYTEST := .venv/bin/pytest
+RUFF   := .venv/bin/ruff
 
-.PHONY: run schedule test populate debug install
+.PHONY: run schedule test populate debug install lint format
 
 run:
 	$(PYTHON) main.py
@@ -20,3 +21,9 @@ debug:
 
 install:
 	.venv/bin/pip install -r requirements.txt && .venv/bin/playwright install chromium
+
+lint:
+	$(RUFF) check .
+
+format:
+	$(RUFF) format .

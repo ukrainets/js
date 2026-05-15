@@ -16,15 +16,14 @@ from datetime import datetime
 import httpx
 from playwright.async_api import async_playwright
 
-from config import load_config, API_CONCURRENCY
-from logger import start_log, stop_log
-from csv_io import load_companies, load_titles, load_known_urls
-from integrations.notifier import SLACK_WEBHOOK, notify_match_found
-from utils import format_duration
-from crawlers.scanner import scan_company
-from crawlers.api_scanner import scan_api
+from config import API_CONCURRENCY, load_config
 from crawlers.api_registry import API_EXTRACTORS
-
+from crawlers.api_scanner import scan_api
+from crawlers.scanner import scan_company
+from csv_io import load_companies, load_known_urls, load_titles
+from integrations.notifier import SLACK_WEBHOOK, notify_match_found
+from logger import start_log, stop_log
+from utils import format_duration
 
 # ── Main run loop ─────────────────────────────────────────────────────────────
 
