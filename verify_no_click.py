@@ -25,14 +25,14 @@ Run with --resume to continue from where the script left off.
 import argparse
 import csv
 import json
-import re
 import random
+import re
 import time
 from datetime import datetime
 from pathlib import Path
 
-from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
-
+from playwright.sync_api import TimeoutError as PWTimeout
+from playwright.sync_api import sync_playwright
 
 # ── Paths ──────────────────────────────────────────────────────────────────
 DEFAULT_INPUT      = "data/companies.csv"

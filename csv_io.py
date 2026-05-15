@@ -7,6 +7,7 @@ import uuid
 from pathlib import Path
 from urllib.parse import urlparse
 
+
 def _is_safe_url(url: str) -> bool:
     try:
         p = urlparse(url)

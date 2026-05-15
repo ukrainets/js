@@ -8,10 +8,9 @@ from urllib.parse import urljoin
 
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
-from config import PAGE_TIMEOUT, PAGE_TIMEOUT_RETRY, PAGE_SETTLE_MS
+from config import PAGE_SETTLE_MS, PAGE_TIMEOUT, PAGE_TIMEOUT_RETRY
 from csv_io import append_match_row
-from utils import normalize_text, find_matches
-
+from utils import find_matches
 
 # ── Navigation ────────────────────────────────────────────────────────────────
 
@@ -131,7 +130,7 @@ async def scan_company(
                             lines.append(f"✅  Match for: [{title}]:")
                             lines.append(f"    {scraped_text}")
                             lines.append(f"    {job_url}")
-                            lines.append(f"🟢  added to output file")
+                            lines.append("🟢  added to output file")
                         # duplicate — skip silently, no output line
 
                 if not new_found:

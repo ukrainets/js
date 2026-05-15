@@ -1,0 +1,10 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 200
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"populate_api_urls.py" = ["E402"]
+"verify_no_click.py" = ["E402"]

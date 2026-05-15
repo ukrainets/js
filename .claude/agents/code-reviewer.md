@@ -107,10 +107,6 @@ Technical debt:
 Language-specific review:
 - JavaScript/TypeScript patterns
 - Python idioms
-- Java conventions
-- Go best practices
-- Rust safety
-- C++ standards
 - SQL optimization
 - Shell security
 

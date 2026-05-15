@@ -3,13 +3,14 @@ Scheduler — runs the job search scan at configured times.
 """
 
 import asyncio
-import schedule
 import time
 from datetime import datetime
 
+import schedule
+
 from config import load_config
 from csv_io import load_companies
-from integrations.notifier import SLACK_WEBHOOK, notify_match_found, notify_scan_started, notify_scan_done
+from integrations.notifier import SLACK_WEBHOOK, notify_match_found, notify_scan_done, notify_scan_started
 from logger import start_log, stop_log
 from main import run
 from utils import format_duration

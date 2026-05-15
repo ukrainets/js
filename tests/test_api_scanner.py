@@ -13,7 +13,6 @@ import pytest
 
 from crawlers.api_scanner import scan_api
 
-
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def stub_extractor(data: dict) -> list[tuple[str, str]]:

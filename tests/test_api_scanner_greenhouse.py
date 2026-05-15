@@ -11,9 +11,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import httpx
 import pytest
 
-from crawlers.api_scanner import scan_api
 from crawlers.api_greenhouse import extract_greenhouse_jobs
-
+from crawlers.api_scanner import scan_api
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 

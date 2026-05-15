@@ -5,10 +5,7 @@ Pure unit tests — no Playwright, no network, no file I/O.
 Run with: pytest tests/test_find_matches.py -v
 """
 
-import pytest
-from utils import normalize_text
-from utils import find_matches
-
+from utils import find_matches, normalize_text
 
 # ── normalize_text() ──────────────────────────────────────────────────────────
 

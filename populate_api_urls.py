@@ -28,7 +28,6 @@ from urllib.parse import urlparse
 
 import httpx
 
-
 DEFAULT_INPUT  = "data/companies.csv"
 DEFAULT_OUTPUT = "data/companies.csv"
 
@@ -180,7 +179,7 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
         writer.writeheader()
         writer.writerows(rows)
 
-    print(f"\n📊  Summary:")
+    print("\n📊  Summary:")
     for plat, counts in per_platform.items():
         total = counts["populated"] + counts["guessed"] + counts["skipped"]
         if total > 0:
