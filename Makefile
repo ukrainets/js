@@ -1,6 +1,8 @@
-PYTHON := .venv/bin/python
-PYTEST := .venv/bin/pytest
-RUFF   := .venv/bin/ruff
+PYTHON     := .venv/bin/python
+PYTEST     := .venv/bin/pytest
+RUFF       := .venv/bin/ruff
+PIP        := .venv/bin/pip
+PLAYWRIGHT := .venv/bin/playwright
 
 .PHONY: run schedule test populate debug install lint format
 
@@ -20,7 +22,7 @@ debug:
 	$(PYTHON) main.py --no-headless --no-log
 
 install:
-	.venv/bin/pip install -r requirements.txt && .venv/bin/playwright install chromium
+	$(PIP) install -r requirements.txt -r requirements-dev.txt && $(PLAYWRIGHT) install chromium
 
 lint:
 	$(RUFF) check .

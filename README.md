@@ -23,7 +23,8 @@ source .venv/bin/activate        # macOS/Linux
 # .venv\Scripts\activate         # Windows
 
 # 2. Install dependencies
-pip install -r requirements.txt
+pip install -r requirements.txt        # runtime dependencies
+pip install -r requirements-dev.txt   # dev tools (Ruff linter)
 
 # 3. Install Playwright's Chromium browser
 playwright install chromium

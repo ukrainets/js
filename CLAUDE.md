@@ -19,7 +19,7 @@ make lint       # check for linting issues (Ruff)
 make format     # auto-format code (Ruff)
 
 # Run a single test
-.venv/bin/pytest tests/test_find_matches.py::test_name -v
+.venv/bin/pytest tests/test_find_matches.py::test_name -v  # Example only
 
 # Populate API URLs with validation
 python populate_api_urls.py --validate
