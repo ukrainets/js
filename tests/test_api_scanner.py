@@ -15,9 +15,9 @@ from crawlers.api_scanner import scan_api
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def stub_extractor(data: dict) -> list[tuple[str, str]]:
-    """Returns whatever jobs list is in data as (title, url) tuples."""
-    return [(j["title"], j["url"]) for j in data.get("jobs", [])]
+def stub_extractor(data: dict) -> list[tuple[str, str, dict]]:
+    """Returns whatever jobs list is in data as (title, url, meta) tuples."""
+    return [(j["title"], j["url"], {}) for j in data.get("jobs", [])]
 
 
 def make_response(status: int, body: dict) -> MagicMock:

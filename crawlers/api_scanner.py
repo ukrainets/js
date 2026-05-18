@@ -14,7 +14,7 @@ from typing import Callable
 import httpx
 
 from csv_io import append_match_row
-from utils import find_matches
+from utils import apply_filters, find_matches
 
 
 async def scan_api(
@@ -26,9 +26,10 @@ async def scan_api(
     output_path: str,
     write_lock: asyncio.Lock,
     known_urls: set[str],
-    extractor: Callable[[dict], list[tuple[str, str]]],
+    extractor: Callable[[dict], list[tuple[str, str, dict]]],
     platform_label: str,
     on_match=None,
+    filters: dict | None = None,
 ) -> list[dict]:
     """
     Fetch jobs from an ATS API and return newly matched dicts.
@@ -50,7 +51,9 @@ async def scan_api(
                 return []
 
             data = response.json()
-            links = extractor(data)
+            jobs = extractor(data)
+            jobs = apply_filters(jobs, filters or {})
+            links = [(t, u) for t, u, _ in jobs]
             matches = find_matches(links, titles)
 
             if matches:

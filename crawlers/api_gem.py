@@ -8,12 +8,23 @@ Gem's API returns a flat JSON array with the same field names as Greenhouse.
 """
 
 
-def extract_gem_jobs(data) -> list[tuple[str, str]]:
-    """Extract (title, absolute_url) pairs from a Gem board API response."""
+def extract_gem_jobs(data) -> list[tuple[str, str, dict]]:
+    """Extract (title, absolute_url, meta) triples from a Gem board API response."""
     if not isinstance(data, list):
         return []
-    return [
-        (job["title"], job["absolute_url"])
-        for job in data
-        if job.get("title") and job.get("absolute_url")
-    ]
+    result = []
+    for job in data:
+        title = job.get("title")
+        url = job.get("absolute_url")
+        if not title or not url:
+            continue
+        loc = job.get("location") or {}
+        loc_str = loc.get("name", "") if isinstance(loc, dict) else str(loc)
+        result.append((title, url, {
+            "location": loc_str,
+            "country": "",
+            "state": "",
+            "is_remote": None,
+            "is_full_time": None,
+        }))
+    return result

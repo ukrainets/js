@@ -8,9 +8,13 @@ Run with: pytest tests/test_extract_greenhouse_jobs.py -v
 from crawlers.api_greenhouse import extract_greenhouse_jobs
 
 
+def titles_and_urls(result):
+    return [(t, u) for t, u, _ in result]
+
+
 def test_returns_title_and_absolute_url():
     data = {"jobs": [{"title": "QA Engineer", "absolute_url": "https://example.com/job/1"}]}
-    assert extract_greenhouse_jobs(data) == [("QA Engineer", "https://example.com/job/1")]
+    assert titles_and_urls(extract_greenhouse_jobs(data)) == [("QA Engineer", "https://example.com/job/1")]
 
 
 def test_multiple_jobs():
@@ -18,7 +22,7 @@ def test_multiple_jobs():
         {"title": "QA Engineer",   "absolute_url": "https://example.com/job/1"},
         {"title": "SDET",          "absolute_url": "https://example.com/job/2"},
     ]}
-    assert extract_greenhouse_jobs(data) == [
+    assert titles_and_urls(extract_greenhouse_jobs(data)) == [
         ("QA Engineer", "https://example.com/job/1"),
         ("SDET",        "https://example.com/job/2"),
     ]
@@ -49,3 +53,20 @@ def test_missing_jobs_key():
 
 def test_none_jobs_value():
     assert extract_greenhouse_jobs({"jobs": None}) == []
+
+
+def test_meta_location_extracted():
+    data = {"jobs": [{"title": "QA Engineer", "absolute_url": "https://example.com/job/1",
+                      "location": {"name": "San Francisco, CA"}}]}
+    _, _, meta = extract_greenhouse_jobs(data)[0]
+    assert meta["location"] == "San Francisco, CA"
+    assert meta["country"] == ""
+    assert meta["state"] == ""
+    assert meta["is_remote"] is None
+    assert meta["is_full_time"] is None
+
+
+def test_meta_missing_location_defaults_to_empty():
+    data = {"jobs": [{"title": "QA Engineer", "absolute_url": "https://example.com/job/1"}]}
+    _, _, meta = extract_greenhouse_jobs(data)[0]
+    assert meta["location"] == ""

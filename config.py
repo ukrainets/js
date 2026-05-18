@@ -28,6 +28,7 @@ CONFIG_DEFAULTS = {
     "log_retention_days":   30,
     "logging_enabled":      True,
     "notifications_enabled": True,
+    "filters": {"enabled": True, "countries": [], "states": [], "city": "", "remote_only": False, "full_time_only": False},
 }
 
 
