@@ -8,9 +8,13 @@ Run with: pytest tests/test_extract_ashby_jobs.py -v
 from crawlers.api_ashby import extract_ashby_jobs
 
 
+def titles_and_urls(result):
+    return [(t, u) for t, u, _ in result]
+
+
 def test_returns_title_and_job_url_for_listed_job():
     data = {"jobs": [{"title": "QA Engineer", "jobUrl": "https://jobs.ashbyhq.com/acme/1", "isListed": True}]}
-    assert extract_ashby_jobs(data) == [("QA Engineer", "https://jobs.ashbyhq.com/acme/1")]
+    assert titles_and_urls(extract_ashby_jobs(data)) == [("QA Engineer", "https://jobs.ashbyhq.com/acme/1")]
 
 
 def test_filters_out_unlisted_jobs():
@@ -60,7 +64,44 @@ def test_multiple_listed_jobs():
         {"title": "QA Engineer", "jobUrl": "https://jobs.ashbyhq.com/acme/1", "isListed": True},
         {"title": "SDET",        "jobUrl": "https://jobs.ashbyhq.com/acme/2", "isListed": True},
     ]}
-    assert extract_ashby_jobs(data) == [
+    assert titles_and_urls(extract_ashby_jobs(data)) == [
         ("QA Engineer", "https://jobs.ashbyhq.com/acme/1"),
         ("SDET",        "https://jobs.ashbyhq.com/acme/2"),
     ]
+
+
+def test_meta_employment_type_full_time():
+    data = {"jobs": [{"title": "QA Engineer", "jobUrl": "https://jobs.ashbyhq.com/acme/1",
+                      "isListed": True, "employmentType": "FullTime"}]}
+    _, _, meta = extract_ashby_jobs(data)[0]
+    assert meta["is_full_time"] is True
+
+
+def test_meta_employment_type_part_time():
+    data = {"jobs": [{"title": "QA Engineer", "jobUrl": "https://jobs.ashbyhq.com/acme/1",
+                      "isListed": True, "employmentType": "PartTime"}]}
+    _, _, meta = extract_ashby_jobs(data)[0]
+    assert meta["is_full_time"] is False
+
+
+def test_meta_is_remote_explicit():
+    data = {"jobs": [{"title": "QA Engineer", "jobUrl": "https://jobs.ashbyhq.com/acme/1",
+                      "isListed": True, "isRemote": True}]}
+    _, _, meta = extract_ashby_jobs(data)[0]
+    assert meta["is_remote"] is True
+
+
+def test_meta_is_remote_inferred_from_location():
+    data = {"jobs": [{"title": "QA Engineer", "jobUrl": "https://jobs.ashbyhq.com/acme/1",
+                      "isListed": True, "locationName": "Remote - US"}]}
+    _, _, meta = extract_ashby_jobs(data)[0]
+    assert meta["is_remote"] is True
+
+
+def test_meta_unknown_fields_are_none():
+    data = {"jobs": [{"title": "QA Engineer", "jobUrl": "https://jobs.ashbyhq.com/acme/1",
+                      "isListed": True}]}
+    _, _, meta = extract_ashby_jobs(data)[0]
+    assert meta["is_remote"] is None
+    assert meta["is_full_time"] is None
+    assert meta["location"] == ""

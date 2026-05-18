@@ -40,6 +40,18 @@ PLATFORM_REGISTRY: dict[str, dict] = {
         "hosts":   {"jobs.ashbyhq.com"},
         "api_url": "https://api.ashbyhq.com/posting-api/job-board/{token}",
     },
+    "lever": {
+        "hosts":   {"jobs.lever.co"},
+        "api_url": "https://api.lever.co/v0/postings/{token}?mode=json",
+    },
+    "workable": {
+        "hosts":   {"apply.workable.com"},
+        "api_url": "https://apply.workable.com/api/v1/widget/accounts/{token}",
+    },
+    "gem": {
+        "hosts":   {"jobs.gem.com"},
+        "api_url": "https://api.gem.com/job_board/v0/{token}/job_posts/",
+    },
 }
 
 
@@ -127,10 +139,10 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
         fieldnames = list(reader.fieldnames or [])
         rows = [dict(r) for r in reader]
 
-    if "api_url" not in fieldnames:
-        fieldnames.append("api_url")
+    if "api_token" not in fieldnames:
+        fieldnames.append("api_token")
         for row in rows:
-            row["api_url"] = ""
+            row["api_token"] = ""
 
     print("🔧  Populating API URLs...")
 
@@ -139,7 +151,7 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
 
     for row in rows:
         platform    = (row.get("hr_platform") or "").strip().lower()
-        existing    = (row.get("api_url") or "").strip()
+        existing    = (row.get("api_token") or "").strip()
         name        = (row.get("company_name") or "(unknown)").strip()
 
         if existing:
@@ -152,22 +164,20 @@ def run(input_path: str, output_path: str, validate: bool) -> None:
         token = extract_board_token(row.get("open_positions_url") or "", platform)
 
         if token:
-            api_url = build_api_url(token, platform)
             if validate:
-                if not validate_url(api_url):
+                if not validate_url(build_api_url(token, platform)):
                     print(f"   ⚠️  {name} — generated URL returned error, skipping")
                     per_platform[platform]["skipped"] += 1
                     continue
-            row["api_url"] = api_url
+            row["api_token"] = token
             per_platform[platform]["populated"] += 1
-            print(f"   ✅  {name} → {api_url}")
+            print(f"   ✅  {name} → {token}")
         else:
             candidate = derive_candidate_token(row.get("website") or "")
             if candidate and probe_api(candidate, platform):
-                api_url = build_api_url(candidate, platform)
-                row["api_url"] = api_url
+                row["api_token"] = candidate
                 per_platform[platform]["guessed"] += 1
-                print(f"   ✅  {name} → {api_url}  (token guessed from website domain)")
+                print(f"   ✅  {name} → {candidate}  (token guessed from website domain)")
             else:
                 per_platform[platform]["skipped"] += 1
                 print(f"   ⚠️  {name} — custom URL, domain-guess failed (will use Playwright)")

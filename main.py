@@ -34,6 +34,7 @@ async def run(
     concurrency: int,
     output_path: str,
     on_match=None,
+    filters: dict | None = None,
 ) -> int:
     companies  = load_companies(companies_path)
     titles     = load_titles(titles_path)
@@ -79,6 +80,7 @@ async def run(
                     http_client, api_semaphore, c["company_name"], api_url,
                     titles, output_path, write_lock, known_urls,
                     extractor=extractor, platform_label=label, on_match=on_match,
+                    filters=filters,
                 ))
             pw_tasks = [
                 scan_company(pw_semaphore, context, c["company_name"], c["open_positions_url"], titles, output_path, write_lock, known_urls, on_match)
@@ -153,6 +155,7 @@ def main():
             concurrency=args.concurrency,
             output_path=args.output,
             on_match=on_match,
+            filters=config.get("filters") or {},
         ))
     finally:
         stop_log()
