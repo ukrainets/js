@@ -24,7 +24,7 @@ def load_companies(path: str) -> list[dict]:
     """
     Read companies CSV and return a sorted, deduplicated list of company dicts.
 
-    Each dict contains: company_name, open_positions_url, hr_platform, api.
+    Each dict contains: company_name, open_positions_url, hr_platform, api_token.
 
     Filtering:
     - Only rows where no_click == "TRUE" are included.
@@ -56,7 +56,7 @@ def load_companies(path: str) -> list[dict]:
                 "company_name":       name,
                 "open_positions_url": url,
                 "hr_platform":        (row.get("hr_platform") or "").strip().lower(),
-                "api_url":            (row.get("api_url") or "").strip(),
+                "api_token":          (row.get("api_token") or "").strip(),
                 "_rating":            rating,
             })
 

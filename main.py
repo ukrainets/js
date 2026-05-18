@@ -16,7 +16,7 @@ from datetime import datetime
 import httpx
 from playwright.async_api import async_playwright
 
-from config import API_CONCURRENCY, load_config
+from config import API_CONCURRENCY, ATS_API_URLS, load_config
 from crawlers.api_registry import API_EXTRACTORS
 from crawlers.api_scanner import scan_api
 from crawlers.scanner import scan_company
@@ -39,8 +39,8 @@ async def run(
     titles     = load_titles(titles_path)
     start_time = datetime.now()
 
-    api_companies       = [c for c in companies if c["api_url"]]
-    playwright_companies = [c for c in companies if not c["api_url"]]
+    api_companies       = [c for c in companies if c["api_token"]]
+    playwright_companies = [c for c in companies if not c["api_token"]]
 
     print(f"Start time        : {start_time.strftime('%H:%M')}")
     print(f"Companies to scan : {len(companies)}  (no_click=TRUE, sorted by rating ↓)")
@@ -74,8 +74,9 @@ async def run(
                     print(f"⚠️  no API extractor for platform '{c['hr_platform']}' — skipping {c['company_name']}")
                     continue
                 extractor, label = entry
+                api_url = ATS_API_URLS[c["hr_platform"]].format(token=c["api_token"])
                 api_tasks.append(scan_api(
-                    http_client, api_semaphore, c["company_name"], c["api_url"],
+                    http_client, api_semaphore, c["company_name"], api_url,
                     titles, output_path, write_lock, known_urls,
                     extractor=extractor, platform_label=label, on_match=on_match,
                 ))

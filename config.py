@@ -12,6 +12,12 @@ PAGE_TIMEOUT_RETRY = 60_000   # ms — single retry after timeout
 PAGE_SETTLE_MS     = 2_000    # ms — wait after domcontentloaded for JS to render
 API_CONCURRENCY    = 20       # max concurrent Greenhouse API requests
 
+# ── ATS API URL templates ─────────────────────────────────────────────────────
+ATS_API_URLS = {
+    "greenhouse": "https://boards-api.greenhouse.io/v1/boards/{token}/jobs",
+    "ashby":      "https://api.ashbyhq.com/posting-api/job-board/{token}",
+}
+
 CONFIG_DEFAULTS = {
     "concurrency":        5,
     "companies_file":     "data/companies.csv",
