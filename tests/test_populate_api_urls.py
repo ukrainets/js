@@ -1,8 +1,8 @@
 """
-Unit tests for populate_api_urls.run() — focuses on robustness against
+Unit tests for populate_api_tokens.run() — focuses on robustness against
 malformed CSV rows where DictReader fills missing columns with None.
 
-Run with: pytest tests/test_populate_api_urls.py -v
+Run with: pytest tests/test_populate_api_tokens.py -v
 """
 
 import csv
@@ -21,7 +21,7 @@ def write_csv(path, rows: list[list]) -> None:
 
 
 HEADER = ["id", "rating", "company_name", "website", "open_positions_url",
-          "hr_platform", "no_click", "comment", "field", "api_url"]
+          "hr_platform", "no_click", "comment", "field", "api_token"]
 
 
 def test_run_does_not_crash_on_short_row(tmp_path):
@@ -34,7 +34,7 @@ def test_run_does_not_crash_on_short_row(tmp_path):
         HEADER,
         # Full valid Ashby row
         ["id1", "5", "Airtable", "airtable.com", "https://jobs.ashbyhq.com/airtable", "Ashby", "TRUE", "", "", ""],
-        # Short row — hr_platform, no_click, comment, field, api_url all missing → None
+        # Short row — hr_platform, no_click, comment, field, api_token all missing → None
         ["id2", "5", "ShortRow Corp", "", "https://example.com/jobs"],
     ])
 
@@ -44,10 +44,10 @@ def test_run_does_not_crash_on_short_row(tmp_path):
         rows = list(csv.DictReader(f))
 
     airtable = next(r for r in rows if r["company_name"] == "Airtable")
-    assert airtable["api_url"] == "https://api.ashbyhq.com/posting-api/job-board/airtable"
+    assert airtable["api_token"] == "airtable"
 
     short_row = next(r for r in rows if r["company_name"] == "ShortRow Corp")
-    assert short_row["api_url"] == ""
+    assert short_row["api_token"] == ""
 
 
 # ── validate_url() ────────────────────────────────────────────────────────────
@@ -96,4 +96,4 @@ def test_run_does_not_crash_on_none_hr_platform(tmp_path):
     with open(output_csv, newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
-    assert rows[0]["api_url"] == ""
+    assert rows[0]["api_token"] == ""

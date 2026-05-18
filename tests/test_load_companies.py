@@ -24,7 +24,7 @@ def test_required_keys_present():
         assert "company_name"       in c
         assert "open_positions_url" in c
         assert "hr_platform"        in c
-        assert "api_url"                in c
+        assert "api_token"                in c
 
 
 def test_no_internal_rating_key_leaked():
@@ -33,22 +33,20 @@ def test_no_internal_rating_key_leaked():
         assert "_rating" not in c
 
 
-def test_greenhouse_companies_have_api_url():
+def test_greenhouse_companies_have_api_token():
     companies = load_companies(FIXTURE)
     greenhouse = [c for c in companies if c["hr_platform"] == "greenhouse"]
     assert len(greenhouse) > 0
     for c in greenhouse:
-        assert c["api_url"].startswith("https://boards-api.greenhouse.io/"), \
-            f"{c['company_name']} missing api url"
+        assert c["api_token"], f"{c['company_name']} missing api token"
 
 
-def test_ashby_companies_have_api_url():
+def test_ashby_companies_have_api_token():
     companies = load_companies(FIXTURE)
     ashby = [c for c in companies if c["hr_platform"] == "ashby"]
     assert len(ashby) > 0
     for c in ashby:
-        assert c["api_url"].startswith("https://api.ashbyhq.com/posting-api/job-board/"), \
-            f"{c['company_name']} missing ashby api url"
+        assert c["api_token"], f"{c['company_name']} missing api token"
 
 
 def test_other_platforms_have_empty_api():
@@ -56,13 +54,13 @@ def test_other_platforms_have_empty_api():
     companies = load_companies(FIXTURE)
     for c in companies:
         if c["hr_platform"] in other_platforms:
-            assert c["api_url"] == "", f"{c['company_name']} should have empty api"
+            assert c["api_token"] == "", f"{c['company_name']} should have empty api"
 
 
 def test_routing_split_is_correct():
     companies = load_companies(FIXTURE)
-    api_companies = [c for c in companies if c["api_url"]]
-    pw_companies  = [c for c in companies if not c["api_url"]]
+    api_companies = [c for c in companies if c["api_token"]]
+    pw_companies  = [c for c in companies if not c["api_token"]]
     assert len(api_companies) + len(pw_companies) == len(companies)
     assert len(api_companies) > 0
     assert len(pw_companies)  > 0
@@ -87,7 +85,7 @@ def test_no_duplicate_urls():
 def test_unsafe_url_schemes_are_skipped(tmp_path):
     csv_file = tmp_path / "companies.csv"
     header = ["id", "rating", "company_name", "website", "open_positions_url",
-              "hr_platform", "no_click", "comment", "field", "api_url"]
+              "hr_platform", "no_click", "comment", "field", "api_token"]
     rows = [
         ["1", "5", "Safe Co",  "", "https://safe.com/jobs",          "custom", "TRUE", "", "", ""],
         ["2", "5", "File Co",  "", "file:///etc/passwd",              "custom", "TRUE", "", "", ""],
@@ -113,8 +111,8 @@ def test_short_row_with_missing_columns_does_not_crash(tmp_path):
     csv_file = tmp_path / "companies.csv"
     with open(csv_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["id", "rating", "company_name", "website", "open_positions_url", "hr_platform", "no_click", "comment", "field", "api_url"])
-        # Short row — hr_platform, no_click, and api_url are missing → DictReader fills with None
+        writer.writerow(["id", "rating", "company_name", "website", "open_positions_url", "hr_platform", "no_click", "comment", "field", "api_token"])
+        # Short row — hr_platform, no_click, and api_token are missing → DictReader fills with None
         writer.writerow(["abc123", "5", "ShortRow Corp", "", "https://example.com/jobs"])
 
     companies = load_companies(str(csv_file))
